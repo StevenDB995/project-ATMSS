@@ -6,7 +6,10 @@ import AppKickstarter.misc.Msg;
 import AppKickstarter.timer.Timer;
 
 import ATMSS.ATMSS.ATMSS;
+import ATMSS.AdvicePrinterHandler.AdvicePrinterHandler;
 import ATMSS.CardReaderHandler.CardReaderHandler;
+import ATMSS.CashDepositCollectorHandler.CashDepositCollectorHandler;
+import ATMSS.CashDispenserHandler.CashDispenserHandler;
 import ATMSS.KeypadHandler.KeypadHandler;
 import ATMSS.TouchDisplayHandler.TouchDisplayHandler;
 
@@ -21,6 +24,10 @@ public class ATMSSStarter extends AppKickstarter {
     protected CardReaderHandler cardReaderHandler;
     protected KeypadHandler keypadHandler;
     protected TouchDisplayHandler touchDisplayHandler;
+    protected CashDispenserHandler cashDispenserHandler;
+    protected CashDepositCollectorHandler cashDepositCollectorHandler;
+    protected AdvicePrinterHandler advicePrinterHandler;
+    protected BuzzerHandler buzzerHandler;
 
 
     //------------------------------------------------------------
