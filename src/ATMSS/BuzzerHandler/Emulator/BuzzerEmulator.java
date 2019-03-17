@@ -1,4 +1,4 @@
-package ATMSS.BuzzerrHandler.Emulator;
+package ATMSS.BuzzerHandler.Emulator;
 
 public class BuzzerEmulator {
 

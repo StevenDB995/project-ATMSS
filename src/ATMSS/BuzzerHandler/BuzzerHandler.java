@@ -1,6 +1,6 @@
-package ATMSS.BuzzerrHandler.Emulator;
+package ATMSS.BuzzerHandler;
 
-public class BuzzerEmulatorController {
+public class BuzzerHandler {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
