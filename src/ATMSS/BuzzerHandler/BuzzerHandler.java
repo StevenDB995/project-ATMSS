@@ -1,16 +1,16 @@
-package ATMSS.AdvicePrinterHandler;
+package ATMSS.BuzzerHandler;
 
 import AppKickstarter.AppKickstarter;
 import AppKickstarter.misc.*;
 
 //======================================================================
-// AdvicePrinterHandler
-public class AdvicePrinterHandler extends AppThread {
+// BuzzerHandler
+public class BuzzerHandler extends AppThread {
 	// ------------------------------------------------------------
-	// AdvicePrinterHandler
-	public AdvicePrinterHandler(String id, AppKickstarter appKickstarter) throws Exception {
+	// BuzzerHandler
+	public BuzzerHandler(String id, AppKickstarter appKickstarter) throws Exception {
 		super(id, appKickstarter);
-	} // AdvicePrinterHandler
+	} // BuzzerHandler
 
 	// ------------------------------------------------------------
 	// run
@@ -37,4 +37,4 @@ public class AdvicePrinterHandler extends AppThread {
 		log.info(id + ": terminating...");
 
 	}// run
-}// AdvicePrinterHandler
+}// BuzzerHandler
