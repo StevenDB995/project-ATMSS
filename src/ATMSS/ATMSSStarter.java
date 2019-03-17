@@ -7,6 +7,7 @@ import AppKickstarter.timer.Timer;
 
 import ATMSS.ATMSS.ATMSS;
 import ATMSS.AdvicePrinterHandler.AdvicePrinterHandler;
+import ATMSS.BuzzerHandler.BuzzerHandler;
 import ATMSS.CardReaderHandler.CardReaderHandler;
 import ATMSS.CashDepositCollectorHandler.CashDepositCollectorHandler;
 import ATMSS.CashDispenserHandler.CashDispenserHandler;
@@ -28,7 +29,6 @@ public class ATMSSStarter extends AppKickstarter {
     protected CashDepositCollectorHandler cashDepositCollectorHandler;
     protected AdvicePrinterHandler advicePrinterHandler;
     protected BuzzerHandler buzzerHandler;
-
 
     //------------------------------------------------------------
     // main
