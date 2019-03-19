@@ -8,7 +8,7 @@ import AppKickstarter.misc.*;
 public class BuzzerHandler extends AppThread {
 	// ------------------------------------------------------------
 	// BuzzerHandler
-	public BuzzerHandler(String id, AppKickstarter appKickstarter) throws Exception {
+	public BuzzerHandler(String id, AppKickstarter appKickstarter) {
 		super(id, appKickstarter);
 	} // BuzzerHandler
 
