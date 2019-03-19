@@ -8,7 +8,7 @@ import AppKickstarter.misc.*;
 public class CashDispenserHandler extends AppThread {
 	// ------------------------------------------------------------
 	// CashDispenserHandler
-	public CashDispenserHandler(String id, AppKickstarter appKickstarter) throws Exception {
+	public CashDispenserHandler(String id, AppKickstarter appKickstarter) {
 		super(id, appKickstarter);
 	} // CashDispenserHandler
 

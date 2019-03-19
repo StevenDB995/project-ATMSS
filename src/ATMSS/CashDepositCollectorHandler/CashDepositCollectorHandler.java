@@ -8,7 +8,7 @@ import AppKickstarter.misc.*;
 public class CashDepositCollectorHandler extends AppThread {
 	// ------------------------------------------------------------
 	// CashDepositCollectorHandler
-	public CashDepositCollectorHandler(String id, AppKickstarter appKickstarter) throws Exception {
+	public CashDepositCollectorHandler(String id, AppKickstarter appKickstarter) {
 		super(id, appKickstarter);
 	} // CashDepositCollectorHandler
 

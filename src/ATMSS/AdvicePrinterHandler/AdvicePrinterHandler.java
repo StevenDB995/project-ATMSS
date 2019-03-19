@@ -8,7 +8,7 @@ import AppKickstarter.misc.*;
 public class AdvicePrinterHandler extends AppThread {
 	// ------------------------------------------------------------
 	// AdvicePrinterHandler
-	public AdvicePrinterHandler(String id, AppKickstarter appKickstarter) throws Exception {
+	public AdvicePrinterHandler(String id, AppKickstarter appKickstarter){
 		super(id, appKickstarter);
 	} // AdvicePrinterHandler
 
