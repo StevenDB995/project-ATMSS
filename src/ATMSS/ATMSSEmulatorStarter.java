@@ -79,10 +79,10 @@ public class ATMSSEmulatorStarter extends ATMSSStarter {
 				keypadEmulator.start();
 				cardReaderEmulator.start();
 				touchDisplayEmulator.start();
-				cashDispenserEmulator.start();
-				cashDepositCollectorEmulator.start();
-				advicePrinterEmulator.start();
-				buzzerEmulator.start();
+//				cashDispenserEmulator.start();
+//				cashDepositCollectorEmulator.start();
+//				advicePrinterEmulator.start();
+//				buzzerEmulator.start();
 			} catch (Exception e) {
 				System.out.println("Emulators: start failed");
 				e.printStackTrace();
