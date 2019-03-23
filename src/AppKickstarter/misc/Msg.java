@@ -48,5 +48,6 @@ public class Msg {
 	CR_CardRemoved,		// Card removed
 	CR_EjectCard,		// Eject card
 	KP_KeyPressed,		// Key pressed
+	TD_ChooseWithdraw,		// Choose withdraw money on touch display
     } // Type
 } // Msg

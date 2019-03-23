@@ -21,7 +21,7 @@ public class MBox {
 
 
     //------------------------------------------------------------
-    // send
+    // send (receiverMBox.send(sender's msg))
     public final synchronized void send(Msg msg) {
 	mqueue.add(msg);
 	log.finest(id + ": send \"" + msg + "\"");

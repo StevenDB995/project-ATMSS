@@ -24,6 +24,13 @@ public class CashDepositCollectorHandler extends AppThread {
 			log.fine(id + ": message received: [" + msg + "].");
 
 			switch (msg.getType()) {
+			case Poll:
+				atmss.send(new Msg(id, mbox, Msg.Type.PollAck, id + " is up!"));
+				break;
+
+			case Terminate:
+				quit = true;
+				break;
 			
 
 			default:

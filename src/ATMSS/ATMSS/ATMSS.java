@@ -14,6 +14,7 @@ public class ATMSS extends AppThread {
 	private MBox cashDepositCollectorMBox;
 	private MBox advicePrinterMBox;
 	private MBox buzzerMBox;
+	// private BAMSHandler bams;
 
 	// ------------------------------------------------------------
 	// ATMSS
@@ -57,6 +58,10 @@ public class ATMSS extends AppThread {
 				cardReaderMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
 				keypadMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
 				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
+				cashDispenserMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
+				cashDepositCollectorMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
+				advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
+				buzzerMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
 				break;
 
 			case PollAck:
