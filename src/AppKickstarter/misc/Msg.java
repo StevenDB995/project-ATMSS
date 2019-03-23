@@ -37,17 +37,24 @@ public class Msg {
     //------------------------------------------------------------
     // Msg Types
     public enum Type {
-	Terminate,		// Terminate the running thread
-	SetTimer,		// Set a timer
-	CancelTimer,		// Set a timer
-	Tick,			// Timer clock ticks
-	TimesUp,		// Time's up for the timer
-	Poll,			// Health poll
-	PollAck,		// Health poll acknowledgement
-	CR_CardInserted,	// Card inserted
+	Terminate,			// Terminate the running thread
+	SetTimer,			// Set a timer
+	CancelTimer,			// Set a timer
+	Tick,				// Timer clock ticks
+	TimesUp,				// Time's up for the timer
+	Poll,				// Health poll
+	PollAck,				// Health poll acknowledgement
+	CR_CardInserted,		// Card inserted
 	CR_CardRemoved,		// Card removed
 	CR_EjectCard,		// Eject card
 	KP_KeyPressed,		// Key pressed
-	TD_ChooseWithdraw,		// Choose withdraw money on touch display
+	TD_ChooseWithdraw,	// Choose withdraw money on touch display
+	TD_ChooseDeposit,	// Choose deposit money on touch display
+	TD_ChooseEnquiry,	// Choose enquiry on touch display
+	CDC_OpenSlot,		// Open slot of cash deposit collector
+	CDC_CloseSlot,		// Close slot of cash deposit collector
+	CD_OpenSlot,			// Open slot of cash dispenser
+	CD_CloseSlot,		// Close slot of cash dispenser
+	B_Sound,				//Buzzer makes sound
     } // Type
 } // Msg
