@@ -1,5 +1,6 @@
 package ATMSS.ATMSS;
 
+import ATMSS.BAMSHandler.AdvancedBAMSHandler;
 import AppKickstarter.AppKickstarter;
 import AppKickstarter.misc.*;
 import AppKickstarter.timer.Timer;
@@ -14,7 +15,7 @@ public class ATMSS extends AppThread {
 	private MBox cashDepositCollectorMBox;
 	private MBox advicePrinterMBox;
 	private MBox buzzerMBox;
-	// private BAMSHandler bams;
+	private AdvancedBAMSHandler bams;
 
 	// ------------------------------------------------------------
 	// ATMSS
