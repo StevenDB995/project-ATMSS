@@ -14,6 +14,7 @@ public class ATMSS extends AppThread {
 	private MBox cashDepositCollectorMBox;
 	private MBox advicePrinterMBox;
 	private MBox buzzerMBox;
+	// private BAMSHandler bams;
 
 	// ------------------------------------------------------------
 	// ATMSS
