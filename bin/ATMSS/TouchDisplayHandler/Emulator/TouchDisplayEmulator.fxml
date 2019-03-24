@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.*?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.152" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ATMSS.TouchDisplayHandler.Emulator.TouchDisplayEmulatorController">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ATMSS.TouchDisplayHandler.Emulator.TouchDisplayEmulatorController">
     <children>
-	<TextArea fx:id="atmssTextArea" layoutX="20.0" layoutY="169.0" editable="false" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20" />
+      <AnchorPane layoutX="-37.0" layoutY="14.0" prefHeight="67.0" prefWidth="600.0">
+         <children>
+            <Button layoutX="42.0" layoutY="-13.0" mnemonicParsing="false" text="WelcomPage" />
+            <Button layoutX="494.0" layoutY="-13.0" mnemonicParsing="false" text="Password Validation" />
+            <Button layoutX="363.0" layoutY="-12.0" mnemonicParsing="false" text="Insrt Password" />
+            <Button layoutX="215.0" layoutY="-13.0" mnemonicParsing="false" text="Select Language" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="6.0" layoutY="34.0" prefHeight="112.0" prefWidth="613.0">
+         <children>
+            <Button layoutX="329.0" layoutY="1.0" mnemonicParsing="false" text="Check Account" />
+            <Button layoutX="250.0" layoutY="1.0" mnemonicParsing="false" text="Transfer" />
+            <Button layoutX="162.0" layoutY="1.0" mnemonicParsing="false" text="Withdraw" />
+            <Button layoutX="86.0" layoutY="1.0" mnemonicParsing="false" text="Deposit" />
+            <Button layoutY="1.0" mnemonicParsing="false" text="Service" />
+            <Button layoutY="43.0" mnemonicParsing="false" text="Other Services" />
+            <Button layoutX="449.0" layoutY="1.0" mnemonicParsing="false" text="Change Password" />
+            <Button layoutX="119.0" layoutY="43.0" mnemonicParsing="false" text="Payment Services" />
+         </children>
+      </AnchorPane>
     </children>
 </AnchorPane>

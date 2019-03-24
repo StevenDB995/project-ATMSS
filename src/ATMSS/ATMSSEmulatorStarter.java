@@ -17,6 +17,9 @@ import ATMSS.TouchDisplayHandler.Emulator.TouchDisplayEmulator;
 import ATMSS.CardReaderHandler.CardReaderHandler;
 import ATMSS.KeypadHandler.Emulator.KeypadEmulator;
 import ATMSS.TouchDisplayHandler.TouchDisplayHandler;
+
+//import ATMSS.WelcomPageHandler.Emulator.WelcomPageEmulator;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -61,6 +64,8 @@ public class ATMSSEmulatorStarter extends ATMSSStarter {
 			CashDepositCollectorEmulator cashDepositCollectorEmulator = null;
 			AdvicePrinterEmulator advicePrinterEmulator = null;
 			BuzzerEmulator buzzerEmulator = null;
+			
+			//WelcomPageEmulator welcomPageEmulator=null;
 
 			// create emulators
 			try {
@@ -75,6 +80,8 @@ public class ATMSSEmulatorStarter extends ATMSSStarter {
 				advicePrinterEmulator = new AdvicePrinterEmulator("AdvicePrinterHandler", atmssEmulatorStarter);
 				buzzerEmulator = new BuzzerEmulator("BuzzerHandler", atmssEmulatorStarter);
 
+				//welcomPageEmulator=new WelcomPageEmulator("",atmssEmulatorStarter);
+				
 				// start emulator GUIs
 				keypadEmulator.start();
 				cardReaderEmulator.start();
@@ -83,6 +90,7 @@ public class ATMSSEmulatorStarter extends ATMSSStarter {
 //				cashDepositCollectorEmulator.start();
 //				advicePrinterEmulator.start();
 //				buzzerEmulator.start();
+				//welcomPageEmulator.start();
 			} catch (Exception e) {
 				System.out.println("Emulators: start failed");
 				e.printStackTrace();
@@ -108,6 +116,7 @@ public class ATMSSEmulatorStarter extends ATMSSStarter {
 			new Thread(cashDepositCollectorEmulator).start();
 			new Thread(advicePrinterEmulator).start();
 			new Thread(buzzerEmulator).start();
+			//new Thread(welcomPageEmulator).start();
 		} // start
 	} // Emulators
 
