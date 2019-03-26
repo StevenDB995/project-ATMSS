@@ -1,6 +1,9 @@
 package ATMSS.ATMSS;
 
+import java.io.IOException;
+
 import ATMSS.BAMSHandler.AdvancedBAMSHandler;
+import ATMSS.BAMSHandler.BAMSInvalidReplyException;
 import AppKickstarter.AppKickstarter;
 import AppKickstarter.misc.*;
 import AppKickstarter.timer.Timer;
@@ -15,12 +18,18 @@ public class ATMSS extends AppThread {
 	private MBox cashDepositCollectorMBox;
 	private MBox advicePrinterMBox;
 	private MBox buzzerMBox;
+
 	private AdvancedBAMSHandler bams;
+	private String currentCardNo;
+	private String keypadInput; // Store card PIN input by users
 
 	// ------------------------------------------------------------
 	// ATMSS
 	public ATMSS(String id, AppKickstarter appKickstarter) throws Exception {
 		super(id, appKickstarter);
+		// bams = new AdvancedBAMSHandler(url, logger);
+		currentCardNo = "";
+		keypadInput = "";
 	} // ATMSS
 
 	// ------------------------------------------------------------
@@ -36,7 +45,6 @@ public class ATMSS extends AppThread {
 		cashDepositCollectorMBox = appKickstarter.getThread("CashDepositCollectorHandler").getMBox();
 		advicePrinterMBox = appKickstarter.getThread("AdvicePrinterHandler").getMBox();
 		buzzerMBox = appKickstarter.getThread("BuzzerHandler").getMBox();
-		
 
 		for (boolean quit = false; !quit;) {
 			Msg msg = mbox.receive();
@@ -50,7 +58,8 @@ public class ATMSS extends AppThread {
 				break;
 
 			case CR_CardInserted:
-				log.info("CardInserted: " + msg.getDetails());
+				currentCardNo = msg.getDetails();
+				log.info("CardInserted: " + currentCardNo);
 				break;
 
 			case TimesUp:
@@ -82,9 +91,30 @@ public class ATMSS extends AppThread {
 	// ------------------------------------------------------------
 	// processKeyPressed
 	private void processKeyPressed(Msg msg) {
-		// *** The following is an example only!! ***
-		if (msg.getDetails().compareToIgnoreCase("Cancel") == 0) {
+		String details = msg.getDetails();
+
+		if (details.compareToIgnoreCase("Cancel") == 0) { // "Cancel" is pressed
+			keypadMBox.send(new Msg(id, mbox, Msg.Type.LogoutAck, "Logout"));
 			cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
+			currentCardNo = "";
+		}
+
+		else if (Character.isDigit(details.charAt(0))) { // Number key is pressed
+			keypadInput += details;
+		}
+
+		else if (details.compareToIgnoreCase("Enter") == 0) { // "Enter" is pressed
+			try {
+				String feedback = bams.login(currentCardNo, keypadInput);
+				if (feedback.equals("ERROR")) {
+
+				} else
+					keypadMBox.send(new Msg(id, mbox, Msg.Type.LoginAck, "Login success"));
+			} catch (BAMSInvalidReplyException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			keypadInput = "";
 		}
 	} // processKeyPressed
 } // CardReaderHandler
