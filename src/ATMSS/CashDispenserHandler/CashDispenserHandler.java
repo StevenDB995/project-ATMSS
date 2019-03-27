@@ -24,6 +24,10 @@ public class CashDispenserHandler extends AppThread {
 			log.fine(id + ": message received: [" + msg + "].");
 
 			switch (msg.getType()) {
+			case CD_UpdateCashDispenserSlot:
+				handleUpdateDisplayOfOpenSlot(msg);
+				break;
+
 			case Poll:
 				atmss.send(new Msg(id, mbox, Msg.Type.PollAck, id + " is up!"));
 				break;
@@ -31,17 +35,21 @@ public class CashDispenserHandler extends AppThread {
 			case Terminate:
 				quit = true;
 				break;
-			
 
 			default:
 				log.warning(id + ": unknown message type: [" + msg + "]");
 			}
 		}
-		
-		
+
 		// declaring our departure
 		appKickstarter.unregThread(this);
 		log.info(id + ": terminating...");
 
 	}// run
+
+	// ------------------------------------------------------------
+	// handleUpdateDisplayOfOpenSlot
+	protected void handleUpdateDisplayOfOpenSlot(Msg msg) {
+		log.info(id + ": " + msg.getDetails() + " and update display of cash dispenser.");
+	} // handleUpdateDisplayOfOpenSlot
 }// CashDispenserHandler

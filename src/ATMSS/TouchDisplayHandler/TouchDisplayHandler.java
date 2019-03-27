@@ -24,6 +24,10 @@ public class TouchDisplayHandler extends AppThread {
 			log.fine(id + ": message received: [" + msg + "].");
 
 			switch (msg.getType()) {
+			case TD_UpdateDisplay:
+				handleUpdateDisplay(msg);
+				break;
+
 			case Poll:
 				atmss.send(new Msg(id, mbox, Msg.Type.PollAck, id + " is up!"));
 				break;
@@ -41,4 +45,10 @@ public class TouchDisplayHandler extends AppThread {
 		appKickstarter.unregThread(this);
 		log.info(id + ": terminating...");
 	} // run
+
+	// ------------------------------------------------------------
+	// handleUpdateDisplay
+	protected void handleUpdateDisplay(Msg msg) {
+		log.info(id + ": update display -- " + msg.getDetails());
+	} // handleUpdateDisplay
 } // TouchDisplayHandler

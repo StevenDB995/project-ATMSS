@@ -2,6 +2,7 @@ package ATMSS.CashDispenserHandler.Emulator;
 
 import ATMSS.ATMSSStarter;
 import ATMSS.CashDispenserHandler.CashDispenserHandler;
+import AppKickstarter.misc.Msg;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,6 +14,8 @@ import javafx.stage.WindowEvent;
 //======================================================================
 //CashDispenserEmulator
 public class CashDispenserEmulator extends CashDispenserHandler {
+	private final int WIDTH = 680;
+	private final int HEIGHT = 520;
 	private ATMSSStarter atmssStarter;
 	private String id;
 	private Stage myStage;
@@ -47,5 +50,51 @@ public class CashDispenserEmulator extends CashDispenserHandler {
 		});
 		myStage.show();
 	} // CashDispenserEmulator
+
+	// ------------------------------------------------------------
+	// handleUpdateDisplay
+	protected void handleUpdateDisplayOfOpenSlot(Msg msg) {
+		log.info(id + ": " + msg.getDetails() + " and update display of cash dispenser.");
+
+		switch (msg.getDetails()) {
+		case "Open cash deposit slot":
+			reloadStage("////////.fxml");
+			break;
+
+		case "Close cash deposit slot":
+			reloadStage("////////.fxml");
+			break;
+
+		default:
+			log.severe(id + ": update cash dispenser display with unknown display type -- " + msg.getDetails());
+			break;
+		}
+	} // handleUpdateDisplay
+
+	// ------------------------------------------------------------
+	// reloadStage
+	private void reloadStage(String fxmlFName) {
+		CashDispenserEmulator cashDispenserEmulator = this;
+
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					log.info(id + ": loading fxml: " + fxmlFName);
+
+					Parent root;
+					FXMLLoader loader = new FXMLLoader();
+					loader.setLocation(CashDispenserEmulator.class.getResource(fxmlFName));
+					root = loader.load();
+					cashDispenserEmulatorController = (CashDispenserEmulatorController) loader.getController();
+					cashDispenserEmulatorController.initialize(id, atmssStarter, log, cashDispenserEmulator);
+					myStage.setScene(new Scene(root, WIDTH, HEIGHT));
+				} catch (Exception e) {
+					log.severe(id + ": failed to load " + fxmlFName);
+					e.printStackTrace();
+				}
+			}
+		});
+	} // reloadStage
 
 }// CashDispenserEmulator

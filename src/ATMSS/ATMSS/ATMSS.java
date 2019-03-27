@@ -1,6 +1,5 @@
 package ATMSS.ATMSS;
 
-
 import java.io.IOException;
 
 import ATMSS.BAMSHandler.AdvancedBAMSHandler;
@@ -20,10 +19,11 @@ public class ATMSS extends AppThread {
 	private MBox advicePrinterMBox;
 	private MBox buzzerMBox;
 
-
 	private AdvancedBAMSHandler bams;
 	private String currentCardNo;
-	private String keypadInput; // Store card PIN input by users
+	private String keypadInput; // Store keypad input by users
+	private String accountNo;
+	private String credential;
 
 	// ------------------------------------------------------------
 	// ATMSS
@@ -32,6 +32,8 @@ public class ATMSS extends AppThread {
 		// bams = new AdvancedBAMSHandler(url, logger);
 		currentCardNo = "";
 		keypadInput = "";
+		accountNo = "";
+		credential = "";
 	} // ATMSS
 
 	// ------------------------------------------------------------
@@ -48,7 +50,6 @@ public class ATMSS extends AppThread {
 		advicePrinterMBox = appKickstarter.getThread("AdvicePrinterHandler").getMBox();
 		buzzerMBox = appKickstarter.getThread("BuzzerHandler").getMBox();
 
-
 		for (boolean quit = false; !quit;) {
 			Msg msg = mbox.receive();
 
@@ -60,42 +61,37 @@ public class ATMSS extends AppThread {
 				processKeyPressed(msg);
 				break;
 
+			case KP_WithdrawKeyPressed:
+				log.info("KeyPressed: " + msg.getDetails());
+				withdrawProcessKeyPressed(msg);
+				break;
+
 			case CR_CardInserted:
 				currentCardNo = msg.getDetails();
 				log.info("CardInserted: " + currentCardNo);
 				break;
-				
+
 			case TD_ChooseWithdraw:
-				//need key in amount
-				//log.info("Withdraw: " + msg.getDetails());
 				break;
-				
+
 			case TD_ChooseDeposit:
 				break;
-				
+
 			case TD_ChooseEnquiry:
 				break;
-				
+
 			case CDC_OpenSlot:
 				log.info("Opend the slot, please insert money.");
 				break;
-				
+
 			case CDC_CloseSlot:
 				log.info("Closed the slot, please wait.");
 				break;
-			
-			case CD_OpenSlot:
-				log.info("Opend the slot, please collect your money.");
-				break;
-				
-			case CD_CloseSlot:
-				log.info("Closed the slot, please wait.");
-				break;
-			
+
 			case B_Sound:
 				log.info("Time out! Buzzer is making sound.");
 				break;
-			
+
 			case TimesUp:
 				Timer.setTimer(id, mbox, 60000);
 				log.info("Poll: " + msg.getDetails());
@@ -155,4 +151,35 @@ public class ATMSS extends AppThread {
 			keypadInput = "";
 		}
 	} // processKeyPressed
-} // CardReaderHandler
+
+	// ------------------------------------------------------------
+	// withdrawProcessKeyPressed
+	private void withdrawProcessKeyPressed(Msg msg) {
+		String details = msg.getDetails();
+
+		if (details.compareToIgnoreCase("Cancel") == 0) { // "Cancel" is pressed
+			touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Cancel Withdraw"));
+			log.info("Withdraw cancelled.");
+			keypadInput = "";
+		} else if (Character.isDigit(details.charAt(0))) { // Number key is pressed
+			keypadInput += details;
+		} else if (details.compareToIgnoreCase("Enter") == 0) { // "Enter" is pressed
+			try {
+				int withdrawAmount = bams.withdraw(currentCardNo, accountNo, credential, keypadInput);
+				if (withdrawAmount < 0) {
+					log.info("Withdraw failed.");
+					touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Withdraw failed"));
+				} else {
+					log.info("Withdraw succeed, you have withdrawed " + withdrawAmount);
+					touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Withdraw successed"));
+					cashDispenserMBox
+							.send(new Msg(id, mbox, Msg.Type.CD_UpdateCashDispenserSlot, "Open cash deposit slot"));
+				}
+			} catch (BAMSInvalidReplyException | IOException e) {
+				e.printStackTrace();
+			}
+			keypadInput = "";
+		}
+
+	} // withdrawProcessKeyPressed
+} // ATMSS
