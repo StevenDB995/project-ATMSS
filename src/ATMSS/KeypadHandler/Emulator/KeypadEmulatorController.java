@@ -19,7 +19,6 @@ public class KeypadEmulatorController {
     private KeypadEmulator keypadEmulator;
     private MBox keypadMBox;
 
-
     //------------------------------------------------------------
     // initialize
     public void initialize(String id, AppKickstarter appKickstarter, Logger log, KeypadEmulator keypadEmulator) {
@@ -42,22 +41,22 @@ public class KeypadEmulatorController {
 
     //------------------------------------------------------------
     // keyPressed
-    public void keyPressed(KeyEvent keyEvent) {
-	String keyCodeStr = keyEvent.getCode().toString();
-
-	if (keyCodeStr.startsWith("DIGIT") || keyCodeStr.startsWith("NUMPAD")) {
-	    char inputChar = keyCodeStr.charAt(keyCodeStr.length() - 1);
-	    keypadMBox.send(new Msg(id, keypadMBox, Msg.Type.KP_KeyPressed, "" + inputChar));
-	} else if (keyCodeStr.compareTo("DECIMAL") == 0) {
-	    keypadMBox.send(new Msg(id, keypadMBox, Msg.Type.KP_KeyPressed, "."));
-	} else if (keyCodeStr.compareTo("ENTER") == 0) {
-	    keypadMBox.send(new Msg(id, keypadMBox, Msg.Type.KP_KeyPressed, "ENTER"));
-	} else if (keyCodeStr.compareTo("ESCAPE") == 0) {
-	    keypadMBox.send(new Msg(id, keypadMBox, Msg.Type.KP_KeyPressed, "CANCEL"));
-	} else if (keyCodeStr.compareTo("BACK_SPACE") == 0) {
-	    keypadMBox.send(new Msg(id, keypadMBox, Msg.Type.KP_KeyPressed, "ERASE"));
-	} else {
-	    log.finer(id + ": Key Pressed " + keyCodeStr);
-	}
-    } // keyPressed
+//    public void keyPressed(KeyEvent keyEvent) {
+//	String keyCodeStr = keyEvent.getCode().toString();
+//
+//	if (keyCodeStr.startsWith("DIGIT") || keyCodeStr.startsWith("NUMPAD")) {
+//	    char inputChar = keyCodeStr.charAt(keyCodeStr.length() - 1);
+//	    keypadMBox.send(new Msg(id, keypadMBox, Msg.Type.KP_KeyPressed, "" + inputChar));
+//	} else if (keyCodeStr.compareTo("DECIMAL") == 0) {
+//	    keypadMBox.send(new Msg(id, keypadMBox, Msg.Type.KP_KeyPressed, "."));
+//	} else if (keyCodeStr.compareTo("ENTER") == 0) {
+//	    keypadMBox.send(new Msg(id, keypadMBox, Msg.Type.KP_KeyPressed, "ENTER"));
+//	} else if (keyCodeStr.compareTo("ESCAPE") == 0) {
+//	    keypadMBox.send(new Msg(id, keypadMBox, Msg.Type.KP_KeyPressed, "CANCEL"));
+//	} else if (keyCodeStr.compareTo("BACK_SPACE") == 0) {
+//	    keypadMBox.send(new Msg(id, keypadMBox, Msg.Type.KP_KeyPressed, "ERASE"));
+//	} else {
+//	    log.finer(id + ": Key Pressed " + keyCodeStr);
+//	}
+//    } // keyPressed
 } // KeypadEmulatorController

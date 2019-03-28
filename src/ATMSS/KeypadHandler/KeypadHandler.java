@@ -6,13 +6,10 @@ import AppKickstarter.misc.*;
 //======================================================================
 // KeypadHandler
 public class KeypadHandler extends AppThread {
-	private boolean login;
-
 	// ------------------------------------------------------------
 	// KeypadHandler
 	public KeypadHandler(String id, ATMSSStarter atmssStarter) {
 		super(id, atmssStarter);
-		login = false;
 	} // KeypadHandler
 
 	// ------------------------------------------------------------
@@ -28,18 +25,7 @@ public class KeypadHandler extends AppThread {
 
 			switch (msg.getType()) {
 			case KP_KeyPressed:
-				if (msg.getDetails().compareToIgnoreCase("Cancel") == 0 || !login)
-					atmss.send(new Msg(id, mbox, Msg.Type.KP_KeyPressed, msg.getDetails()));
-				// if the ATMSS is in login status, keypad will never send KP_KeyPressed message
-				// to ATMSS except that "Cancel" is pressed
-				break;
-
-			case LoginAck:
-				login = true;
-				break;
-
-			case LogoutAck:
-				login = false;
+				atmss.send(new Msg(id, mbox, Msg.Type.KP_KeyPressed, msg.getDetails()));
 				break;
 
 			case Poll:
