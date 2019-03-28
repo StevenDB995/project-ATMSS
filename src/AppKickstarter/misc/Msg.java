@@ -47,6 +47,6 @@ public class Msg {
 	CR_CardInserted,	// Card inserted
 	CR_CardRemoved,		// Card removed
 	CR_EjectCard,		// Eject card
-	KP_KeyPressed,		// Key pressed
+	KP_KeyPressed, TD_MouseClicked, TD_UpdateDisplay,		// Key pressed
     } // Type
 } // Msg

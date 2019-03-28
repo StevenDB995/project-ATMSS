@@ -1,4 +1,4 @@
-package ATMSS.TouchDisplayHandler;
+package TouchDisplayHandler;
 
 import AppKickstarter.AppKickstarter;
 import AppKickstarter.misc.*;

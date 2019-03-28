@@ -1,4 +1,4 @@
-package ATMSS.TouchDisplayHandler.Emulator;
+package TouchDisplayHandler.Emulator;
 
 import ATMSS.ATMSSStarter;
 import ATMSS.TouchDisplayHandler.TouchDisplayHandler;

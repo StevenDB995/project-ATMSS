@@ -1,4 +1,4 @@
-package ATMSS.TouchDisplayHandler.Emulator;
+package TouchDisplayHandler.Emulator;
 
 import AppKickstarter.AppKickstarter;
 import AppKickstarter.misc.MBox;

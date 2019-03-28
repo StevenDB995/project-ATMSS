@@ -1,0 +1,64 @@
+190328-11:04:27 [INFO] -- 
+190328-11:04:27 [INFO] -- 
+190328-11:04:27 [INFO] -- ============================================================
+190328-11:04:27 [INFO] -- ATMSSStarter: Application Starting...
+190328-11:04:28 [INFO] -- ATMSS: starting...
+190328-11:04:28 [INFO] -- timer: starting...
+190328-11:04:28 [INFO] -- CardReaderHandler: starting...
+190328-11:04:28 [INFO] -- KeypadHandler: starting...
+190328-11:04:28 [INFO] -- TouchDisplayHandler: starting...
+190328-11:04:32 [INFO] -- KeyPressed: 5
+190328-11:04:32 [INFO] -- KeyPressed: 2
+190328-11:04:32 [INFO] -- TouchDisplayHandler: update display -- MainMenu
+190328-11:04:32 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayMainMenu.fxml
+190328-11:04:33 [INFO] -- KeyPressed: 8
+190328-11:04:33 [INFO] -- KeyPressed: 1
+190328-11:04:33 [INFO] -- TouchDisplayHandler: update display -- BlankScreen
+190328-11:04:33 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulator.fxml
+190328-11:04:34 [INFO] -- KeyPressed: 7
+190328-11:04:35 [INFO] -- KeyPressed: 9
+190328-11:04:37 [INFO] -- KeyPressed: 6
+190328-11:04:38 [INFO] -- KeyPressed: 1
+190328-11:04:38 [INFO] -- TouchDisplayHandler: update display -- BlankScreen
+190328-11:04:38 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulator.fxml
+190328-11:04:38 [INFO] -- KeyPressed: 9
+190328-11:04:38 [INFO] -- KeyPressed: Cancel
+190328-11:04:38 [INFO] -- CardReaderHandler: card ejected
+190328-11:04:46 [INFO] -- KeyPressed: 3
+190328-11:04:46 [INFO] -- TouchDisplayHandler: update display -- Confirmation
+190328-11:04:46 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayConfirmation.fxml
+190328-11:04:46 [INFO] -- KeyPressed: 4
+190328-11:04:54 [INFO] -- CardInserted: 4107-7014
+190328-11:04:57 [INFO] -- KeyPressed: 4
+190328-11:04:58 [INFO] -- KeyPressed: 1
+190328-11:04:58 [INFO] -- TouchDisplayHandler: update display -- BlankScreen
+190328-11:04:58 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulator.fxml
+190328-11:05:02 [INFO] -- KeyPressed: 0
+190328-11:05:04 [INFO] -- KeyPressed: 7
+190328-11:05:07 [INFO] -- KeyPressed: 7
+190328-11:05:08 [INFO] -- KeyPressed: 0
+190328-11:05:09 [INFO] -- KeyPressed: 1
+190328-11:05:09 [INFO] -- TouchDisplayHandler: update display -- BlankScreen
+190328-11:05:09 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulator.fxml
+190328-11:05:09 [INFO] -- KeyPressed: 4
+190328-11:05:11 [INFO] -- KeyPressed: Enter
+190328-11:05:21 [INFO] -- CardInserted: 2026-6202
+190328-11:05:24 [INFO] -- KeyPressed: 2
+190328-11:05:24 [INFO] -- TouchDisplayHandler: update display -- MainMenu
+190328-11:05:24 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayMainMenu.fxml
+190328-11:05:26 [INFO] -- KeyPressed: 0
+190328-11:05:28 [INFO] -- MouseCLicked: 182 309
+190328-11:05:28 [INFO] -- Poll: [66013]: Time's up!
+190328-11:05:28 [INFO] -- PollAck: TouchDisplayHandler is up!
+190328-11:05:28 [INFO] -- PollAck: CardReaderHandler is up!
+190328-11:05:28 [INFO] -- PollAck: KeypadHandler is up!
+190328-11:05:29 [INFO] -- 
+190328-11:05:29 [INFO] -- 
+190328-11:05:29 [INFO] -- ============================================================
+190328-11:05:29 [INFO] -- ATMSSStarter: Application Stopping...
+190328-11:05:29 [INFO] -- CardReaderHandler: terminating...
+190328-11:05:29 [INFO] -- timer: received terminate!
+190328-11:05:29 [INFO] -- timer: terminating...
+190328-11:05:29 [INFO] -- KeypadHandler: terminating...
+190328-11:05:29 [INFO] -- ATMSS: terminating...
+190328-11:05:29 [INFO] -- TouchDisplayHandler: terminating...
