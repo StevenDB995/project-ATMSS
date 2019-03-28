@@ -38,7 +38,7 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 	Parent root;
 	myStage = new Stage();
 	FXMLLoader loader = new FXMLLoader();
-	String fxmlName = "TouchDisplayEmulator.fxml";
+	String fxmlName = "TouchDisplayWelcome.fxml";
 	loader.setLocation(TouchDisplayEmulator.class.getResource(fxmlName));
 	root = loader.load();
 	touchDisplayEmulatorController = (TouchDisplayEmulatorController) loader.getController();
@@ -72,6 +72,10 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 	    case "Confirmation":
 		reloadStage("TouchDisplayConfirmation.fxml");
 		break;
+		
+	    case "Welcome":
+	    	reloadStage("TouchDisplayWelcome.fxml");
+	    	break;
 
 	    default:
 		log.severe(id + ": update display with unknown display type -- " + msg.getDetails());

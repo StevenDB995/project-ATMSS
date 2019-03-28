@@ -60,16 +60,16 @@ public class CardReaderEmulatorController {
 	    case "Insert Card":
 		if (cardNumField.getText().length() != 0) {
 		    cardReaderMBox.send(new Msg(id, cardReaderMBox, Msg.Type.CR_CardInserted, cardNumField.getText()));
-		    cardReaderTextArea.appendText("Inset Card: " + cardNumField.getText()+"\n");
+		    cardReaderTextArea.appendText("Sending " + cardNumField.getText()+"\n");
 		    cardStatusField.setText("Card Inserted");
 		}
 		break;
 
 	    case "Remove Card":
-	       // if (cardStatusField.getText().compareTo("Card Ejected") == 0) {
+	        if (cardStatusField.getText().compareTo("Card Ejected") == 0) {
 		    cardReaderTextArea.appendText("Removing card\n");
 		    cardReaderMBox.send(new Msg(id, cardReaderMBox, Msg.Type.CR_CardRemoved, cardNumField.getText()));
-		//}
+		}
 		break;
 
 	    default:

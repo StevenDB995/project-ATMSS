@@ -83,11 +83,13 @@ public class ATMSS extends AppThread {
         if (msg.getDetails().compareToIgnoreCase("Cancel") == 0) {
 	    cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
 	} else if (msg.getDetails().compareToIgnoreCase("1") == 0) {
-	    touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "BlankScreen"));
+	    touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Welcome"));
 	} else if (msg.getDetails().compareToIgnoreCase("2") == 0) {
 	    touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "MainMenu"));
 	} else if (msg.getDetails().compareToIgnoreCase("3") == 0) {
 	    touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Confirmation"));
+	}else if (msg.getDetails().compareTo("4") == 0) {
+	    touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "BlankScreen"));
 	}
     } // processKeyPressed
 
