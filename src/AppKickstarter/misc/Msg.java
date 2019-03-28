@@ -51,11 +51,11 @@ public class Msg {
 		TimesUp, // Time's up for the timer
 		Poll, // Health poll
 		PollAck, // Health poll acknowledgement
+		TD_UpdateDisplay,	// Update Display
+		TD_MouseClicked,	// Mouse Clicked
 		CR_CardInserted, // Card inserted
 		CR_CardRemoved, // Card removed
 		CR_EjectCard, // Eject card
 		KP_KeyPressed, // Key pressed
-		LoginAck, // Acknowledge successful login
-		LogoutAck, // Acknowledge logout
 	} // Type
 } // Msg
