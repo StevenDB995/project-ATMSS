@@ -69,6 +69,18 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 			reloadStage("////////.fxml");
 			break;
 
+		case "Cancel Deposit":
+			reloadStage("////////.fxml");
+			break;
+
+		case "Deposit failed":
+			reloadStage("////////.fxml");
+			break;
+
+		case "Deposit successed":
+			reloadStage("////////.fxml");
+			break;
+
 		default:
 			log.severe(id + ": update display with unknown display type -- " + msg.getDetails());
 			break;

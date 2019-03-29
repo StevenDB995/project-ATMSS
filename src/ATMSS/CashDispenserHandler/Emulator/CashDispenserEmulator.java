@@ -52,16 +52,16 @@ public class CashDispenserEmulator extends CashDispenserHandler {
 	} // CashDispenserEmulator
 
 	// ------------------------------------------------------------
-	// handleUpdateDisplay
-	protected void handleUpdateDisplayOfOpenSlot(Msg msg) {
+	// handleUpdateDisplayOfCashDisperserSlot
+	protected void handleUpdateDisplayOfCashDisperserSlot(Msg msg) {
 		log.info(id + ": " + msg.getDetails() + " and update display of cash dispenser.");
 
 		switch (msg.getDetails()) {
-		case "Open cash deposit slot":
+		case "Open cash dispenser slot":
 			reloadStage("////////.fxml");
 			break;
 
-		case "Close cash deposit slot":
+		case "Close cash dispenser slot":
 			reloadStage("////////.fxml");
 			break;
 
@@ -69,7 +69,7 @@ public class CashDispenserEmulator extends CashDispenserHandler {
 			log.severe(id + ": update cash dispenser display with unknown display type -- " + msg.getDetails());
 			break;
 		}
-	} // handleUpdateDisplay
+	} // handleUpdateDisplayOfCashDisperserSlot
 
 	// ------------------------------------------------------------
 	// reloadStage

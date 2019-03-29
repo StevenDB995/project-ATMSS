@@ -2,6 +2,7 @@ package ATMSS.CashDepositCollectorHandler.Emulator;
 
 import ATMSS.ATMSSStarter;
 import ATMSS.CashDepositCollectorHandler.CashDepositCollectorHandler;
+import AppKickstarter.misc.Msg;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,6 +14,8 @@ import javafx.stage.WindowEvent;
 //======================================================================
 //CashDepositCollectorEmulator
 public class CashDepositCollectorEmulator extends CashDepositCollectorHandler {
+	private final int WIDTH = 680;
+	private final int HEIGHT = 520;
 	private ATMSSStarter atmssStarter;
 	private String id;
 	private Stage myStage;
@@ -47,5 +50,53 @@ public class CashDepositCollectorEmulator extends CashDepositCollectorHandler {
 		});
 		myStage.show();
 	} // CashDepositCollectorEmulator
+
+	// ------------------------------------------------------------
+	// handleUpdateDisplayOfCashDepositCollectorSlot
+	protected void handleUpdateDisplayOfCashDepositCollectorSlot(Msg msg) {
+		log.info(id + ": " + msg.getDetails() + " and update display of cash deposit collector.");
+
+		switch (msg.getDetails()) {
+		case "Open cash deposit collector slot":
+			reloadStage("////////.fxml");
+			break;
+
+		case "Close cash deposit collector slot":
+			reloadStage("////////.fxml");
+			break;
+
+		default:
+			log.severe(id + ": update cash dispenser display with unknown display type -- " + msg.getDetails());
+			break;
+		}
+	} // handleUpdateDisplayOfCashDepositCollectorSlot
+
+	// ------------------------------------------------------------
+	// reloadStage
+	private void reloadStage(String fxmlFName) {
+		CashDepositCollectorEmulator cashDepositCollectorEmulator = this;
+
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					log.info(id + ": loading fxml: " + fxmlFName);
+
+					Parent root;
+					FXMLLoader loader = new FXMLLoader();
+					loader.setLocation(CashDepositCollectorEmulator.class.getResource(fxmlFName));
+					root = loader.load();
+					cashDepositCollectorEmulatorController = (CashDepositCollectorEmulatorController) loader
+							.getController();
+					cashDepositCollectorEmulatorController.initialize(id, atmssStarter, log,
+							cashDepositCollectorEmulator);
+					myStage.setScene(new Scene(root, WIDTH, HEIGHT));
+				} catch (Exception e) {
+					log.severe(id + ": failed to load " + fxmlFName);
+					e.printStackTrace();
+				}
+			}
+		});
+	} // reloadStage
 
 }// CashDepositCollectorEmulator

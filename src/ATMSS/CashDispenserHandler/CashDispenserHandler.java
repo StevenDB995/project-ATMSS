@@ -25,7 +25,7 @@ public class CashDispenserHandler extends AppThread {
 
 			switch (msg.getType()) {
 			case CD_UpdateCashDispenserSlot:
-				handleUpdateDisplayOfOpenSlot(msg);
+				handleUpdateDisplayOfCashDisperserSlot(msg);
 				break;
 
 			case Poll:
@@ -48,8 +48,8 @@ public class CashDispenserHandler extends AppThread {
 	}// run
 
 	// ------------------------------------------------------------
-	// handleUpdateDisplayOfOpenSlot
-	protected void handleUpdateDisplayOfOpenSlot(Msg msg) {
+	// handleUpdateDisplayOfCashDisperserSlot
+	protected void handleUpdateDisplayOfCashDisperserSlot(Msg msg) {
 		log.info(id + ": " + msg.getDetails() + " and update display of cash dispenser.");
-	} // handleUpdateDisplayOfOpenSlot
+	} // handleUpdateDisplayOfCashDisperserSlot
 }// CashDispenserHandler

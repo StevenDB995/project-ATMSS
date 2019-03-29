@@ -66,6 +66,16 @@ public class ATMSS extends AppThread {
 				withdrawProcessKeyPressed(msg);
 				break;
 
+			case KP_DepositKeyPressed:
+				log.info("KeyPressed: " + msg.getDetails());
+				depositProcessKeyPressed(msg);
+				break;
+				
+			case KP_EnquiryKeyPressed:
+				log.info("KeyPressed: " + msg.getDetails());
+				
+				break;
+
 			case CR_CardInserted:
 				currentCardNo = msg.getDetails();
 				log.info("CardInserted: " + currentCardNo);
@@ -78,14 +88,8 @@ public class ATMSS extends AppThread {
 				break;
 
 			case TD_ChooseEnquiry:
-				break;
-
-			case CDC_OpenSlot:
-				log.info("Opend the slot, please insert money.");
-				break;
-
-			case CDC_CloseSlot:
-				log.info("Closed the slot, please wait.");
+				log.info("Enquiry your balance in your account.");
+				enquiry(msg);
 				break;
 
 			case B_Sound:
@@ -173,7 +177,7 @@ public class ATMSS extends AppThread {
 					log.info("Withdraw succeed, you have withdrawed " + withdrawAmount);
 					touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Withdraw successed"));
 					cashDispenserMBox
-							.send(new Msg(id, mbox, Msg.Type.CD_UpdateCashDispenserSlot, "Open cash deposit slot"));
+							.send(new Msg(id, mbox, Msg.Type.CD_UpdateCashDispenserSlot, "Open cash dispenser slot"));
 				}
 			} catch (BAMSInvalidReplyException | IOException e) {
 				e.printStackTrace();
@@ -182,4 +186,44 @@ public class ATMSS extends AppThread {
 		}
 
 	} // withdrawProcessKeyPressed
+
+	// ------------------------------------------------------------
+	// depositProcessKeyPressed
+	private void depositProcessKeyPressed(Msg msg) {
+		String details = msg.getDetails();
+
+		if (details.compareToIgnoreCase("Cancel") == 0) { // "Cancel" is pressed
+			touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Cancel Deposit"));
+			log.info("Deposit cancelled.");
+			cashDepositCollectorMBox.send(new Msg(id, mbox, Msg.Type.CDC_UpdateCashDepositCollectorSlot,
+					"Close cash deposit collector slot"));
+			keypadInput = "";
+		} else if (Character.isDigit(details.charAt(0))) { // Number key is pressed
+			keypadInput += details;
+		} else if (details.compareToIgnoreCase("Enter") == 0) { // "Enter" is pressed
+			try {
+				double depositAmount = bams.deposit(currentCardNo, accountNo, credential, keypadInput);
+				if (depositAmount < 0) {
+					log.info("Deposit failed.");
+					touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Deposit failed"));
+				} else {
+					log.info("Deposit succeed, you have deposit " + depositAmount);
+					touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Deposit successed"));
+					cashDepositCollectorMBox.send(new Msg(id, mbox, Msg.Type.CDC_UpdateCashDepositCollectorSlot,
+							"Close cash deposit collector slot"));
+				}
+			} catch (BAMSInvalidReplyException | IOException e) {
+				e.printStackTrace();
+			}
+			keypadInput = "";
+		}
+
+	} // depositProcessKeyPressed
+
+	// ------------------------------------------------------------
+	// enquiry
+	private void enquiry(Msg msg) {
+		String details = msg.getDetails();
+		
+	} // enquiry
 } // ATMSS

@@ -57,16 +57,15 @@ public class Msg {
 		CR_EjectCard, // Eject card
 		KP_KeyPressed, // Key pressed
 		KP_WithdrawKeyPressed, // Key pressed in withdraw
+		KP_DepositKeyPressed, // Key pressed in deposit
+		KP_EnquiryKeyPressed, // Key pressed in enquiry
 		LoginAck, // Acknowledge successful login
 		LogoutAck, // Acknowledge logout
 		TD_UpdateDisplay,	// Update Display
-		KP_CancelDeposit,	// Choose cancel on keypad when deposit and deposit is cancelled
-		KP_CancelEnquiry,	// Choose cancel on keypad when enquiry and enquiry is cancelled
 		TD_ChooseWithdraw,	// Choose withdraw money on touch display
 		TD_ChooseDeposit,	// Choose deposit money on touch display
 		TD_ChooseEnquiry,	// Choose enquiry on touch display
-		CDC_OpenSlot,		// Open slot of cash deposit collector
-		CDC_CloseSlot,		// Close slot of cash deposit collector
+		CDC_UpdateCashDepositCollectorSlot,		// Update display of slot of cash deposit collector
 		CD_UpdateCashDispenserSlot,		// Update display of slot of cash dispenser
 		B_Sound,				//Buzzer makes sound
 	} // Type
