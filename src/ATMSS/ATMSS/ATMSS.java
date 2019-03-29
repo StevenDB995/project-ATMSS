@@ -186,7 +186,7 @@ public class ATMSS extends AppThread {
 					}
 					
 					keypadInput = "";
-					break;
+					break; 
 				}
 			} catch (BAMSInvalidReplyException | IOException e) {
 				// TODO Auto-generated catch block
