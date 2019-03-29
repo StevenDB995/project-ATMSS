@@ -59,6 +59,7 @@ public class Msg {
 		KP_WithdrawKeyPressed, // Key pressed in withdraw
 		KP_DepositKeyPressed, // Key pressed in deposit
 		KP_EnquiryKeyPressed, // Key pressed in enquiry
+		TD_MouseClicked, // Mouse Clicked
 		LoginAck, // Acknowledge successful login
 		LogoutAck, // Acknowledge logout
 		TD_UpdateDisplay,	// Update Display

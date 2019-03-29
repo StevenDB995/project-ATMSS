@@ -56,6 +56,11 @@ public class ATMSS extends AppThread {
 			log.fine(id + ": message received: [" + msg + "].");
 
 			switch (msg.getType()) {
+			case TD_MouseClicked:
+				log.info("MouseCLicked: " + msg.getDetails());
+				processMouseClicked(msg);
+				break;
+
 			case KP_KeyPressed:
 				log.info("KeyPressed: " + msg.getDetails());
 				processKeyPressed(msg);
@@ -70,10 +75,10 @@ public class ATMSS extends AppThread {
 				log.info("KeyPressed: " + msg.getDetails());
 				depositProcessKeyPressed(msg);
 				break;
-				
+
 			case KP_EnquiryKeyPressed:
 				log.info("KeyPressed: " + msg.getDetails());
-				
+
 				break;
 
 			case CR_CardInserted:
@@ -88,7 +93,6 @@ public class ATMSS extends AppThread {
 				break;
 
 			case TD_ChooseEnquiry:
-				log.info("Enquiry your balance in your account.");
 				enquiry(msg);
 				break;
 
@@ -224,6 +228,25 @@ public class ATMSS extends AppThread {
 	// enquiry
 	private void enquiry(Msg msg) {
 		String details = msg.getDetails();
-		
+		log.info("Enquiry your balance in your account.");
+		try {
+			double enquiryAmount = bams.enquiry(currentCardNo, accountNo, credential);
+			if (enquiryAmount < 0) {
+				log.info("Enquiry failed.");
+				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Withdraw failed"));
+			} else {
+				log.info("Enquiry succeed, you have " + enquiryAmount + " in your account.");
+				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Withdraw successed"));
+			}
+		} catch (BAMSInvalidReplyException | IOException e) {
+			e.printStackTrace();
+		}
+
 	} // enquiry
+
+	// ------------------------------------------------------------
+	// processMouseClicked
+	private void processMouseClicked(Msg msg) {
+
+	} // processMouseClicked
 } // ATMSS
