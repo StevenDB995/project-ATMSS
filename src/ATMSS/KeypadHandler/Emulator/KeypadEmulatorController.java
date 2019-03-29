@@ -9,35 +9,32 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 
-
 //======================================================================
 // KeypadEmulatorController
 public class KeypadEmulatorController {
-    private String id;
-    private AppKickstarter appKickstarter;
-    private Logger log;
-    private KeypadEmulator keypadEmulator;
-    private MBox keypadMBox;
+	private String id;
+	private AppKickstarter appKickstarter;
+	private Logger log;
+	private KeypadEmulator keypadEmulator;
+	private MBox keypadMBox;
 
-    //------------------------------------------------------------
-    // initialize
-    public void initialize(String id, AppKickstarter appKickstarter, Logger log, KeypadEmulator keypadEmulator) {
-        this.id = id;
-	this.appKickstarter = appKickstarter;
-	this.log = log;
-	this.keypadEmulator = keypadEmulator;
-	this.keypadMBox = appKickstarter.getThread("KeypadHandler").getMBox();
-    } // initialize
+	// ------------------------------------------------------------
+	// initialize
+	public void initialize(String id, AppKickstarter appKickstarter, Logger log, KeypadEmulator keypadEmulator) {
+		this.id = id;
+		this.appKickstarter = appKickstarter;
+		this.log = log;
+		this.keypadEmulator = keypadEmulator;
+		this.keypadMBox = appKickstarter.getThread("KeypadHandler").getMBox();
+	} // initialize
 
-
-    //------------------------------------------------------------
-    // buttonPressed
-    public void buttonPressed(ActionEvent actionEvent) {
-	Button btn = (Button) actionEvent.getSource();
-	String btnTxt = btn.getText();
-	keypadMBox.send(new Msg(id, keypadMBox, Msg.Type.KP_KeyPressed, btnTxt));
-    } // buttonPressed
-
+	// ------------------------------------------------------------
+	// buttonPressed
+	public void buttonPressed(ActionEvent actionEvent) {
+		Button btn = (Button) actionEvent.getSource();
+		String btnTxt = btn.getText();
+		keypadMBox.send(new Msg(id, keypadMBox, Msg.Type.KP_KeyPressed, btnTxt));
+	} // buttonPressed
 
     //------------------------------------------------------------
     // keyPressed

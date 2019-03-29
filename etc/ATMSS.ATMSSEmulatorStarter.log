@@ -1,0 +1,41 @@
+190329-09:37:24 [INFO] -- 
+190329-09:37:24 [INFO] -- 
+190329-09:37:24 [INFO] -- ============================================================
+190329-09:37:24 [INFO] -- ATMSSStarter: Application Starting...
+190329-09:37:27 [INFO] -- timer: starting...
+190329-09:37:27 [INFO] -- CardReaderHandler: starting...
+190329-09:37:27 [INFO] -- KeypadHandler: starting...
+190329-09:37:27 [INFO] -- TouchDisplayHandler: starting...
+190329-09:37:27 [INFO] -- CashDispenserHandler: starting...
+190329-09:37:27 [INFO] -- CashDepositCollectorHandler: starting...
+190329-09:37:27 [INFO] -- ATMSS: starting...
+190329-09:37:27 [INFO] -- BuzzerHandler: starting...
+190329-09:37:27 [INFO] -- AdvicePrinterHandler: starting...
+190329-09:38:27 [INFO] -- Poll: [75285]: Time's up!
+190329-09:38:27 [INFO] -- PollAck: CardReaderHandler is up!
+190329-09:38:27 [INFO] -- PollAck: KeypadHandler is up!
+190329-09:38:27 [INFO] -- PollAck: TouchDisplayHandler is up!
+190329-09:39:27 [INFO] -- Poll: [62103]: Time's up!
+190329-09:39:27 [INFO] -- PollAck: CardReaderHandler is up!
+190329-09:39:27 [INFO] -- PollAck: KeypadHandler is up!
+190329-09:39:27 [INFO] -- PollAck: TouchDisplayHandler is up!
+190329-09:40:27 [INFO] -- Poll: [80563]: Time's up!
+190329-09:40:27 [INFO] -- PollAck: CardReaderHandler is up!
+190329-09:40:27 [INFO] -- PollAck: KeypadHandler is up!
+190329-09:40:27 [INFO] -- PollAck: TouchDisplayHandler is up!
+190329-09:41:27 [INFO] -- Poll: [56821]: Time's up!
+190329-09:41:27 [INFO] -- PollAck: CardReaderHandler is up!
+190329-09:41:27 [INFO] -- PollAck: KeypadHandler is up!
+190329-09:41:27 [INFO] -- PollAck: TouchDisplayHandler is up!
+190329-09:42:27 [INFO] -- Poll: [92177]: Time's up!
+190329-09:42:27 [INFO] -- PollAck: CardReaderHandler is up!
+190329-09:42:27 [INFO] -- PollAck: KeypadHandler is up!
+190329-09:42:27 [INFO] -- PollAck: TouchDisplayHandler is up!
+190329-09:43:27 [INFO] -- Poll: [89667]: Time's up!
+190329-09:43:27 [INFO] -- PollAck: CardReaderHandler is up!
+190329-09:43:27 [INFO] -- PollAck: KeypadHandler is up!
+190329-09:43:27 [INFO] -- PollAck: TouchDisplayHandler is up!
+190329-09:44:27 [INFO] -- Poll: [31494]: Time's up!
+190329-09:44:27 [INFO] -- PollAck: CardReaderHandler is up!
+190329-09:44:27 [INFO] -- PollAck: KeypadHandler is up!
+190329-09:44:27 [INFO] -- PollAck: TouchDisplayHandler is up!
