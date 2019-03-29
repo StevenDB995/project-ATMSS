@@ -57,5 +57,7 @@ public class Msg {
 		CR_CardRemoved, // Card removed
 		CR_EjectCard, // Eject card
 		KP_KeyPressed, // Key pressed
+		BAMS_GetAccounts, // For touch display to display available accounts
+		BAMS_ChooseAccount, // For touch display to display chosen account
 	} // Type
 } // Msg

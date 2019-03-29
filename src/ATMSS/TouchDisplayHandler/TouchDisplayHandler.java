@@ -17,7 +17,7 @@ public class TouchDisplayHandler extends AppThread {
     //------------------------------------------------------------
     // run
     public void run() {
-	MBox atmss = appKickstarter.getThread("ATMSS").getMBox();
+    MBox atmss = appKickstarter.getThread("ATMSS").getMBox();
 	log.info(id + ": starting...");
 
 	for (boolean quit = false; !quit;) {

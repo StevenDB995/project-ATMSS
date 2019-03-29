@@ -21,8 +21,6 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 	private String id;
 	private Stage myStage;
 	private TouchDisplayEmulatorController touchDisplayEmulatorController;
-	private String stageId; // record the current stage of the touchDisplay
-	// stageId is designed to be the same as the FXML filename
 
 	// ------------------------------------------------------------
 	// TouchDisplayEmulator
@@ -30,7 +28,6 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 		super(id, atmssStarter);
 		this.atmssStarter = atmssStarter;
 		this.id = id;
-		stageId = "TouchDisplayEmulator";
 	} // TouchDisplayEmulator
 
 	// ------------------------------------------------------------
@@ -55,16 +52,12 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 		myStage.show();
 	} // TouchDisplayEmulator
 
-	public String getStageId() {
-		return stageId;
-	}
-
 	// ------------------------------------------------------------
 	// handleUpdateDisplay
 	protected void handleUpdateDisplay(Msg msg) {
-		stageId = msg.getDetails();
-		log.info(id + ": update display -- " + stageId);
-		reloadStage(stageId + ".fxml");
+		String details = msg.getDetails();
+		reloadStage(details + ".fxml");
+		log.info(id + ": update display -- " + details);
 	} // handleUpdateDisplay
 
 	// ------------------------------------------------------------
