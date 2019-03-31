@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import ATMSS.BAMSHandler.AdvancedBAMSHandler;
 import ATMSS.BAMSHandler.BAMSInvalidReplyException;
+//import ATMSS.TouchDisplayHandler.Emulator.TouchDisplayEmulator;
 import AppKickstarter.AppKickstarter;
 import AppKickstarter.misc.*;
 import AppKickstarter.timer.Timer;
@@ -18,12 +19,21 @@ public class ATMSS extends AppThread {
 	private MBox cashDepositCollectorMBox;
 	private MBox advicePrinterMBox;
 	private MBox buzzerMBox;
+	// private TouchDisplayEmulator touchDisplay;
 
 	private AdvancedBAMSHandler bams;
 	private String currentCardNo;
-	private String keypadInput; // Store keypad input by users
-	private String accountNo;
+
 	private String credential;
+	private String[] availableAccounts;
+	private String currentAccount;
+
+	private String keypadInput; // Store keypad input by users
+	private String TD_StageId; // record the current stage of the touchDisplay
+	private String adviceContent; // store the content of the advice
+	private boolean adviceCollected; // whether the user has collect the advice (pressed the button in advice
+										// printer)
+	// TD_StageId is designed to be the same as the FXML filename
 
 	// ------------------------------------------------------------
 	// ATMSS
@@ -31,9 +41,13 @@ public class ATMSS extends AppThread {
 		super(id, appKickstarter);
 		// bams = new AdvancedBAMSHandler(url, logger);
 		currentCardNo = "";
-		keypadInput = "";
-		accountNo = "";
 		credential = "";
+		keypadInput = "";
+		currentAccount = "";
+		credential = "";
+		TD_StageId = "TouchDisplayEmulator";
+		adviceContent = "";
+		adviceCollected = false;
 	} // ATMSS
 
 	// ------------------------------------------------------------
@@ -49,6 +63,10 @@ public class ATMSS extends AppThread {
 		cashDepositCollectorMBox = appKickstarter.getThread("CashDepositCollectorHandler").getMBox();
 		advicePrinterMBox = appKickstarter.getThread("AdvicePrinterHandler").getMBox();
 		buzzerMBox = appKickstarter.getThread("BuzzerHandler").getMBox();
+
+		// touchDisplay = (TouchDisplayEmulator)
+		// appKickstarter.getThread("TouchDisplayHandler");
+		// touchDisplayMBox = touchDisplay.getMBox();
 
 		for (boolean quit = false; !quit;) {
 			Msg msg = mbox.receive();
@@ -66,39 +84,23 @@ public class ATMSS extends AppThread {
 				processKeyPressed(msg);
 				break;
 
-			case KP_WithdrawKeyPressed:
-				log.info("KeyPressed: " + msg.getDetails());
-				withdrawProcessKeyPressed(msg);
-				break;
-
-			case KP_DepositKeyPressed:
-				log.info("KeyPressed: " + msg.getDetails());
-				depositProcessKeyPressed(msg);
-				break;
-
-			case KP_EnquiryKeyPressed:
-				log.info("KeyPressed: " + msg.getDetails());
-
-				break;
-
 			case CR_CardInserted:
 				currentCardNo = msg.getDetails();
 				log.info("CardInserted: " + currentCardNo);
 				break;
 
-			case TD_ChooseWithdraw:
+			case CDC_ButtonPressed:
+				cashDepositCollectorMBox.send(new Msg(id, mbox, Msg.Type.CDC_UpdateCashDepositCollectorSlot,
+						"CloseCashDepositCollectorSlot"));
 				break;
 
-			case TD_ChooseDeposit:
+			case CD_ButtonPressed:
+				cashDispenserMBox
+						.send(new Msg(id, mbox, Msg.Type.CD_UpdateCashDispenserSlot, "CloseCashDispenserSlot"));
 				break;
 
-			case TD_ChooseEnquiry:
-				enquiry(msg);
-				break;
-
-			case B_Sound:
-				log.info("Time out! Buzzer is making sound.");
-				break;
+			case AP_ButtonPressed:
+				adviceCollected = true;
 
 			case TimesUp:
 				Timer.setTimer(id, mbox, 60000);
@@ -136,117 +138,258 @@ public class ATMSS extends AppThread {
 		String details = msg.getDetails();
 
 		if (details.compareToIgnoreCase("Cancel") == 0) { // "Cancel" is pressed
-			keypadMBox.send(new Msg(id, mbox, Msg.Type.LogoutAck, "Logout"));
-			cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
-			currentCardNo = "";
+			switch (TD_StageId) {
+			case "TransferAccNo":
+			case "TransferAmount":
+				log.info("Transfer Cancelled.");
+				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TransferCancelled"));
+				keypadInput = "";
+				break;
+
+			case "WithdrawAmount":
+				log.info("Withdraw cancelled.");
+				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "WithdrawCancelled"));
+				keypadInput = "";
+				break;
+
+			case "DepositAmount":
+				log.info("Deposit cancelled.");
+				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "DepositCancelled"));
+				keypadInput = "";
+				break;
+
+			default:
+				cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
+				currentCardNo = "";
+			}
 		}
 
 		else if (Character.isDigit(details.charAt(0))) { // Number key is pressed
-			keypadInput += details;
+			switch (TD_StageId) {
+			case "TouchDisplayEmulator": // cases where keypad input should be recorded
+			case "TransferAccNo":
+			case "TransferAmount":
+			case "WithdrawAmount":
+			case "DepositAmount":
+				keypadInput += details;
+				break;
+			}
+		}
+
+		else if (details.compareToIgnoreCase("Clear") == 0) { // "Clear" is pressed
+			keypadInput = "";
 		}
 
 		else if (details.compareToIgnoreCase("Enter") == 0) { // "Enter" is pressed
 			try {
-				String feedback = bams.login(currentCardNo, keypadInput);
-				if (feedback.equals("ERROR")) {
+				switch (TD_StageId) {
+				case "TouchDisplayEmulator": // Login state
+					String feedback = bams.login(currentCardNo, keypadInput);
+					log.info("logging in with card number " + currentCardNo);
 
-				} else
-					keypadMBox.send(new Msg(id, mbox, Msg.Type.LoginAck, "Login success"));
+					if (feedback.equals("ERROR")) {
+						log.info(id + ": Wrong login password");
+						touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "WrongPassword")); // to be
+																												// revised
+						TD_StageId = "WrongPassword";
+					} else {
+						log.info(id + ": Login successful");
+						credential = feedback;
+						String accounts = bams.getAccounts(currentCardNo, credential);
+						touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.BAMS_GetAccounts, accounts));
+						availableAccounts = accounts.split("/");
+
+						touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "ChooseAccount")); // to be
+																												// revised
+						TD_StageId = "ChooseAccount";
+					}
+
+					keypadInput = "";
+					break;
+
+				case "TransferAccNo":
+					keypadInput += ":";
+					touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TransferAmount"));
+					TD_StageId = "TransferAmount";
+					break;
+
+				case "TransferAmount":
+					String[] tokens = keypadInput.split(":");
+					String toAcc = tokens[0];
+					String amount = tokens[1];
+					double transferFeedback = bams.transfer(currentCardNo, credential, currentAccount, toAcc, amount);
+					if (transferFeedback < 0) {
+						log.info("Failed to transfer from " + currentAccount + " to " + toAcc);
+						touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TransferFailed"));
+						TD_StageId = "TransferFailed";
+					} else {
+						log.info("Successfully transfered " + transferFeedback + " from" + currentAccount + " to "
+								+ toAcc);
+						touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TransferSucceeded"));
+						TD_StageId = "TransferSucceeded";
+					}
+
+					keypadInput = "";
+					break;
+
+				case "WithdrawAmount":
+					int withdrawFeedback = bams.withdraw(currentCardNo, currentAccount, credential, keypadInput);
+					if (withdrawFeedback < 0) {
+						log.info("Withdraw failed");
+						touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "WithdrawFailed"));
+						TD_StageId = "WithdrawFailed";
+						adviceContent = "Withdraw failed/" + currentCardNo + "/" + currentAccount + "/0";
+					} else {
+						log.info("Successfully withdrawed " + withdrawFeedback);
+						touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "WithdrawsSuccessed"));
+						cashDispenserMBox
+								.send(new Msg(id, mbox, Msg.Type.CD_UpdateCashDispenserSlot, "OpenCashDispenserSlot"));
+						TD_StageId = "WithdrawsSuccessed";
+						adviceContent = "Withdraw succeed/" + currentCardNo + "/" + currentAccount + "/"
+								+ withdrawFeedback;
+					}
+
+					keypadInput = "";
+					break;
+
+				case "DepositAmount":
+					double depositFeedback = bams.deposit(currentCardNo, currentAccount, credential, keypadInput);
+					if (depositFeedback < 0) {
+						log.info("Deposit failed.");
+						touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "DepositFailed"));
+						TD_StageId = "DepositFailed";
+						adviceContent = "Deposit failed/" + currentCardNo + "/" + currentAccount + "/0";
+					} else {
+						log.info("Successfully deposited " + depositFeedback);
+						touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "DepositSuccessed"));
+						cashDepositCollectorMBox.send(new Msg(id, mbox, Msg.Type.CDC_UpdateCashDepositCollectorSlot,
+								"OpenCashDepositCollectorSlot"));
+						TD_StageId = "DepositSuccessed";
+						adviceContent = "Deposit succeed/" + currentCardNo + "/" + currentAccount + "/"
+								+ depositFeedback;
+					}
+
+					keypadInput = "";
+					break;
+				}
 			} catch (BAMSInvalidReplyException | IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			keypadInput = "";
 		}
 	} // processKeyPressed
 
-	// ------------------------------------------------------------
-	// withdrawProcessKeyPressed
-	private void withdrawProcessKeyPressed(Msg msg) {
-		String details = msg.getDetails();
-
-		if (details.compareToIgnoreCase("Cancel") == 0) { // "Cancel" is pressed
-			touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Cancel Withdraw"));
-			log.info("Withdraw cancelled.");
-			keypadInput = "";
-		} else if (Character.isDigit(details.charAt(0))) { // Number key is pressed
-			keypadInput += details;
-		} else if (details.compareToIgnoreCase("Enter") == 0) { // "Enter" is pressed
-			try {
-				int withdrawAmount = bams.withdraw(currentCardNo, accountNo, credential, keypadInput);
-				if (withdrawAmount < 0) {
-					log.info("Withdraw failed.");
-					touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Withdraw failed"));
-				} else {
-					log.info("Withdraw succeed, you have withdrawed " + withdrawAmount);
-					touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Withdraw successed"));
-					cashDispenserMBox
-							.send(new Msg(id, mbox, Msg.Type.CD_UpdateCashDispenserSlot, "Open cash dispenser slot"));
-				}
-			} catch (BAMSInvalidReplyException | IOException e) {
-				e.printStackTrace();
-			}
-			keypadInput = "";
-		}
-
-	} // withdrawProcessKeyPressed
-
-	// ------------------------------------------------------------
-	// depositProcessKeyPressed
-	private void depositProcessKeyPressed(Msg msg) {
-		String details = msg.getDetails();
-
-		if (details.compareToIgnoreCase("Cancel") == 0) { // "Cancel" is pressed
-			touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Cancel Deposit"));
-			log.info("Deposit cancelled.");
-			cashDepositCollectorMBox.send(new Msg(id, mbox, Msg.Type.CDC_UpdateCashDepositCollectorSlot,
-					"Close cash deposit collector slot"));
-			keypadInput = "";
-		} else if (Character.isDigit(details.charAt(0))) { // Number key is pressed
-			keypadInput += details;
-		} else if (details.compareToIgnoreCase("Enter") == 0) { // "Enter" is pressed
-			try {
-				double depositAmount = bams.deposit(currentCardNo, accountNo, credential, keypadInput);
-				if (depositAmount < 0) {
-					log.info("Deposit failed.");
-					touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Deposit failed"));
-				} else {
-					log.info("Deposit succeed, you have deposit " + depositAmount);
-					touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Deposit successed"));
-					cashDepositCollectorMBox.send(new Msg(id, mbox, Msg.Type.CDC_UpdateCashDepositCollectorSlot,
-							"Close cash deposit collector slot"));
-				}
-			} catch (BAMSInvalidReplyException | IOException e) {
-				e.printStackTrace();
-			}
-			keypadInput = "";
-		}
-
-	} // depositProcessKeyPressed
-
-	// ------------------------------------------------------------
-	// enquiry
-	private void enquiry(Msg msg) {
-		String details = msg.getDetails();
-		log.info("Enquiry your balance in your account.");
-		try {
-			double enquiryAmount = bams.enquiry(currentCardNo, accountNo, credential);
-			if (enquiryAmount < 0) {
-				log.info("Enquiry failed.");
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Withdraw failed"));
-			} else {
-				log.info("Enquiry succeed, you have " + enquiryAmount + " in your account.");
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Withdraw successed"));
-			}
-		} catch (BAMSInvalidReplyException | IOException e) {
-			e.printStackTrace();
-		}
-
-	} // enquiry
-
-	// ------------------------------------------------------------
 	// processMouseClicked
 	private void processMouseClicked(Msg msg) {
+		String[] details = msg.getDetails().split(" ");
+		int x = Integer.parseInt(details[0]);
+		int y = Integer.parseInt(details[1]);
 
+		switch (TD_StageId) {
+		case "TouchDisplayEmulator":
+			// if (x... y...)
+			// touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "stage"));
+			// TD_StageId = "stage";
+			break;
+
+		case "ChooseAccount":
+			if (x < 0 && y < 0) { // to be revised
+				currentAccount = availableAccounts[0];
+				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.BAMS_ChooseAccount, currentAccount));
+				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayMainMenu"));
+				TD_StageId = "TouchDisplayMainMenu";
+			}
+			break;
+
+		case "TouchDisplayMainMenu":
+			if (x < 0 && y < 0) { // case for enquiry, to be revised
+				log.info("Enquiry your balance in your account.");
+				try {
+					double enquiryFeedback = bams.enquiry(currentCardNo, currentAccount, credential);
+					if (enquiryFeedback < 0) {
+						log.info("Enquiry failed.");
+						touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "EnquiryFailed"));
+						TD_StageId = "EnquiryFailed";
+						adviceContent = "Enquiry failed/" + currentCardNo + "/" + currentAccount + "/0";
+					} else {
+						log.info("Enquiry successfully, you have " + enquiryFeedback + " in your account.");
+						touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "EnquirySuccessed"));
+						TD_StageId = "EnquirySuccessed";
+						adviceContent = "Enquiry succeed/" + currentCardNo + "/" + currentAccount + "/"
+								+ enquiryFeedback;
+					}
+				} catch (BAMSInvalidReplyException | IOException e) {
+					e.printStackTrace();
+				}
+			}
+
+			else if (x < 0 && y < 0) { // case for withdraw, to be revised
+				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "WithdrawAmount"));
+				TD_StageId = "WithdrawAmount";
+			}
+
+			else if (x < 0 && y < 0) { // case for deposit, to be revised
+				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "DepositAmount"));
+				TD_StageId = "DepositAmount";
+			}
+
+			break;
+
+		case "TouchDisplayConfirmation":
+			// if (x... y...)
+			// touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "stage"));
+			// TD_StageId = "stage";
+			break;
+
+		case "EnquiryFailed":
+
+			break;
+
+		case "DepositFailed":
+
+			break;
+
+		case "WithdrawFailed":
+
+			break;
+
+		case "EnquirySuccessed":
+		case "DepositSuccessed":
+		case "WithdrawsSuccessed":
+			if (x < 0 && y < 0) { // case for eject card
+				cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
+				currentCardNo = "";
+				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulator"));
+				TD_StageId = "TouchDisplayEmulator";
+			}
+
+			else if (x < 0 && y < 0) { // case for print advice and eject card
+				advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.AP_UpdateAdvicePrinter, adviceContent));
+				adviceContent = "";
+				if (adviceCollected) {
+					cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
+					currentCardNo = "";
+					touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulator"));
+					TD_StageId = "TouchDisplayEmulator";
+					adviceCollected = false;
+				}
+			}
+
+			else if (x < 0 && y < 0) { // case for more transactions
+				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayMainMenu"));
+				TD_StageId = "TouchDisplayMainMenu";
+			}
+
+			else if (x < 0 && y < 0) { // case for print advice and more transactions
+				advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.AP_UpdateAdvicePrinter, adviceContent));
+				adviceContent = "";
+				if (adviceCollected) {
+					touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayMainMenu"));
+					TD_StageId = "TouchDisplayMainMenu";
+				}
+			}
+			break;
+
+		}
 	} // processMouseClicked
+
 } // ATMSS

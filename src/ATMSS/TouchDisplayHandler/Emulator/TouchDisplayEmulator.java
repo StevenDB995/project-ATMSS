@@ -3,6 +3,7 @@ package ATMSS.TouchDisplayHandler.Emulator;
 import ATMSS.ATMSSStarter;
 import ATMSS.TouchDisplayHandler.TouchDisplayHandler;
 import AppKickstarter.misc.Msg;
+
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -41,7 +42,7 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 		touchDisplayEmulatorController = (TouchDisplayEmulatorController) loader.getController();
 		touchDisplayEmulatorController.initialize(id, atmssStarter, log, this);
 		myStage.initStyle(StageStyle.DECORATED);
-		myStage.setScene(new Scene(root, 600, 450));
+		myStage.setScene(new Scene(root, WIDTH, HEIGHT));
 		myStage.setTitle("Touch Display");
 		myStage.setResizable(false);
 		myStage.setOnCloseRequest((WindowEvent event) -> {
@@ -54,37 +55,10 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 	// ------------------------------------------------------------
 	// handleUpdateDisplay
 	protected void handleUpdateDisplay(Msg msg) {
-		log.info(id + ": update display -- " + msg.getDetails());
 
-		switch (msg.getDetails()) {
-		case "Cancel Withdraw":
-			reloadStage("////////.fxml");
-			break;
-
-		case "Withdraw failed":
-			reloadStage("////////.fxml");
-			break;
-
-		case "Withdraw successed":
-			reloadStage("////////.fxml");
-			break;
-
-		case "Cancel Deposit":
-			reloadStage("////////.fxml");
-			break;
-
-		case "Deposit failed":
-			reloadStage("////////.fxml");
-			break;
-
-		case "Deposit successed":
-			reloadStage("////////.fxml");
-			break;
-
-		default:
-			log.severe(id + ": update display with unknown display type -- " + msg.getDetails());
-			break;
-		}
+		String details = msg.getDetails();
+		reloadStage(details + ".fxml");
+		log.info(id + ": update display -- " + details);
 	} // handleUpdateDisplay
 
 	// ------------------------------------------------------------

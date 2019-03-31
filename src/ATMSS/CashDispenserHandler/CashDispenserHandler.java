@@ -27,6 +27,10 @@ public class CashDispenserHandler extends AppThread {
 			case CD_UpdateCashDispenserSlot:
 				handleUpdateDisplayOfCashDisperserSlot(msg);
 				break;
+				
+			case CD_ButtonPressed:
+				atmss.send(new Msg(id, mbox, Msg.Type.CD_ButtonPressed, msg.getDetails()));
+				break;
 
 			case Poll:
 				atmss.send(new Msg(id, mbox, Msg.Type.PollAck, id + " is up!"));

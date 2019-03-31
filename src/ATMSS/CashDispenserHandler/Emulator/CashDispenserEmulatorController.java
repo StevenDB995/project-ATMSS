@@ -4,6 +4,9 @@ import java.util.logging.Logger;
 
 import AppKickstarter.AppKickstarter;
 import AppKickstarter.misc.MBox;
+import AppKickstarter.misc.Msg;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 
 //======================================================================
 //CashDispenserEmulatorController
@@ -25,5 +28,13 @@ public class CashDispenserEmulatorController {
 		this.cashDispenserEmulator = cashDispenserEmulator;
 		this.cashDispenserMBox = appKickstarter.getThread("CashDispenserHandler").getMBox();
 	} // initialize
+
+	// ------------------------------------------------------------
+	// buttonPressed
+	public void buttonPressed(ActionEvent actionEvent) {
+		Button btn = (Button) actionEvent.getSource();
+		String btnTxt = btn.getText();
+		cashDispenserMBox.send(new Msg(id, cashDispenserMBox, Msg.Type.CD_ButtonPressed, btnTxt));
+	} // buttonPressed
 
 }// CashDispenserEmulatorController

@@ -24,6 +24,10 @@ public class TouchDisplayHandler extends AppThread {
 			log.fine(id + ": message received: [" + msg + "].");
 
 			switch (msg.getType()) {
+			case TD_MouseClicked:
+				atmss.send(new Msg(id, mbox, Msg.Type.TD_MouseClicked, msg.getDetails()));
+				break;
+
 			case TD_UpdateDisplay:
 				handleUpdateDisplay(msg);
 				break;
@@ -51,4 +55,5 @@ public class TouchDisplayHandler extends AppThread {
 	protected void handleUpdateDisplay(Msg msg) {
 		log.info(id + ": update display -- " + msg.getDetails());
 	} // handleUpdateDisplay
+
 } // TouchDisplayHandler

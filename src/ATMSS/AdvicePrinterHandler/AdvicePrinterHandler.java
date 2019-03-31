@@ -8,7 +8,7 @@ import AppKickstarter.misc.*;
 public class AdvicePrinterHandler extends AppThread {
 	// ------------------------------------------------------------
 	// AdvicePrinterHandler
-	public AdvicePrinterHandler(String id, AppKickstarter appKickstarter){
+	public AdvicePrinterHandler(String id, AppKickstarter appKickstarter) {
 		super(id, appKickstarter);
 	} // AdvicePrinterHandler
 
@@ -31,17 +31,33 @@ public class AdvicePrinterHandler extends AppThread {
 			case Terminate:
 				quit = true;
 				break;
-			
+				
+			case AP_UpdateAdvicePrinter:
+				if(msg.getDetails().compareToIgnoreCase("CollectedAdvice") != 0) {
+					handleUpdateDisplayOfAdvicePrinter(msg);
+				}
 
 			default:
 				log.warning(id + ": unknown message type: [" + msg + "]");
 			}
 		}
-		
-		
+
 		// declaring our departure
 		appKickstarter.unregThread(this);
 		log.info(id + ": terminating...");
 
 	}// run
+
+	// ------------------------------------------------------------
+	// handleUpdateDisplayOfAdvicePrinter
+	protected void handleUpdateDisplayOfAdvicePrinter(Msg msg) {
+		String tokens[] = msg.getDetails().split("/");
+		String transactionType = tokens[0];
+		String currentCardNo = tokens[1];
+		String currentAccount = tokens[2];
+		String amount = tokens[3];
+
+		log.info(id + ": " + transactionType + " from card number" + currentCardNo + " ,account number "
+				+ currentAccount + " with amount " + amount + " and print advice.");
+	} // handleUpdateDisplayOfAdvicePrinter
 }// AdvicePrinterHandler

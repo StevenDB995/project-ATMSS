@@ -2,7 +2,7 @@ package ATMSS.AdvicePrinterHandler.Emulator;
 
 import ATMSS.ATMSSStarter;
 import ATMSS.AdvicePrinterHandler.AdvicePrinterHandler;
-
+import AppKickstarter.misc.Msg;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,6 +14,8 @@ import javafx.stage.WindowEvent;
 //======================================================================
 //AdvicePrinterEmulator
 public class AdvicePrinterEmulator extends AdvicePrinterHandler {
+	private final int WIDTH = 680; // to be revised
+	private final int HEIGHT = 520; // to be revised
 	private ATMSSStarter atmssStarter;
 	private String id;
 	private Stage myStage;
@@ -48,5 +50,74 @@ public class AdvicePrinterEmulator extends AdvicePrinterHandler {
 		});
 		myStage.show();
 	} // AdvicePrinterEmulator
+
+	// ------------------------------------------------------------
+	// handleUpdateDisplayOfAdvicePrinter
+	protected void handleUpdateDisplayOfAdvicePrinter(Msg msg) {
+		String tokens[] = msg.getDetails().split("/");
+		String transactionType = tokens[0];
+		String currentCardNo = tokens[1];
+		String currentAccount = tokens[2];
+		String amount = tokens[3];
+
+		log.info(id + ": " + transactionType + " from card number" + currentCardNo + " ,account number "
+				+ currentAccount + " with amount " + amount + " and print advice.");
+
+		switch (msg.getDetails()) {
+		case "Withdraw failed":
+			reloadStage("////////.fxml");
+			break;
+
+		case "Withdraw succeed":
+			reloadStage("////////.fxml");
+			break;
+
+		case "Deposit failed":
+			reloadStage("////////.fxml");
+			break;
+
+		case "Deposit succeed":
+			reloadStage("////////.fxml");
+			break;
+
+		case "Enquiry failed":
+			reloadStage("////////.fxml");
+			break;
+
+		case "Enquiry succeed":
+			reloadStage("////////.fxml");
+			break;
+
+		default:
+			log.severe(id + ": print advice with unknown type -- " + transactionType);
+			break;
+		}
+	} // handleUpdateDisplayOfAdvicePrinter
+
+	// ------------------------------------------------------------
+	// reloadStage
+	private void reloadStage(String fxmlFName) {
+		AdvicePrinterEmulator advicePrinterEmulator = this;
+
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					log.info(id + ": loading fxml: " + fxmlFName);
+
+					Parent root;
+					FXMLLoader loader = new FXMLLoader();
+					loader.setLocation(AdvicePrinterEmulator.class.getResource(fxmlFName));
+					root = loader.load();
+					advicePrinterEmulatorController = (AdvicePrinterEmulatorController) loader.getController();
+					advicePrinterEmulatorController.initialize(id, atmssStarter, log, advicePrinterEmulator);
+					myStage.setScene(new Scene(root, WIDTH, HEIGHT));
+				} catch (Exception e) {
+					log.severe(id + ": failed to load " + fxmlFName);
+					e.printStackTrace();
+				}
+			}
+		});
+	} // reloadStage
 
 }// AdvicePrinterEmulator

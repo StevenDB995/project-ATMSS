@@ -57,11 +57,11 @@ public class CashDispenserEmulator extends CashDispenserHandler {
 		log.info(id + ": " + msg.getDetails() + " and update display of cash dispenser.");
 
 		switch (msg.getDetails()) {
-		case "Open cash dispenser slot":
+		case "OpenCashDispenserSlot":
 			reloadStage("////////.fxml");
 			break;
 
-		case "Close cash dispenser slot":
+		case "CloseCashDispenserSlot":
 			reloadStage("////////.fxml");
 			break;
 

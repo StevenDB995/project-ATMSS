@@ -57,11 +57,11 @@ public class CashDepositCollectorEmulator extends CashDepositCollectorHandler {
 		log.info(id + ": " + msg.getDetails() + " and update display of cash deposit collector.");
 
 		switch (msg.getDetails()) {
-		case "Open cash deposit collector slot":
+		case "OpenCashDepositCollectorSlot":
 			reloadStage("////////.fxml");
 			break;
 
-		case "Close cash deposit collector slot":
+		case "CloseCashDepositCollectorSlot":
 			reloadStage("////////.fxml");
 			break;
 

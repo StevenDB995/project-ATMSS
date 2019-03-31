@@ -52,22 +52,22 @@ public class Msg {
 		TimesUp, // Time's up for the timer
 		Poll, // Health poll
 		PollAck, // Health poll acknowledgement
+		TD_UpdateDisplay,	// Update Display
+		TD_MouseClicked,	// Mouse Clicked
 		CR_CardInserted, // Card inserted
 		CR_CardRemoved, // Card removed
 		CR_EjectCard, // Eject card
 		KP_KeyPressed, // Key pressed
-		KP_WithdrawKeyPressed, // Key pressed in withdraw
-		KP_DepositKeyPressed, // Key pressed in deposit
-		KP_EnquiryKeyPressed, // Key pressed in enquiry
-		TD_MouseClicked, // Mouse Clicked
 		LoginAck, // Acknowledge successful login
 		LogoutAck, // Acknowledge logout
-		TD_UpdateDisplay,	// Update Display
-		TD_ChooseWithdraw,	// Choose withdraw money on touch display
-		TD_ChooseDeposit,	// Choose deposit money on touch display
-		TD_ChooseEnquiry,	// Choose enquiry on touch display
-		CDC_UpdateCashDepositCollectorSlot,		// Update display of slot of cash deposit collector
-		CD_UpdateCashDispenserSlot,		// Update display of slot of cash dispenser
-		B_Sound,				//Buzzer makes sound
+		CDC_UpdateCashDepositCollectorSlot, // Update display of slot of cash deposit collector
+		CD_UpdateCashDispenserSlot, // Update display of slot of cash dispenser
+		B_Sound,	 //Buzzer makes sound
+		BAMS_GetAccounts, // For touch display to display available accounts
+		BAMS_ChooseAccount, // For touch display to display chosen account
+		CDC_ButtonPressed, // Button pressed in cash deposit collector
+		CD_ButtonPressed, // Button pressed in cash dispenser
+		AP_UpdateAdvicePrinter, // Update display of advice printer
+		AP_ButtonPressed, //Button pressed in advice printer
 	} // Type
 } // Msg
