@@ -31,11 +31,12 @@ public class AdvicePrinterHandler extends AppThread {
 			case Terminate:
 				quit = true;
 				break;
-				
+
 			case AP_UpdateAdvicePrinter:
-				if(msg.getDetails().compareToIgnoreCase("CollectedAdvice") != 0) {
-					handleUpdateDisplayOfAdvicePrinter(msg);
-				}
+				handleUpdateDisplayOfAdvicePrinter(msg);
+				
+			case AP_ButtonPressed:
+				atmss.send(new Msg(id, mbox, Msg.Type.AP_ButtonPressed, msg.getDetails()));
 
 			default:
 				log.warning(id + ": unknown message type: [" + msg + "]");

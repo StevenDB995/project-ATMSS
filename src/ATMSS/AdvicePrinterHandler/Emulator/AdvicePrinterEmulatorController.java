@@ -33,7 +33,7 @@ public class AdvicePrinterEmulatorController {
 	// buttonPressed
 	public void buttonPressed(ActionEvent actionEvent) {
 		//Button btn = (Button) actionEvent.getSource();
-		advicePrinterMBox.send(new Msg(id, advicePrinterMBox, Msg.Type.AP_UpdateAdvicePrinter, "CollectedAdvice"));
+		advicePrinterMBox.send(new Msg(id, advicePrinterMBox, Msg.Type.AP_ButtonPressed, ""));
 	} // buttonPressed
 
 }// AdvicePrinterEmulatorController
