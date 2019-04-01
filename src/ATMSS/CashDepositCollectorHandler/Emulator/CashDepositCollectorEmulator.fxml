@@ -4,17 +4,16 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 
-
-<AnchorPane prefHeight="89.0" prefWidth="226.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
+<AnchorPane prefHeight="197.0" prefWidth="321.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ATMSS.CashDepositCollectorHandler.Emulator.CashDepositCollectorEmulatorController">
    <children>
       <AnchorPane layoutX="-118.0" prefHeight="89.0" prefWidth="192.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#626262" height="89.0" stroke="BLACK" strokeType="INSIDE" width="226.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#41474c" height="61.0" layoutX="12.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-      <Line endX="-100.0" endY="68.0" layoutX="142.0" layoutY="6.0" startX="-100.0" startY="8.0" />
-      <Line endX="-100.0" endY="68.0" layoutX="173.0" layoutY="6.0" startX="-100.0" startY="8.0" />
-      <Line endX="-100.0" endY="68.0" layoutX="206.0" layoutY="6.0" startX="-100.0" startY="8.0" />
-      <Line endX="-100.0" endY="68.0" layoutX="239.0" layoutY="7.0" startX="-100.0" startY="8.0" />
-      <Line endX="-100.0" endY="68.0" layoutX="268.0" layoutY="7.0" startX="-100.0" startY="8.0" />
-      <Line endX="-100.0" endY="68.0" layoutX="290.0" layoutY="6.0" startX="-100.0" startY="8.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#626262" height="89.0" layoutX="48.0" layoutY="54.0" stroke="BLACK" strokeType="INSIDE" width="226.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#41474c" height="61.0" layoutX="60.0" layoutY="68.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+      <Line endX="-100.0" endY="68.0" layoutX="190.0" layoutY="60.0" startX="-100.0" startY="8.0" />
+      <Line endX="-100.0" endY="68.0" layoutX="221.0" layoutY="60.0" startX="-100.0" startY="8.0" />
+      <Line endX="-100.0" endY="68.0" layoutX="254.0" layoutY="60.0" startX="-100.0" startY="8.0" />
+      <Line endX="-100.0" endY="68.0" layoutX="287.0" layoutY="61.0" startX="-100.0" startY="8.0" />
+      <Line endX="-100.0" endY="68.0" layoutX="316.0" layoutY="61.0" startX="-100.0" startY="8.0" />
+      <Line endX="-100.0" endY="68.0" layoutX="338.0" layoutY="60.0" startX="-100.0" startY="8.0" />
    </children>
 </AnchorPane>
