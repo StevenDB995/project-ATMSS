@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="8.0" layoutY="289.0" prefHeight="45.0" prefWidth="584.0" style="-fx-border-color: #000000;" />
+      <Label layoutX="218.0" layoutY="47.0" text="CashDispenser">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Button layoutX="533.0" layoutY="344.0" mnemonicParsing="false" text="Take" />
+   </children>
 </AnchorPane>
-

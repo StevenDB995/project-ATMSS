@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ATMSS.TouchDisplayHandler.Emulator.TouchDisplayEmulatorController">
+    <children>
+	<TextArea fx:id="atmssTextArea" editable="false" layoutX="20.0" layoutY="169.0" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20" />
+      <AnchorPane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Label alignment="CENTER" layoutX="120.0" layoutY="25.0" prefHeight="66.0" prefWidth="361.0" text="Please Press the Amount">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <Button layoutX="14.0" layoutY="99.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="131.0" text="HKD 200" />
+            <Button layoutX="14.0" layoutY="187.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="131.0" text="HKD 400" />
+            <Button layoutX="437.0" layoutY="99.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="131.0" text="HKD 800" />
+            <Button layoutX="437.0" layoutY="187.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="131.0" text="HKD 1000" />
+            <Label layoutX="145.0" layoutY="269.0" prefHeight="56.0" prefWidth="194.0" text="           or&#10; After entering the aomunt,Press">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
+            <Button layoutX="345.0" layoutY="290.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="73.0" text="Input" />
+            <Label layoutX="433.0" layoutY="295.0" text="Key" />
+         </children>
+      </AnchorPane>
+      <TextField layoutX="285.0" layoutY="397.0" prefHeight="27.0" prefWidth="295.0" />
+    </children>
+</AnchorPane>
