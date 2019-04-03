@@ -1,35 +1,84 @@
-190401-21:19:05 [INFO] -- 
-190401-21:19:05 [INFO] -- 
-190401-21:19:05 [INFO] -- ============================================================
-190401-21:19:05 [INFO] -- ATMSSStarter: Application Starting...
-190401-21:19:07 [INFO] -- timer: starting...
-190401-21:19:07 [INFO] -- TouchDisplayHandler: starting...
-190401-21:19:07 [INFO] -- ATMSS: starting...
-190401-21:19:07 [INFO] -- CashDispenserHandler: starting...
-190401-21:19:07 [INFO] -- CashDepositCollectorHandler: starting...
-190401-21:19:07 [INFO] -- KeypadHandler: starting...
-190401-21:19:07 [INFO] -- CardReaderHandler: starting...
-190401-21:19:07 [INFO] -- AdvicePrinterHandler: starting...
-190401-21:19:07 [INFO] -- BuzzerHandler: starting...
-190401-21:19:15 [INFO] -- KeyPressed: 1
-190401-21:19:15 [INFO] -- KeyPressed: 2
-190401-21:19:15 [INFO] -- KeyPressed: 3
-190401-21:19:16 [INFO] -- KeyPressed: 6
-190401-21:19:17 [INFO] -- KeyPressed: 7
-190401-21:19:17 [INFO] -- KeyPressed: 9
-190401-21:19:18 [INFO] -- KeyPressed: 8
-190401-21:19:18 [INFO] -- KeyPressed: 7
-190401-21:19:19 [INFO] -- 
-190401-21:19:19 [INFO] -- 
-190401-21:19:19 [INFO] -- ============================================================
-190401-21:19:19 [INFO] -- ATMSSStarter: Application Stopping...
-190401-21:19:19 [INFO] -- ATMSS: terminating...
-190401-21:19:19 [INFO] -- KeypadHandler: terminating...
-190401-21:19:19 [INFO] -- timer: received terminate!
-190401-21:19:19 [INFO] -- timer: terminating...
-190401-21:19:19 [INFO] -- TouchDisplayHandler: terminating...
-190401-21:19:19 [WARNING] -- CashDispenserHandler: unknown message type: [ATMSSStarter (Terminate) -- Terminate now!]
-190401-21:19:19 [WARNING] -- CashDepositCollectorHandler: unknown message type: [ATMSSStarter (Terminate) -- Terminate now!]
-190401-21:19:19 [WARNING] -- BuzzerHandler: unknown message type: [ATMSSStarter (Terminate) -- Terminate now!]
-190401-21:19:19 [WARNING] -- AdvicePrinterHandler: unknown message type: [ATMSSStarter (Terminate) -- Terminate now!]
-190401-21:19:19 [INFO] -- CardReaderHandler: terminating...
+190403-14:42:55 [INFO] -- 
+190403-14:42:55 [INFO] -- 
+190403-14:42:55 [INFO] -- ============================================================
+190403-14:42:55 [INFO] -- ATMSSStarter: Application Starting...
+190403-14:42:57 [INFO] -- timer: starting...
+190403-14:42:57 [INFO] -- KeypadHandler: starting...
+190403-14:42:57 [INFO] -- TouchDisplayHandler: starting...
+190403-14:42:57 [INFO] -- CashDepositCollectorHandler: starting...
+190403-14:42:57 [INFO] -- BuzzerHandler: starting...
+190403-14:42:57 [INFO] -- CardReaderHandler: starting...
+190403-14:42:57 [INFO] -- AdvicePrinterHandler: starting...
+190403-14:42:57 [INFO] -- ATMSS: starting...
+190403-14:42:57 [INFO] -- CashDispenserHandler: starting...
+190403-14:43:02 [INFO] -- KeyPressed: 1
+190403-14:43:02 [INFO] -- TouchDisplayHandler: update display -- BlankScreen
+190403-14:43:02 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulator.fxml
+190403-14:43:02 [INFO] -- KeyPressed: 2
+190403-14:43:02 [INFO] -- TouchDisplayHandler: update display -- MainMenu
+190403-14:43:02 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayMainMenu.fxml
+190403-14:43:03 [INFO] -- KeyPressed: 3
+190403-14:43:03 [INFO] -- TouchDisplayHandler: update display -- Confirmation
+190403-14:43:03 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayConfirmation.fxml
+190403-14:43:05 [INFO] -- KeyPressed: 1
+190403-14:43:05 [INFO] -- TouchDisplayHandler: update display -- BlankScreen
+190403-14:43:05 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulator.fxml
+190403-14:43:06 [INFO] -- KeyPressed: 2
+190403-14:43:06 [INFO] -- TouchDisplayHandler: update display -- MainMenu
+190403-14:43:06 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayMainMenu.fxml
+190403-14:43:06 [INFO] -- KeyPressed: 3
+190403-14:43:06 [INFO] -- TouchDisplayHandler: update display -- Confirmation
+190403-14:43:06 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayConfirmation.fxml
+190403-14:43:07 [INFO] -- KeyPressed: 6
+190403-14:43:07 [INFO] -- KeyPressed: 5
+190403-14:43:07 [INFO] -- KeyPressed: 4
+190403-14:43:08 [INFO] -- KeyPressed: 7
+190403-14:43:08 [INFO] -- KeyPressed: 8
+190403-14:43:08 [INFO] -- KeyPressed: 9
+190403-14:43:09 [INFO] -- MouseCLicked: 491 436
+190403-14:43:10 [INFO] -- KeyPressed: 2
+190403-14:43:10 [INFO] -- TouchDisplayHandler: update display -- MainMenu
+190403-14:43:10 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayMainMenu.fxml
+190403-14:43:57 [INFO] -- Poll: [24887]: Time's up!
+190403-14:43:57 [INFO] -- PollAck: KeypadHandler is up!
+190403-14:43:57 [INFO] -- PollAck: TouchDisplayHandler is up!
+190403-14:43:57 [INFO] -- PollAck: CardReaderHandler is up!
+190403-14:44:46 [INFO] -- KeyPressed: 2
+190403-14:44:46 [INFO] -- TouchDisplayHandler: update display -- MainMenu
+190403-14:44:46 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayMainMenu.fxml
+190403-14:44:46 [INFO] -- KeyPressed: 3
+190403-14:44:46 [INFO] -- TouchDisplayHandler: update display -- Confirmation
+190403-14:44:46 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayConfirmation.fxml
+190403-14:44:47 [INFO] -- KeyPressed: 1
+190403-14:44:47 [INFO] -- TouchDisplayHandler: update display -- BlankScreen
+190403-14:44:47 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulator.fxml
+190403-14:44:48 [INFO] -- KeyPressed: 2
+190403-14:44:48 [INFO] -- TouchDisplayHandler: update display -- MainMenu
+190403-14:44:48 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayMainMenu.fxml
+190403-14:44:48 [INFO] -- KeyPressed: 3
+190403-14:44:48 [INFO] -- TouchDisplayHandler: update display -- Confirmation
+190403-14:44:48 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayConfirmation.fxml
+190403-14:44:49 [INFO] -- KeyPressed: 2
+190403-14:44:49 [INFO] -- TouchDisplayHandler: update display -- MainMenu
+190403-14:44:49 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayMainMenu.fxml
+190403-14:44:49 [INFO] -- KeyPressed: 1
+190403-14:44:49 [INFO] -- TouchDisplayHandler: update display -- BlankScreen
+190403-14:44:49 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulator.fxml
+190403-14:44:57 [INFO] -- Poll: [97085]: Time's up!
+190403-14:44:57 [INFO] -- PollAck: CardReaderHandler is up!
+190403-14:44:57 [INFO] -- PollAck: KeypadHandler is up!
+190403-14:44:57 [INFO] -- PollAck: TouchDisplayHandler is up!
+190403-14:45:45 [INFO] -- 
+190403-14:45:45 [INFO] -- 
+190403-14:45:45 [INFO] -- ============================================================
+190403-14:45:45 [INFO] -- ATMSSStarter: Application Stopping...
+190403-14:45:45 [INFO] -- ATMSS: terminating...
+190403-14:45:45 [INFO] -- TouchDisplayHandler: terminating...
+190403-14:45:45 [WARNING] -- CashDepositCollectorHandler: unknown message type: [ATMSSStarter (Terminate) -- Terminate now!]
+190403-14:45:45 [WARNING] -- AdvicePrinterHandler: unknown message type: [ATMSSStarter (Terminate) -- Terminate now!]
+190403-14:45:45 [WARNING] -- CashDispenserHandler: unknown message type: [ATMSSStarter (Terminate) -- Terminate now!]
+190403-14:45:45 [WARNING] -- BuzzerHandler: unknown message type: [ATMSSStarter (Terminate) -- Terminate now!]
+190403-14:45:45 [INFO] -- CardReaderHandler: terminating...
+190403-14:45:45 [INFO] -- timer: received terminate!
+190403-14:45:46 [INFO] -- timer: terminating...
+190403-14:45:45 [INFO] -- KeypadHandler: terminating...

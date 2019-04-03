@@ -1,53 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="70" AnchorPane.leftAnchor="0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="70" AnchorPane.rightAnchor="0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="140" AnchorPane.leftAnchor="0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="140" AnchorPane.rightAnchor="0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="480.0" onMouseClicked="#td_mouseClick" stroke="BLACK" strokeType="OUTSIDE" width="640" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
-      <Label layoutX="161.0" layoutY="56.0" text="Transaction Successful">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="480.0" layoutX="1.0" layoutY="1.0" onMouseClicked="#td_mouseClick" stroke="BLACK" strokeType="OUTSIDE" width="640" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Label layoutX="161.0" layoutY="56.0" text="Please Choose the Amount">
          <font>
             <Font size="29.0" />
          </font>
       </Label>
-      <Label layoutX="10.0" layoutY="297.0" prefHeight="20.0" prefWidth="282.0" text="Print Statement/ Return to the menu">
+      <Label layoutX="131.0" layoutY="296.0" prefHeight="20.0" prefWidth="40.0" text="200">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="381.0" layoutY="297.0" prefHeight="20.0" prefWidth="239.0" text="Print Statement/ Remove Card">
+      <Label layoutX="476.0" layoutY="296.0" prefHeight="20.0" prefWidth="31.0" text="400">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="77.0" layoutY="436.0" prefHeight="20.0" prefWidth="155.0" text="Return to the menu">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="451.0" layoutY="436.0" prefHeight="20.0" prefWidth="100.0" text="Return Card">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="101.0" layoutY="125.0" prefHeight="30.0" prefWidth="478.0" text="Please Remove the Card and Statement">
+      <Label layoutX="93.0" layoutY="152.0" prefHeight="30.0" prefWidth="505.0" text="Please Press the Key or Input the Amount">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <Label layoutX="233.0" layoutY="195.0" prefHeight="30.0" prefWidth="176.0" text="Please Choose">
+      <Label layoutX="131.0" layoutY="366.0" prefHeight="20.0" prefWidth="31.0" text="800">
          <font>
-            <Font size="25.0" />
+            <Font size="16.0" />
          </font>
       </Label>
+      <Label layoutX="471.0" layoutY="366.0" prefHeight="20.0" prefWidth="40.0" text="1000">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField layoutX="270.0" layoutY="445.0" prefHeight="30.0" prefWidth="370.0" />
    </children>
 </AnchorPane>

@@ -2,6 +2,9 @@ package ATMSS.TouchDisplayHandler.Emulator;
 
 import AppKickstarter.AppKickstarter;
 import AppKickstarter.misc.MBox;
+import AppKickstarter.misc.Msg;
+import javafx.scene.input.MouseEvent;
+
 import java.util.logging.Logger;
 
 
@@ -24,4 +27,15 @@ public class TouchDisplayEmulatorController {
 	this.touchDisplayEmulator = touchDisplayEmulator;
 	this.touchDisplayMBox = appKickstarter.getThread("TouchDisplayHandler").getMBox();
     } // initialize
+
+
+    //------------------------------------------------------------
+    // td_mouseClick
+    public void td_mouseClick(MouseEvent mouseEvent) {
+        int x = (int) mouseEvent.getX();
+	int y = (int) mouseEvent.getY();
+
+	log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
+	touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
+    } // td_mouseClick
 } // TouchDisplayEmulatorController

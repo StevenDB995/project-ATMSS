@@ -4,85 +4,97 @@ import AppKickstarter.AppKickstarter;
 import AppKickstarter.misc.*;
 import AppKickstarter.timer.Timer;
 
+
 //======================================================================
 // ATMSS
 public class ATMSS extends AppThread {
-	private MBox cardReaderMBox;
-	private MBox keypadMBox;
-	private MBox touchDisplayMBox;
-	private MBox cashDispenserMBox;
-	private MBox cashDepositCollectorMBox;
-	private MBox advicePrinterMBox;
-	private MBox buzzerMBox;
+    private MBox cardReaderMBox;
+    private MBox keypadMBox;
+    private MBox touchDisplayMBox;
 
-	// ------------------------------------------------------------
-	// ATMSS
-	public ATMSS(String id, AppKickstarter appKickstarter) throws Exception {
-		super(id, appKickstarter);
-	} // ATMSS
+    //------------------------------------------------------------
+    // ATMSS
+    public ATMSS(String id, AppKickstarter appKickstarter) throws Exception {
+	super(id, appKickstarter);
+    } // ATMSS
 
-	// ------------------------------------------------------------
-	// run
-	public void run() {
-		Timer.setTimer(id, mbox, 60000);
-		log.info(id + ": starting...");
 
-		cardReaderMBox = appKickstarter.getThread("CardReaderHandler").getMBox();
-		keypadMBox = appKickstarter.getThread("KeypadHandler").getMBox();
-		touchDisplayMBox = appKickstarter.getThread("TouchDisplayHandler").getMBox();
-		cashDispenserMBox = appKickstarter.getThread("CashDispenserHandler").getMBox();
-		cashDepositCollectorMBox = appKickstarter.getThread("CashDepositCollectorHandler").getMBox();
-		advicePrinterMBox = appKickstarter.getThread("AdvicePrinterHandler").getMBox();
-		buzzerMBox = appKickstarter.getThread("BuzzerHandler").getMBox();
-		
+    //------------------------------------------------------------
+    // run
+    public void run() {
+	Timer.setTimer(id, mbox, 60000);
+	log.info(id + ": starting...");
 
-		for (boolean quit = false; !quit;) {
-			Msg msg = mbox.receive();
+	cardReaderMBox = appKickstarter.getThread("CardReaderHandler").getMBox();
+	keypadMBox = appKickstarter.getThread("KeypadHandler").getMBox();
+	touchDisplayMBox = appKickstarter.getThread("TouchDisplayHandler").getMBox();
 
-			log.fine(id + ": message received: [" + msg + "].");
+	for (boolean quit = false; !quit;) {
+	    Msg msg = mbox.receive();
 
-			switch (msg.getType()) {
-			case KP_KeyPressed:
-				log.info("KeyPressed: " + msg.getDetails());
-				processKeyPressed(msg);
-				break;
+	    log.fine(id + ": message received: [" + msg + "].");
 
-			case CR_CardInserted:
-				log.info("CardInserted: " + msg.getDetails());
-				break;
+	    switch (msg.getType()) {
+		case TD_MouseClicked:
+		    log.info("MouseCLicked: " + msg.getDetails());
+		    processMouseClicked(msg);
+		    break;
 
-			case TimesUp:
-				Timer.setTimer(id, mbox, 60000);
-				log.info("Poll: " + msg.getDetails());
-				cardReaderMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
-				keypadMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
-				break;
+		case KP_KeyPressed:
+		    log.info("KeyPressed: " + msg.getDetails());
+		    processKeyPressed(msg);
+		    break;
 
-			case PollAck:
-				log.info("PollAck: " + msg.getDetails());
-				break;
+		case CR_CardInserted:
+		    log.info("CardInserted: " + msg.getDetails());
+		    break;
 
-			case Terminate:
-				quit = true;
-				break;
+		case TimesUp:
+		    Timer.setTimer(id, mbox, 60000);
+		    log.info("Poll: " + msg.getDetails());
+		    cardReaderMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
+		    keypadMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
+		    touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
+		    break;
 
-			default:
-				log.warning(id + ": unknown message type: [" + msg + "]");
-			}
-		}
+		case PollAck:
+		    log.info("PollAck: " + msg.getDetails());
+		    break;
 
-		// declaring our departure
-		appKickstarter.unregThread(this);
-		log.info(id + ": terminating...");
-	} // run
+		case Terminate:
+		    quit = true;
+		    break;
 
-	// ------------------------------------------------------------
-	// processKeyPressed
-	private void processKeyPressed(Msg msg) {
-		// *** The following is an example only!! ***
-		if (msg.getDetails().compareToIgnoreCase("Cancel") == 0) {
-			cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
-		}
-	} // processKeyPressed
+		default:
+		    log.warning(id + ": unknown message type: [" + msg + "]");
+	    }
+	}
+
+	// declaring our departure
+	appKickstarter.unregThread(this);
+	log.info(id + ": terminating...");
+    } // run
+    
+
+    //------------------------------------------------------------
+    // processKeyPressed
+    private void processKeyPressed(Msg msg) {
+        // *** The following is an example only!! ***
+        if (msg.getDetails().compareToIgnoreCase("Cancel") == 0) {
+	    cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
+	} else if (msg.getDetails().compareToIgnoreCase("1") == 0) {
+	    touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "BlankScreen"));
+	} else if (msg.getDetails().compareToIgnoreCase("2") == 0) {
+	    touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "MainMenu"));
+	} else if (msg.getDetails().compareToIgnoreCase("3") == 0) {
+	    touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Confirmation"));
+	}
+    } // processKeyPressed
+
+
+    //------------------------------------------------------------
+    // processMouseClicked
+    private void processMouseClicked(Msg msg) {
+	// *** process mouse click here!!! ***
+    } // processMouseClicked
 } // CardReaderHandler

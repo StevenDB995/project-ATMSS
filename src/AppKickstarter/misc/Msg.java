@@ -37,6 +37,8 @@ public class Msg {
     //------------------------------------------------------------
     // Msg Types
     public enum Type {
+    TD_MouseClicked,
+    TD_UpdateDisplay,
 	Terminate,		// Terminate the running thread
 	SetTimer,		// Set a timer
 	CancelTimer,		// Set a timer
