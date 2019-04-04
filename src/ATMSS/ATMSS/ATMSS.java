@@ -27,6 +27,7 @@ public class ATMSS extends AppThread {
 	private String credential;
 	private String[] availableAccounts;
 	private String currentAccount;
+	private String toAccount;
 
 	private String keypadInput; // Store keypad input by users
 	private String TD_StageId; // record the current stage of the touchDisplay
@@ -44,8 +45,9 @@ public class ATMSS extends AppThread {
 		credential = "";
 		keypadInput = "";
 		currentAccount = "";
+		toAccount = "";
 		credential = "";
-		TD_StageId = "TouchDisplayEmulator";
+		TD_StageId = "Welcome";
 		adviceContent = "";
 		adviceCollected = false;
 	} // ATMSS
@@ -85,8 +87,11 @@ public class ATMSS extends AppThread {
 				break;
 
 			case CR_CardInserted:
-				currentCardNo = msg.getDetails();
-				log.info("CardInserted: " + currentCardNo);
+				if (TD_StageId.compareToIgnoreCase("Welcome") == 0) {
+					currentCardNo = msg.getDetails();
+					log.info("CardInserted: " + currentCardNo);
+					touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulator"));
+				}
 				break;
 
 			case CDC_ButtonPressed:
@@ -139,23 +144,49 @@ public class ATMSS extends AppThread {
 
 		if (details.compareToIgnoreCase("Cancel") == 0) { // "Cancel" is pressed
 			switch (TD_StageId) {
-			case "TransferAccNo":
+			case "TransferToAccNo":
+				toAccount = "";
+										// no break here!!!
+			case "TransferFromAccNo":
 			case "TransferAmount":
 				log.info("Transfer Cancelled.");
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TransferCancelled"));
+				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Cancelled"));
 				keypadInput = "";
+				currentCardNo = "";
+				currentAccount ="";
+				cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
+				advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.AP_UpdateAdvicePrinter, "Print"));
 				break;
 
+			case "WithdrawFromAccNo":
 			case "WithdrawAmount":
 				log.info("Withdraw cancelled.");
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "WithdrawCancelled"));
+				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Cancelled"));
 				keypadInput = "";
+				currentCardNo = "";
+				currentAccount ="";
+				cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
+				advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.AP_UpdateAdvicePrinter, "Print"));
 				break;
 
+			case "DepositFromAccNo":
 			case "DepositAmount":
 				log.info("Deposit cancelled.");
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "DepositCancelled"));
+				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Cancelled"));
 				keypadInput = "";
+				currentCardNo = "";
+				currentAccount ="";
+				cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
+				advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.AP_UpdateAdvicePrinter, "Print"));
+				break;
+
+			case "EnquiryFromAccNo":
+				log.info("Enquiry cancelled.");
+				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Cancelled"));
+				currentCardNo = "";
+				currentAccount ="";
+				cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
+				advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.AP_UpdateAdvicePrinter, "Print"));
 				break;
 
 			default:
@@ -167,7 +198,6 @@ public class ATMSS extends AppThread {
 		else if (Character.isDigit(details.charAt(0))) { // Number key is pressed
 			switch (TD_StageId) {
 			case "TouchDisplayEmulator": // cases where keypad input should be recorded
-			case "TransferAccNo":
 			case "TransferAmount":
 			case "WithdrawAmount":
 			case "DepositAmount":
@@ -207,24 +237,24 @@ public class ATMSS extends AppThread {
 					keypadInput = "";
 					break;
 
-				case "TransferAccNo":
-					keypadInput += ":";
-					touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TransferAmount"));
-					TD_StageId = "TransferAmount";
-					break;
+//				case "TransferAccNo":
+//					keypadInput += ":";
+//					touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TransferAmount"));
+//					TD_StageId = "TransferAmount";
+//					break;
 
 				case "TransferAmount":
-					String[] tokens = keypadInput.split(":");
-					String toAcc = tokens[0];
-					String amount = tokens[1];
-					double transferFeedback = bams.transfer(currentCardNo, credential, currentAccount, toAcc, amount);
+//					String[] tokens = keypadInput.split(":");
+//					String toAcc = tokens[0];
+//					String amount = tokens[1];
+					double transferFeedback = bams.transfer(currentCardNo, credential, currentAccount, toAccount, keypadInput);
 					if (transferFeedback < 0) {
-						log.info("Failed to transfer from " + currentAccount + " to " + toAcc);
+						log.info("Failed to transfer from " + currentAccount + " to " + toAccount);
 						touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TransferFailed"));
 						TD_StageId = "TransferFailed";
 					} else {
 						log.info("Successfully transfered " + transferFeedback + " from" + currentAccount + " to "
-								+ toAcc);
+								+ toAccount);
 						touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TransferSucceeded"));
 						TD_StageId = "TransferSucceeded";
 					}
@@ -238,15 +268,17 @@ public class ATMSS extends AppThread {
 						log.info("Withdraw failed");
 						touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "WithdrawFailed"));
 						TD_StageId = "WithdrawFailed";
-						adviceContent = "Withdraw failed/" + currentCardNo + "/" + currentAccount + "/0";
+						// adviceContent = "Withdraw failed/" + currentCardNo + "/" + currentAccount +
+						// "/0";
 					} else {
 						log.info("Successfully withdrawed " + withdrawFeedback);
 						touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "WithdrawsSuccessed"));
 						cashDispenserMBox
 								.send(new Msg(id, mbox, Msg.Type.CD_UpdateCashDispenserSlot, "OpenCashDispenserSlot"));
 						TD_StageId = "WithdrawsSuccessed";
-						adviceContent = "Withdraw succeed/" + currentCardNo + "/" + currentAccount + "/"
-								+ withdrawFeedback;
+						// adviceContent = "Withdraw succeed/" + currentCardNo + "/" + currentAccount +
+						// "/"
+						// + withdrawFeedback;
 					}
 
 					keypadInput = "";
@@ -258,15 +290,17 @@ public class ATMSS extends AppThread {
 						log.info("Deposit failed.");
 						touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "DepositFailed"));
 						TD_StageId = "DepositFailed";
-						adviceContent = "Deposit failed/" + currentCardNo + "/" + currentAccount + "/0";
+						// adviceContent = "Deposit failed/" + currentCardNo + "/" + currentAccount +
+						// "/0";
 					} else {
 						log.info("Successfully deposited " + depositFeedback);
 						touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "DepositSuccessed"));
 						cashDepositCollectorMBox.send(new Msg(id, mbox, Msg.Type.CDC_UpdateCashDepositCollectorSlot,
 								"OpenCashDepositCollectorSlot"));
 						TD_StageId = "DepositSuccessed";
-						adviceContent = "Deposit succeed/" + currentCardNo + "/" + currentAccount + "/"
-								+ depositFeedback;
+						// adviceContent = "Deposit succeed/" + currentCardNo + "/" + currentAccount +
+						// "/"
+						// + depositFeedback;
 					}
 
 					keypadInput = "";
@@ -291,7 +325,16 @@ public class ATMSS extends AppThread {
 			// TD_StageId = "stage";
 			break;
 
-		case "ChooseAccount":
+		case "ChooseFromAccount":
+			if (x < 0 && y < 0) { // to be revised
+				currentAccount = availableAccounts[0];
+				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.BAMS_ChooseAccount, currentAccount));
+				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayMainMenu"));
+				TD_StageId = "TouchDisplayMainMenu";
+			}
+			break;
+
+		case "ChooseToAccount":
 			if (x < 0 && y < 0) { // to be revised
 				currentAccount = availableAccounts[0];
 				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.BAMS_ChooseAccount, currentAccount));
