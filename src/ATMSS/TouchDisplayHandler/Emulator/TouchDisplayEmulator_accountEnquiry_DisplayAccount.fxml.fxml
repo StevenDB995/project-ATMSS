@@ -34,17 +34,17 @@
                   <Font size="17.0" />
                </font>
             </Label>
-            <Label layoutX="67.0" layoutY="426.0" prefHeight="20.0" prefWidth="155.0" text="Return to the menu">
+            <Label layoutX="67.0" layoutY="436.0" prefHeight="20.0" prefWidth="155.0" text="Return to the Menu">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="442.0" layoutY="436.0" prefHeight="20.0" prefWidth="100.0" text="Return Card">
+            <Label layoutX="442.0" layoutY="436.0" prefHeight="20.0" prefWidth="117.0" text="Remove Card">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="17.0" layoutY="296.0" prefHeight="20.0" prefWidth="282.0" text="Print Statement/ Return to the menu">
+            <Label layoutX="17.0" layoutY="296.0" prefHeight="20.0" prefWidth="282.0" text="Print Statement/ Return to the Menu">
                <font>
                   <Font size="16.0" />
                </font>
