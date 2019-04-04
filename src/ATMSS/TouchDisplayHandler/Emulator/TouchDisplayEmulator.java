@@ -36,7 +36,7 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 		Parent root;
 		myStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
-		String fxmlName = "TouchDisplayWelcome.fxml";
+		String fxmlName = "TouchDisplayMainMenu.fxml";
 		loader.setLocation(TouchDisplayEmulator.class.getResource(fxmlName));
 		root = loader.load();
 		touchDisplayEmulatorController = (TouchDisplayEmulatorController) loader.getController();

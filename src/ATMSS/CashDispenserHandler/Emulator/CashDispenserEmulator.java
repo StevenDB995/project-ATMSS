@@ -21,7 +21,7 @@ public class CashDispenserEmulator extends CashDispenserHandler {
 	private String id;
 	private Stage myStage;
 	private final int WIDTH = 350;
-	private final int HEIGHT = 470;
+	private final int HEIGHT = 350;
 	private CashDispenserEmulatorController cashDispenserEmulatorController;
 
 	// ------------------------------------------------------------
@@ -44,7 +44,7 @@ public class CashDispenserEmulator extends CashDispenserHandler {
 		cashDispenserEmulatorController = (CashDispenserEmulatorController) loader.getController();
 		cashDispenserEmulatorController.initialize(id, atmssStarter, log, this);
 		myStage.initStyle(StageStyle.DECORATED);
-		myStage.setScene(new Scene(root, 350, 470));
+		myStage.setScene(new Scene(root, 350, 350));
 		myStage.setTitle("Cash Dispenser");
 		myStage.setResizable(false);
 		myStage.setOnCloseRequest((WindowEvent event) -> {

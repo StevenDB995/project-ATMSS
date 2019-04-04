@@ -20,7 +20,7 @@ public class AdvicePrinterEmulator extends AdvicePrinterHandler {
 	private String id;
 	private Stage myStage;
 	private final int WIDTH = 350;
-	private final int HEIGHT = 470;
+	private final int HEIGHT = 350;
 	private AdvicePrinterEmulatorController advicePrinterEmulatorController;
 
 	// ------------------------------------------------------------
@@ -43,7 +43,7 @@ public class AdvicePrinterEmulator extends AdvicePrinterHandler {
 		advicePrinterEmulatorController = (AdvicePrinterEmulatorController) loader.getController();
 		advicePrinterEmulatorController.initialize(id, atmssStarter, log, this);
 		myStage.initStyle(StageStyle.DECORATED);
-		myStage.setScene(new Scene(root, 350, 470));
+		myStage.setScene(new Scene(root, 350, 350));
 		myStage.setTitle("Advice Printer");
 		myStage.setResizable(false);
 		myStage.setOnCloseRequest((WindowEvent event) -> {

@@ -10,6 +10,9 @@ public class ATMSS extends AppThread {
 	private MBox cardReaderMBox;
 	private MBox keypadMBox;
 	private MBox touchDisplayMBox;
+	private MBox advicePrinterMBox;
+	private MBox cashDepositCollectorMBox;
+	private MBox cashDispenserMBox;
 	private String password="";
 	boolean inputCheck = false;
 
@@ -28,6 +31,9 @@ public class ATMSS extends AppThread {
 		cardReaderMBox = appKickstarter.getThread("CardReaderHandler").getMBox();
 		keypadMBox = appKickstarter.getThread("KeypadHandler").getMBox();
 		touchDisplayMBox = appKickstarter.getThread("TouchDisplayHandler").getMBox();
+		advicePrinterMBox = appKickstarter.getThread("AdvicePrinterHandler").getMBox();
+		cashDepositCollectorMBox = appKickstarter.getThread("CashDepositCollectorHandler").getMBox();
+		cashDispenserMBox = appKickstarter.getThread("CashDispenserHandler").getMBox();
 
 		for (boolean quit = false; !quit;) {
 			Msg msg = mbox.receive();
@@ -60,6 +66,9 @@ public class ATMSS extends AppThread {
 				cardReaderMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
 				keypadMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
 				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
+				advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
+				cashDepositCollectorMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
+				cashDispenserMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
 				break;
 
 			case PollAck:
