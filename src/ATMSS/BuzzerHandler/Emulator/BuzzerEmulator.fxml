@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ATMSS.BuzzerHandler.Emulator.BuzzerEmulatorController">
+   <children>
+      <AnchorPane prefHeight="150.0" prefWidth="228.0">
+         <children>
+            <Circle fill="#161616" layoutX="114.0" layoutY="82.0" radius="80.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fill="#727272" layoutX="114.0" layoutY="82.0" radius="62.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fill="#282828" layoutX="114.0" layoutY="81.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+         </children></AnchorPane>
+   </children>
 </AnchorPane>
-
