@@ -1,121 +1,25 @@
-190404-10:15:17 [INFO] -- 
-190404-10:15:17 [INFO] -- 
-190404-10:15:17 [INFO] -- ============================================================
-190404-10:15:17 [INFO] -- ATMSSStarter: Application Starting...
-190404-10:15:18 [INFO] -- KeypadHandler: starting...
-190404-10:15:18 [INFO] -- CardReaderHandler: starting...
-190404-10:15:18 [INFO] -- TouchDisplayHandler: starting...
-190404-10:15:18 [INFO] -- timer: starting...
-190404-10:15:18 [INFO] -- ATMSS: starting...
-190404-10:15:18 [INFO] -- AdvicePrinterHandler: starting...
-190404-10:15:18 [INFO] -- CashDispenserHandler: starting...
-190404-10:15:18 [INFO] -- BuzzerHandler: starting...
-190404-10:15:18 [INFO] -- CashDepositCollectorHandler: starting...
-190404-10:15:23 [INFO] -- KeyPressed: 3
-190404-10:15:23 [INFO] -- TouchDisplayHandler: update display -- Confirmation
-190404-10:15:23 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayConfirmation.fxml
-190404-10:15:25 [INFO] -- KeyPressed: 2
-190404-10:15:25 [INFO] -- TouchDisplayHandler: update display -- MainMenu
-190404-10:15:25 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayMainMenu.fxml
-190404-10:15:29 [INFO] -- MouseCLicked: 1 271
-190404-10:15:38 [INFO] -- MouseCLicked: 0 271
-190404-10:15:56 [INFO] -- MouseCLicked: 0 271
-190404-10:16:18 [INFO] -- Poll: [53548]: Time's up!
-190404-10:16:18 [INFO] -- PollAck: KeypadHandler is up!
-190404-10:16:18 [INFO] -- PollAck: CardReaderHandler is up!
-190404-10:16:18 [INFO] -- PollAck: TouchDisplayHandler is up!
-190404-10:16:55 [INFO] -- MouseCLicked: 0 270
-190404-10:17:18 [INFO] -- Poll: [91113]: Time's up!
-190404-10:17:18 [INFO] -- PollAck: CardReaderHandler is up!
-190404-10:17:18 [INFO] -- PollAck: TouchDisplayHandler is up!
-190404-10:17:18 [INFO] -- PollAck: KeypadHandler is up!
-190404-10:18:18 [INFO] -- Poll: [33313]: Time's up!
-190404-10:18:18 [INFO] -- PollAck: KeypadHandler is up!
-190404-10:18:18 [INFO] -- PollAck: CardReaderHandler is up!
-190404-10:18:18 [INFO] -- PollAck: TouchDisplayHandler is up!
-190404-10:19:18 [INFO] -- Poll: [39910]: Time's up!
-190404-10:19:18 [INFO] -- PollAck: KeypadHandler is up!
-190404-10:19:18 [INFO] -- PollAck: CardReaderHandler is up!
-190404-10:19:18 [INFO] -- PollAck: TouchDisplayHandler is up!
-190404-10:20:16 [INFO] -- MouseCLicked: 299 271
-190404-10:20:18 [INFO] -- Poll: [28459]: Time's up!
-190404-10:20:18 [INFO] -- PollAck: CardReaderHandler is up!
-190404-10:20:18 [INFO] -- PollAck: KeypadHandler is up!
-190404-10:20:18 [INFO] -- PollAck: TouchDisplayHandler is up!
-190404-10:20:26 [INFO] -- MouseCLicked: 1 271
-190404-10:20:34 [INFO] -- MouseCLicked: -1 271
-190404-10:20:39 [INFO] -- MouseCLicked: 0 271
-190404-10:20:43 [INFO] -- MouseCLicked: 300 271
-190404-10:21:18 [INFO] -- Poll: [97081]: Time's up!
-190404-10:21:18 [INFO] -- PollAck: CardReaderHandler is up!
-190404-10:21:18 [INFO] -- PollAck: KeypadHandler is up!
-190404-10:21:18 [INFO] -- PollAck: TouchDisplayHandler is up!
-190404-10:22:18 [INFO] -- Poll: [63888]: Time's up!
-190404-10:22:18 [INFO] -- PollAck: KeypadHandler is up!
-190404-10:22:18 [INFO] -- PollAck: CardReaderHandler is up!
-190404-10:22:18 [INFO] -- PollAck: TouchDisplayHandler is up!
-190404-10:23:18 [INFO] -- Poll: [78196]: Time's up!
-190404-10:23:18 [INFO] -- PollAck: CardReaderHandler is up!
-190404-10:23:18 [INFO] -- PollAck: KeypadHandler is up!
-190404-10:23:18 [INFO] -- PollAck: TouchDisplayHandler is up!
-190404-10:24:18 [INFO] -- Poll: [70776]: Time's up!
-190404-10:24:18 [INFO] -- PollAck: KeypadHandler is up!
-190404-10:24:18 [INFO] -- PollAck: CardReaderHandler is up!
-190404-10:24:18 [INFO] -- PollAck: TouchDisplayHandler is up!
-190404-10:25:18 [INFO] -- Poll: [36280]: Time's up!
-190404-10:25:18 [INFO] -- PollAck: TouchDisplayHandler is up!
-190404-10:25:18 [INFO] -- PollAck: CardReaderHandler is up!
-190404-10:25:18 [INFO] -- PollAck: KeypadHandler is up!
-190404-10:26:18 [INFO] -- Poll: [22476]: Time's up!
-190404-10:26:18 [INFO] -- PollAck: CardReaderHandler is up!
-190404-10:26:18 [INFO] -- PollAck: KeypadHandler is up!
-190404-10:26:18 [INFO] -- PollAck: TouchDisplayHandler is up!
-190404-10:27:08 [INFO] -- MouseCLicked: 341 271
-190404-10:27:15 [INFO] -- MouseCLicked: 341 271
-190404-10:27:18 [INFO] -- Poll: [53871]: Time's up!
-190404-10:27:18 [INFO] -- PollAck: CardReaderHandler is up!
-190404-10:27:18 [INFO] -- PollAck: TouchDisplayHandler is up!
-190404-10:27:18 [INFO] -- PollAck: KeypadHandler is up!
-190404-10:27:52 [INFO] -- MouseCLicked: 638 271
-190404-10:27:58 [INFO] -- MouseCLicked: 638 270
-190404-10:28:16 [INFO] -- MouseCLicked: 0 341
-190404-10:28:18 [INFO] -- Poll: [40707]: Time's up!
-190404-10:28:18 [INFO] -- PollAck: CardReaderHandler is up!
-190404-10:28:18 [INFO] -- PollAck: KeypadHandler is up!
-190404-10:28:18 [INFO] -- PollAck: TouchDisplayHandler is up!
-190404-10:28:22 [INFO] -- MouseCLicked: 1 341
-190404-10:29:10 [INFO] -- MouseCLicked: 1 409
-190404-10:29:18 [INFO] -- Poll: [53524]: Time's up!
-190404-10:29:18 [INFO] -- PollAck: CardReaderHandler is up!
-190404-10:29:18 [INFO] -- PollAck: KeypadHandler is up!
-190404-10:29:18 [INFO] -- PollAck: TouchDisplayHandler is up!
-190404-10:29:38 [INFO] -- MouseCLicked: 0 478
-190404-10:29:49 [INFO] -- MouseCLicked: 0 479
-190404-10:30:18 [INFO] -- Poll: [53599]: Time's up!
-190404-10:30:18 [INFO] -- PollAck: KeypadHandler is up!
-190404-10:30:18 [INFO] -- PollAck: TouchDisplayHandler is up!
-190404-10:30:18 [INFO] -- PollAck: CardReaderHandler is up!
-190404-10:31:18 [INFO] -- Poll: [68753]: Time's up!
-190404-10:31:18 [INFO] -- PollAck: KeypadHandler is up!
-190404-10:31:18 [INFO] -- PollAck: CardReaderHandler is up!
-190404-10:31:18 [INFO] -- PollAck: TouchDisplayHandler is up!
-190404-10:32:18 [INFO] -- Poll: [67529]: Time's up!
-190404-10:32:18 [INFO] -- PollAck: TouchDisplayHandler is up!
-190404-10:32:18 [INFO] -- PollAck: KeypadHandler is up!
-190404-10:32:18 [INFO] -- PollAck: CardReaderHandler is up!
-190404-10:33:18 [INFO] -- Poll: [18372]: Time's up!
-190404-10:33:18 [INFO] -- PollAck: KeypadHandler is up!
-190404-10:33:18 [INFO] -- PollAck: CardReaderHandler is up!
-190404-10:33:18 [INFO] -- PollAck: TouchDisplayHandler is up!
-190404-10:34:18 [INFO] -- Poll: [50134]: Time's up!
-190404-10:34:18 [INFO] -- PollAck: CardReaderHandler is up!
-190404-10:34:18 [INFO] -- PollAck: TouchDisplayHandler is up!
-190404-10:34:18 [INFO] -- PollAck: KeypadHandler is up!
-190404-10:35:18 [INFO] -- Poll: [75783]: Time's up!
-190404-10:35:18 [INFO] -- PollAck: CardReaderHandler is up!
-190404-10:35:18 [INFO] -- PollAck: TouchDisplayHandler is up!
-190404-10:35:18 [INFO] -- PollAck: KeypadHandler is up!
-190404-10:36:18 [INFO] -- Poll: [64024]: Time's up!
-190404-10:36:18 [INFO] -- PollAck: KeypadHandler is up!
-190404-10:36:18 [INFO] -- PollAck: CardReaderHandler is up!
-190404-10:36:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+190405-11:10:59 [INFO] -- 
+190405-11:10:59 [INFO] -- 
+190405-11:10:59 [INFO] -- ============================================================
+190405-11:10:59 [INFO] -- ATMSSStarter: Application Starting...
+190405-11:11:03 [INFO] -- CashDispenserHandler: starting...
+190405-11:11:03 [INFO] -- CardReaderHandler: starting...
+190405-11:11:03 [INFO] -- BuzzerHandler: starting...
+190405-11:11:03 [INFO] -- AdvicePrinterHandler: starting...
+190405-11:11:03 [INFO] -- CashDepositCollectorHandler: starting...
+190405-11:11:03 [INFO] -- KeypadHandler: starting...
+190405-11:11:03 [INFO] -- TouchDisplayHandler: starting...
+190405-11:11:03 [INFO] -- timer: starting...
+190405-11:11:03 [INFO] -- ATMSS: starting...
+190405-11:11:33 [INFO] -- KeyPressed: 0
+190405-11:11:40 [INFO] -- KeyPressed: 3
+190405-11:11:40 [INFO] -- KeyPressed: Enter
+輸  入
+190405-11:12:03 [INFO] -- Poll: [91076]: Time's up!
+190405-11:12:03 [INFO] -- PollAck: CardReaderHandler is up!
+190405-11:12:03 [INFO] -- PollAck: KeypadHandler is up!
+190405-11:12:03 [INFO] -- PollAck: TouchDisplayHandler is up!
+190405-11:12:03 [INFO] -- PollAck: CashDispenserHandler is up!
+190405-11:12:03 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190405-11:12:03 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190405-11:12:03 [INFO] -- PollAck: BuzzerHandler is up!

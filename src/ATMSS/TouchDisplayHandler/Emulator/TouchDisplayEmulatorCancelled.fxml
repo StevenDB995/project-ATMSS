@@ -8,14 +8,14 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ATMSS.TouchDisplayHandler.Emulator.TouchDisplayEmulatorController">
     <children>
 	<TextArea fx:id="atmssTextArea" editable="false" layoutX="20.0" layoutY="169.0" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20" />
-      <AnchorPane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+      <AnchorPane layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
          <children>
-            <Label layoutX="81.0" layoutY="118.0" text="Please Remove the Bank Card">
+            <Label layoutX="76.0" layoutY="138.0" text="Please Remove the Bank Card " textAlignment="CENTER">
                <font>
                   <Font size="31.0" />
                </font>
             </Label>
-            <Label layoutX="148.0" layoutY="45.0" text="Transaction Cancelled">
+            <Label layoutX="129.0" layoutY="55.0" text="Transaction Cancelled">
                <font>
                   <Font size="31.0" />
                </font>
