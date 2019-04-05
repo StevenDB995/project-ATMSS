@@ -63,8 +63,9 @@ public class Msg {
 		CDC_UpdateCashDepositCollectorSlot, // Update display of slot of cash deposit collector
 		CD_UpdateCashDispenserSlot, // Update display of slot of cash dispenser
 		B_Sound,	 //Buzzer makes sound
-		BAMS_GetAccounts, // For touch display to display available accounts
-		BAMS_ChooseAccount, // For touch display to display chosen account
+//		BAMS_GetAccounts, // For touch display to display available accounts
+		BAMS_ChooseFromAccount, // For touch display to display from account
+		BAMS_ChooseToAccount, // For touch display to display to account
 		CDC_ButtonPressed, // Button pressed in cash deposit collector
 		CD_ButtonPressed, // Button pressed in cash dispenser
 		AP_UpdateAdvicePrinter, // Update display of advice printer
