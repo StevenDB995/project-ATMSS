@@ -1,6 +1,9 @@
 package ATMSS.CashDispenserHandler.Emulator;
 
 import ATMSS.ATMSSStarter;
+import ATMSS.AdvicePrinterHandler.Emulator.AdvicePrinterEmulator;
+import ATMSS.CashDepositCollectorHandler.Emulator.CashDepositCollectorEmulator;
+import ATMSS.CashDepositCollectorHandler.Emulator.CashDepositCollectorEmulatorController;
 import ATMSS.CashDispenserHandler.CashDispenserHandler;
 import AppKickstarter.misc.Msg;
 import javafx.application.Platform;
@@ -14,11 +17,11 @@ import javafx.stage.WindowEvent;
 //======================================================================
 //CashDispenserEmulator
 public class CashDispenserEmulator extends CashDispenserHandler {
-	private final int WIDTH = 680;
-	private final int HEIGHT = 520;
 	private ATMSSStarter atmssStarter;
 	private String id;
 	private Stage myStage;
+	private final int WIDTH = 350;
+	private final int HEIGHT = 350;
 	private CashDispenserEmulatorController cashDispenserEmulatorController;
 
 	// ------------------------------------------------------------
@@ -41,7 +44,7 @@ public class CashDispenserEmulator extends CashDispenserHandler {
 		cashDispenserEmulatorController = (CashDispenserEmulatorController) loader.getController();
 		cashDispenserEmulatorController.initialize(id, atmssStarter, log, this);
 		myStage.initStyle(StageStyle.DECORATED);
-		myStage.setScene(new Scene(root, 350, 470));
+		myStage.setScene(new Scene(root, 350, 350));
 		myStage.setTitle("Cash Dispenser");
 		myStage.setResizable(false);
 		myStage.setOnCloseRequest((WindowEvent event) -> {
@@ -50,6 +53,31 @@ public class CashDispenserEmulator extends CashDispenserHandler {
 		});
 		myStage.show();
 	} // CashDispenserEmulator
+
+	// reloadStage
+	void reloadStage(String fxmlFName) {
+		CashDispenserEmulator cashDispenserEmulator = this;
+
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					log.info(id + ": loading fxml: " + fxmlFName);
+
+					Parent root;
+					FXMLLoader loader = new FXMLLoader();
+					loader.setLocation(AdvicePrinterEmulator.class.getResource(fxmlFName));
+					root = loader.load();
+					cashDispenserEmulatorController = (CashDispenserEmulatorController) loader.getController();
+					cashDispenserEmulatorController.initialize(id, atmssStarter, log, cashDispenserEmulator);
+					myStage.setScene(new Scene(root, WIDTH, HEIGHT));
+				} catch (Exception e) {
+					log.severe(id + ": failed to load " + fxmlFName);
+					e.printStackTrace();
+				}
+			}
+		});
+	} // reloadStage
 
 	// ------------------------------------------------------------
 	// handleUpdateDisplayOfCashDisperserSlot
@@ -70,31 +98,5 @@ public class CashDispenserEmulator extends CashDispenserHandler {
 			break;
 		}
 	} // handleUpdateDisplayOfCashDisperserSlot
-
-	// ------------------------------------------------------------
-	// reloadStage
-	private void reloadStage(String fxmlFName) {
-		CashDispenserEmulator cashDispenserEmulator = this;
-
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					log.info(id + ": loading fxml: " + fxmlFName);
-
-					Parent root;
-					FXMLLoader loader = new FXMLLoader();
-					loader.setLocation(CashDispenserEmulator.class.getResource(fxmlFName));
-					root = loader.load();
-					cashDispenserEmulatorController = (CashDispenserEmulatorController) loader.getController();
-					cashDispenserEmulatorController.initialize(id, atmssStarter, log, cashDispenserEmulator);
-					myStage.setScene(new Scene(root, WIDTH, HEIGHT));
-				} catch (Exception e) {
-					log.severe(id + ": failed to load " + fxmlFName);
-					e.printStackTrace();
-				}
-			}
-		});
-	} // reloadStage
 
 }// CashDispenserEmulator

@@ -59,6 +59,7 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 		String details = msg.getDetails();
 		reloadStage(details + ".fxml");
 		log.info(id + ": update display -- " + details);
+
 	} // handleUpdateDisplay
 
 	// ------------------------------------------------------------

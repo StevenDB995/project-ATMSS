@@ -8,6 +8,7 @@ import AppKickstarter.misc.Msg;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
+
 //======================================================================
 //CashDepositCollectorEmulatorController
 public class CashDepositCollectorEmulatorController {
@@ -28,6 +29,12 @@ public class CashDepositCollectorEmulatorController {
 		this.cashDepositCollectorEmulator = cashDepositCollectorEmulator;
 		this.cashDepositCollectorMBox = appKickstarter.getThread("CashDepositCollectorHandler").getMBox();
 	} // initialize
+	
+	// buttonPressed
+			public void buttonPressedInput(ActionEvent actionEvent) {
+				String btnTxt = "CashInput";
+				cashDepositCollectorMBox.send(new Msg(id, cashDepositCollectorMBox, Msg.Type.TD_UpdateDisplay, btnTxt));
+			} // buttonPressed
 
 	// ------------------------------------------------------------
 	// buttonPressed

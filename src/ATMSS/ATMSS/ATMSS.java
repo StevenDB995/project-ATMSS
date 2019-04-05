@@ -5,6 +5,7 @@ import java.io.IOException;
 import ATMSS.BAMSHandler.AdvancedBAMSHandler;
 import ATMSS.BAMSHandler.BAMSInvalidReplyException;
 //import ATMSS.TouchDisplayHandler.Emulator.TouchDisplayEmulator;
+
 import AppKickstarter.AppKickstarter;
 import AppKickstarter.misc.*;
 import AppKickstarter.timer.Timer;
@@ -15,9 +16,9 @@ public class ATMSS extends AppThread {
 	private MBox cardReaderMBox;
 	private MBox keypadMBox;
 	private MBox touchDisplayMBox;
-	private MBox cashDispenserMBox;
-	private MBox cashDepositCollectorMBox;
 	private MBox advicePrinterMBox;
+	private MBox cashDepositCollectorMBox;
+	private MBox cashDispenserMBox;
 	private MBox buzzerMBox;
 	// private TouchDisplayEmulator touchDisplay;
 
@@ -35,6 +36,7 @@ public class ATMSS extends AppThread {
 	private boolean adviceCollected; // whether the user has collect the advice (pressed the button in advice
 										// printer)
 	// TD_StageId is designed to be the same as the FXML filename
+
 
 	// ------------------------------------------------------------
 	// ATMSS
@@ -61,18 +63,18 @@ public class ATMSS extends AppThread {
 		cardReaderMBox = appKickstarter.getThread("CardReaderHandler").getMBox();
 		keypadMBox = appKickstarter.getThread("KeypadHandler").getMBox();
 		touchDisplayMBox = appKickstarter.getThread("TouchDisplayHandler").getMBox();
-		cashDispenserMBox = appKickstarter.getThread("CashDispenserHandler").getMBox();
-		cashDepositCollectorMBox = appKickstarter.getThread("CashDepositCollectorHandler").getMBox();
 		advicePrinterMBox = appKickstarter.getThread("AdvicePrinterHandler").getMBox();
 		buzzerMBox = appKickstarter.getThread("BuzzerHandler").getMBox();
+		cashDepositCollectorMBox = appKickstarter.getThread("CashDepositCollectorHandler").getMBox();
+		cashDispenserMBox = appKickstarter.getThread("CashDispenserHandler").getMBox();
 
 		// touchDisplay = (TouchDisplayEmulator)
 		// appKickstarter.getThread("TouchDisplayHandler");
 		// touchDisplayMBox = touchDisplay.getMBox();
 
+
 		for (boolean quit = false; !quit;) {
 			Msg msg = mbox.receive();
-
 			log.fine(id + ": message received: [" + msg + "].");
 
 			switch (msg.getType()) {
@@ -85,6 +87,7 @@ public class ATMSS extends AppThread {
 				log.info("KeyPressed: " + msg.getDetails());
 				processKeyPressed(msg);
 				break;
+
 
 			case CR_CardInserted:
 				if (TD_StageId.compareToIgnoreCase("TouchDisplayWelocme") == 0) {
@@ -118,6 +121,7 @@ public class ATMSS extends AppThread {
 				cashDepositCollectorMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
 				advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
 				buzzerMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
+
 				break;
 
 			case PollAck:

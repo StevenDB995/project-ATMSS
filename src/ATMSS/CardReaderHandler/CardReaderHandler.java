@@ -3,72 +3,77 @@ package ATMSS.CardReaderHandler;
 import AppKickstarter.AppKickstarter;
 import AppKickstarter.misc.*;
 
+
 //======================================================================
 // CardReaderHandler
 public class CardReaderHandler extends AppThread {
-	// ------------------------------------------------------------
-	// CardReaderHandler
-	public CardReaderHandler(String id, AppKickstarter appKickstarter) {
-		super(id, appKickstarter);
-	} // CardReaderHandler
+    //------------------------------------------------------------
+    // CardReaderHandler
+    public CardReaderHandler(String id, AppKickstarter appKickstarter) {
+	super(id, appKickstarter);
+    } // CardReaderHandler
 
-	// ------------------------------------------------------------
-	// run
-	public void run() {
-		MBox atmss = appKickstarter.getThread("ATMSS").getMBox();
-		log.info(id + ": starting...");
 
-		for (boolean quit = false; !quit;) {
-			Msg msg = mbox.receive();
+    //------------------------------------------------------------
+    // run
+    public void run() {
+        MBox atmss = appKickstarter.getThread("ATMSS").getMBox();
+	log.info(id + ": starting...");
 
-			log.fine(id + ": message received: [" + msg + "].");
+	for (boolean quit = false; !quit;) {
+	    Msg msg = mbox.receive();
 
-			switch (msg.getType()) {
-			case CR_CardInserted:
-				atmss.send(new Msg(id, mbox, Msg.Type.CR_CardInserted, msg.getDetails()));
-				break;
+	    log.fine(id + ": message received: [" + msg + "].");
 
-			case CR_EjectCard:
-				handleCardEject();
-				break;
+	    switch (msg.getType()) {
+		case CR_CardInserted:
+		    atmss.send(new Msg(id, mbox, Msg.Type.CR_CardInserted, msg.getDetails()));
+		    break;
 
-			case CR_CardRemoved:
-				handleCardRemove();
-				break;
+		case CR_EjectCard:
+		    handleCardEject();
+		    break;
 
-			case Poll:
-				atmss.send(new Msg(id, mbox, Msg.Type.PollAck, id + " is up!"));
-				break;
+		case CR_CardRemoved:
+		    handleCardRemove();
+		    break;
 
-			case Terminate:
-				quit = true;
-				break;
+		case Poll:
+		    atmss.send(new Msg(id, mbox, Msg.Type.PollAck, id + " is up!"));
+		    break;
 
-			default:
-				log.warning(id + ": unknown message type: [" + msg + "]");
-			}
-		}
+		case Terminate:
+		    quit = true;
+		    break;
 
-		// declaring our departure
-		appKickstarter.unregThread(this);
-		log.info(id + ": terminating...");
-	} // run
+		default:
+		    log.warning(id + ": unknown message type: [" + msg + "]");
+	    }
+	}
 
-	// ------------------------------------------------------------
-	// handleCardInsert
-	protected void handleCardInsert() {
-		log.info(id + ": card inserted");
-	} // handleCardInsert
+	// declaring our departure
+	appKickstarter.unregThread(this);
+	log.info(id + ": terminating...");
+    } // run
 
-	// ------------------------------------------------------------
-	// handleCardEject
-	protected void handleCardEject() {
-		log.info(id + ": card ejected");
-	} // handleCardEject
 
-	// ------------------------------------------------------------
-	// handleCardRemove
-	protected void handleCardRemove() {
-		log.info(id + ": card removed");
-	} // handleCardRemove
+    //------------------------------------------------------------
+    // handleCardInsert
+    protected void handleCardInsert() {
+	log.info(id + ": card inserted");
+    } // handleCardInsert
+
+
+    //------------------------------------------------------------
+    // handleCardEject
+    protected void handleCardEject() {
+	log.info(id + ": card ejected");
+    } // handleCardEject
+
+
+    //------------------------------------------------------------
+    // handleCardRemove
+    protected void handleCardRemove() {
+	log.info(id + ": card removed");
+    } // handleCardRemove
 } // CardReaderHandler

@@ -8,6 +8,7 @@ import AppKickstarter.misc.Msg;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
+
 //======================================================================
 //CashDispenserEmulatorController
 public class CashDispenserEmulatorController {
@@ -36,5 +37,6 @@ public class CashDispenserEmulatorController {
 		String btnTxt = btn.getText();
 		cashDispenserMBox.send(new Msg(id, cashDispenserMBox, Msg.Type.CD_ButtonPressed, btnTxt));
 	} // buttonPressed
+
 
 }// CashDispenserEmulatorController

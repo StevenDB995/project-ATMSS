@@ -8,6 +8,7 @@ import AppKickstarter.misc.Msg;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
+
 //======================================================================
 //AdvicePrinterEmulatorController
 public class AdvicePrinterEmulatorController {
@@ -28,6 +29,12 @@ public class AdvicePrinterEmulatorController {
 		this.advicePrinterEmulator = advicePrinterEmulator;
 		this.advicePrinterMBox = appKickstarter.getThread("AdvicePrinterHandler").getMBox();
 	} // initialize
+	
+	// buttonPressed
+		public void buttonPressedTake(ActionEvent actionEvent) {
+			String btnTxt = "AdviceTake";
+			advicePrinterMBox.send(new Msg(id, advicePrinterMBox, Msg.Type.TD_UpdateDisplay, btnTxt));
+		} // buttonPressed
 
 	// ------------------------------------------------------------
 	// buttonPressed

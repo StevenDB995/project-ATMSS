@@ -38,7 +38,7 @@ public class BuzzerEmulator extends BuzzerHandler {
 		buzzerEmulatorController = (BuzzerEmulatorController) loader.getController();
 		buzzerEmulatorController.initialize(id, atmssStarter, log, this);
 		myStage.initStyle(StageStyle.DECORATED);
-		myStage.setScene(new Scene(root, 350, 470));
+		myStage.setScene(new Scene(root, 200, 200));
 		myStage.setTitle("Buzzer");
 		myStage.setResizable(false);
 		myStage.setOnCloseRequest((WindowEvent event) -> {

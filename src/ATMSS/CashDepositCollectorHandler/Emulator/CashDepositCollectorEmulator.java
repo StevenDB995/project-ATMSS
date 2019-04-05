@@ -1,6 +1,8 @@
 package ATMSS.CashDepositCollectorHandler.Emulator;
 
 import ATMSS.ATMSSStarter;
+import ATMSS.AdvicePrinterHandler.Emulator.AdvicePrinterEmulator;
+import ATMSS.AdvicePrinterHandler.Emulator.AdvicePrinterEmulatorController;
 import ATMSS.CashDepositCollectorHandler.CashDepositCollectorHandler;
 import AppKickstarter.misc.Msg;
 import javafx.application.Platform;
@@ -14,11 +16,11 @@ import javafx.stage.WindowEvent;
 //======================================================================
 //CashDepositCollectorEmulator
 public class CashDepositCollectorEmulator extends CashDepositCollectorHandler {
-	private final int WIDTH = 680;
-	private final int HEIGHT = 520;
 	private ATMSSStarter atmssStarter;
 	private String id;
 	private Stage myStage;
+	private final int WIDTH = 350;
+	private final int HEIGHT = 350;
 	private CashDepositCollectorEmulatorController cashDepositCollectorEmulatorController;
 
 	// ------------------------------------------------------------
@@ -41,7 +43,7 @@ public class CashDepositCollectorEmulator extends CashDepositCollectorHandler {
 		cashDepositCollectorEmulatorController = (CashDepositCollectorEmulatorController) loader.getController();
 		cashDepositCollectorEmulatorController.initialize(id, atmssStarter, log, this);
 		myStage.initStyle(StageStyle.DECORATED);
-		myStage.setScene(new Scene(root, 350, 470));
+		myStage.setScene(new Scene(root, 350, 350));
 		myStage.setTitle("Cash Deposit Collector");
 		myStage.setResizable(false);
 		myStage.setOnCloseRequest((WindowEvent event) -> {
