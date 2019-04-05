@@ -52,13 +52,12 @@ public class AdvicePrinterHandler extends AppThread {
 	// ------------------------------------------------------------
 	// handleUpdateDisplayOfAdvicePrinter
 	protected void handleUpdateDisplayOfAdvicePrinter(Msg msg) {
-		String tokens[] = msg.getDetails().split("/");
-		String transactionType = tokens[0];
-		String currentCardNo = tokens[1];
-		String currentAccount = tokens[2];
-		String amount = tokens[3];
+//		String tokens[] = msg.getDetails().split("/");
+//		String transactionType = tokens[0];
+//		String currentCardNo = tokens[1];
+//		String currentAccount = tokens[2];
+//		String amount = tokens[3];
 
-		log.info(id + ": " + transactionType + " from card number" + currentCardNo + " ,account number "
-				+ currentAccount + " with amount " + amount + " and print advice.");
+		log.info("Print advice.");
 	} // handleUpdateDisplayOfAdvicePrinter
 }// AdvicePrinterHandler

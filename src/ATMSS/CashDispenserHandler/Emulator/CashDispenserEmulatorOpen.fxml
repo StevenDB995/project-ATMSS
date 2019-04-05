@@ -14,6 +14,6 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffaf1f" height="89.0" layoutX="60.0" layoutY="105.0" stroke="BLACK" strokeType="INSIDE" width="192.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffaf1f" height="89.0" layoutX="70.0" layoutY="115.0" stroke="BLACK" strokeType="INSIDE" width="192.0" />
       <Text layoutX="144.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cash" />
-      <Button layoutX="110.0" layoutY="23.0" mnemonicParsing="false" onAction="#buttonPressedTake" text="Take" />
+      <Button layoutX="110.0" layoutY="23.0" mnemonicParsing="false" onAction="#buttonPressed" text="Take" />
    </children>
 </AnchorPane>

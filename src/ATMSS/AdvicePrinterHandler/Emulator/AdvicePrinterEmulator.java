@@ -17,8 +17,8 @@ public class AdvicePrinterEmulator extends AdvicePrinterHandler {
 	private ATMSSStarter atmssStarter;
 	private String id;
 	private Stage myStage;
-	private final int WIDTH = 350;
-	private final int HEIGHT = 350;
+	private final int WIDTH = 250;
+	private final int HEIGHT = 150;
 	private AdvicePrinterEmulatorController advicePrinterEmulatorController;
 
 	// ------------------------------------------------------------
@@ -41,7 +41,7 @@ public class AdvicePrinterEmulator extends AdvicePrinterHandler {
 		advicePrinterEmulatorController = (AdvicePrinterEmulatorController) loader.getController();
 		advicePrinterEmulatorController.initialize(id, atmssStarter, log, this);
 		myStage.initStyle(StageStyle.DECORATED);
-		myStage.setScene(new Scene(root, 350, 350));
+		myStage.setScene(new Scene(root, WIDTH, HEIGHT));
 		myStage.setTitle("Advice Printer");
 		myStage.setResizable(false);
 		myStage.setOnCloseRequest((WindowEvent event) -> {
@@ -54,42 +54,25 @@ public class AdvicePrinterEmulator extends AdvicePrinterHandler {
 	// ------------------------------------------------------------
 	// handleUpdateDisplayOfAdvicePrinter
 	protected void handleUpdateDisplayOfAdvicePrinter(Msg msg) {
-		String tokens[] = msg.getDetails().split("/");
-		String transactionType = tokens[0];
-		String currentCardNo = tokens[1];
-		String currentAccount = tokens[2];
-		String amount = tokens[3];
+		// String tokens[] = msg.getDetails().split("/");
+		// String transactionType = tokens[0];
+		// String currentCardNo = tokens[1];
+		// String currentAccount = tokens[2];
+		// String amount = tokens[3];
 
-		log.info(id + ": " + transactionType + " from card number" + currentCardNo + " ,account number "
-				+ currentAccount + " with amount " + amount + " and print advice.");
+		log.info("Print advice.");
 
 		switch (msg.getDetails()) {
-		case "Withdraw failed":
-			reloadStage("////////.fxml");
+		case "print":
+			reloadStage("AdvicePrinterEmulatorPrint.fxml");
 			break;
 
-		case "Withdraw succeed":
-			reloadStage("////////.fxml");
-			break;
-
-		case "Deposit failed":
-			reloadStage("////////.fxml");
-			break;
-
-		case "Deposit succeed":
-			reloadStage("////////.fxml");
-			break;
-
-		case "Enquiry failed":
-			reloadStage("////////.fxml");
-			break;
-
-		case "Enquiry succeed":
-			reloadStage("////////.fxml");
+		case "close":
+			reloadStage("AdvicePrinterEmulator.fxml");
 			break;
 
 		default:
-			log.severe(id + ": print advice with unknown type -- " + transactionType);
+			log.severe(id + ": print advice with unknown type -- " + msg.getDetails());
 			break;
 		}
 	} // handleUpdateDisplayOfAdvicePrinter

@@ -1,8 +1,6 @@
 package ATMSS.CashDepositCollectorHandler.Emulator;
 
 import ATMSS.ATMSSStarter;
-import ATMSS.AdvicePrinterHandler.Emulator.AdvicePrinterEmulator;
-import ATMSS.AdvicePrinterHandler.Emulator.AdvicePrinterEmulatorController;
 import ATMSS.CashDepositCollectorHandler.CashDepositCollectorHandler;
 import AppKickstarter.misc.Msg;
 import javafx.application.Platform;
@@ -60,11 +58,11 @@ public class CashDepositCollectorEmulator extends CashDepositCollectorHandler {
 
 		switch (msg.getDetails()) {
 		case "OpenCashDepositCollectorSlot":
-			reloadStage("////////.fxml");
+			reloadStage("CashDepositCollectorEmulatorOpen.fxml");
 			break;
 
 		case "CloseCashDepositCollectorSlot":
-			reloadStage("////////.fxml");
+			reloadStage("CashDepositCollectorEmulator.fxml");
 			break;
 
 		default:

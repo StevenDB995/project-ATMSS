@@ -1,9 +1,6 @@
 package ATMSS.CashDispenserHandler.Emulator;
 
 import ATMSS.ATMSSStarter;
-import ATMSS.AdvicePrinterHandler.Emulator.AdvicePrinterEmulator;
-import ATMSS.CashDepositCollectorHandler.Emulator.CashDepositCollectorEmulator;
-import ATMSS.CashDepositCollectorHandler.Emulator.CashDepositCollectorEmulatorController;
 import ATMSS.CashDispenserHandler.CashDispenserHandler;
 import AppKickstarter.misc.Msg;
 import javafx.application.Platform;
@@ -55,7 +52,7 @@ public class CashDispenserEmulator extends CashDispenserHandler {
 	} // CashDispenserEmulator
 
 	// reloadStage
-	void reloadStage(String fxmlFName) {
+	private void reloadStage(String fxmlFName) {
 		CashDispenserEmulator cashDispenserEmulator = this;
 
 		Platform.runLater(new Runnable() {
@@ -66,7 +63,7 @@ public class CashDispenserEmulator extends CashDispenserHandler {
 
 					Parent root;
 					FXMLLoader loader = new FXMLLoader();
-					loader.setLocation(AdvicePrinterEmulator.class.getResource(fxmlFName));
+					loader.setLocation(CashDispenserEmulator.class.getResource(fxmlFName));
 					root = loader.load();
 					cashDispenserEmulatorController = (CashDispenserEmulatorController) loader.getController();
 					cashDispenserEmulatorController.initialize(id, atmssStarter, log, cashDispenserEmulator);
@@ -86,11 +83,11 @@ public class CashDispenserEmulator extends CashDispenserHandler {
 
 		switch (msg.getDetails()) {
 		case "OpenCashDispenserSlot":
-			reloadStage("////////.fxml");
+			reloadStage("CashDispenserEmulatorOpen.fxml");
 			break;
 
 		case "CloseCashDispenserSlot":
-			reloadStage("////////.fxml");
+			reloadStage("CashDispenserEmulator.fxml");
 			break;
 
 		default:

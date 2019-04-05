@@ -40,6 +40,14 @@ public class TouchDisplayHandler extends AppThread {
 			case Terminate:
 				quit = true;
 				break;
+				
+			case BAMS_ChooseFromAccount:
+				// let touch display show the from account
+				break;
+				
+			case BAMS_ChooseToAccount:
+				// let touch display show the to account
+				break;
 
 			default:
 				log.warning(id + ": unknown message type: [" + msg + "]");
