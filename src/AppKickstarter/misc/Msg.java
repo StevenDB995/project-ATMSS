@@ -71,4 +71,5 @@ public class Msg {
 		AP_UpdateAdvicePrinter, // Update display of advice printer
 		AP_ButtonPressed, //Button pressed in advice printer
 	} // Type
+
 } // Msg
