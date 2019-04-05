@@ -28,6 +28,7 @@ public class ATMSSStarter extends AppKickstarter {
 	protected CashDepositCollectorHandler cashDepositCollectorHandler;
 	protected AdvicePrinterHandler advicePrinterHandler;
 	protected BuzzerHandler buzzerHandler;
+	//protected WelcomPageHandler welcomPagehandler;
 
 	// ------------------------------------------------------------
 	// main

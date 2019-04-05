@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane layoutX="8.0" layoutY="289.0" prefHeight="45.0" prefWidth="584.0" style="-fx-border-color: #000000;" />
-      <Label layoutX="218.0" layoutY="47.0" text="CashDispenser">
+      <AnchorPane layoutX="73.0" layoutY="83.0" prefHeight="44.0" prefWidth="454.0" style="-fx-border-color: #000000;">
+         <children>
+            <AnchorPane layoutX="108.0" layoutY="16.0" prefHeight="15.0" prefWidth="238.0" style="-fx-border-color: #000000;" />
+         </children>
+      </AnchorPane>
+      <Label alignment="CENTER" layoutX="251.0" layoutY="36.0" prefHeight="15.0" prefWidth="98.0" text="Printer">
          <font>
-            <Font size="23.0" />
+            <Font size="22.0" />
          </font>
       </Label>
-      <Button layoutX="533.0" layoutY="344.0" mnemonicParsing="false" text="Take" />
    </children>
 </AnchorPane>

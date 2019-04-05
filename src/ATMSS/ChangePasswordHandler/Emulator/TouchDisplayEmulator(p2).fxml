@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ATMSS.TouchDisplayHandler.Emulator.TouchDisplayEmulatorController">
+    <children>
+	<TextArea fx:id="atmssTextArea" editable="false" layoutX="20.0" layoutY="169.0" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20" />
+      <AnchorPane layoutX="10.0" layoutY="10.0">
+         <children>
+            <AnchorPane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+               <children>
+                  <Label layoutX="69.0" layoutY="28.0" text="核對中請重按新的私人密碼">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="201.0" layoutY="108.0" text="按">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="349.0" layoutY="108.0" text="鍵">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="248.0" layoutY="108.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="73.0" text="輸入" />
+                  <Label layoutX="257.0" layoutY="181.0" text="保安提示:&#10;請您輸入密碼時用手覆蓋鍵盤.&#10;避免.....">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Label>
+                  <PasswordField layoutY="387.0" prefHeight="27.0" prefWidth="560.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+    </children>
+</AnchorPane>
