@@ -25,10 +25,6 @@
 				<Rectangle arcHeight="5.0" arcWidth="5.0" fill="white"
 					height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0"
 					AnchorPane.bottomAnchor="140" AnchorPane.rightAnchor="0" />
-				<Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT"
-					height="480.0" onMouseClicked="#td_mouseClick" stroke="BLACK"
-					strokeType="OUTSIDE" width="640" AnchorPane.bottomAnchor="0"
-					AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
 				<Label layoutX="185.0" layoutY="92.0" prefHeight="40.0"
 					prefWidth="273.0" text="Transacition Failed">
 					<font>
@@ -67,5 +63,9 @@
 				<Font size="25.0" />
 			</font>
 		</Label>
+		<Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT"
+			height="480.0" onMouseClicked="#td_mouseClick" stroke="BLACK"
+			strokeType="OUTSIDE" width="640" AnchorPane.bottomAnchor="0"
+			AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
 	</children>
 </AnchorPane>

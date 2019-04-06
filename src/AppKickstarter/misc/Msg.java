@@ -52,8 +52,8 @@ public class Msg {
 		TimesUp, // Time's up for the timer
 		Poll, // Health poll
 		PollAck, // Health poll acknowledgement
-		TD_UpdateDisplay,	// Update Display
-		TD_MouseClicked,	// Mouse Clicked
+		TD_UpdateDisplay, // Update Display
+		TD_MouseClicked, // Mouse Clicked
 		CR_CardInserted, // Card inserted
 		CR_CardRemoved, // Card removed
 		CR_EjectCard, // Eject card
@@ -62,14 +62,14 @@ public class Msg {
 		LogoutAck, // Acknowledge logout
 		CDC_UpdateCashDepositCollectorSlot, // Update display of slot of cash deposit collector
 		CD_UpdateCashDispenserSlot, // Update display of slot of cash dispenser
-		B_Sound,	 //Buzzer makes sound
-//		BAMS_GetAccounts, // For touch display to display available accounts
+		B_Sound, // Buzzer makes sound
+		// BAMS_GetAccounts, // For touch display to display available accounts
 		BAMS_ChooseFromAccount, // For touch display to display from account
 		BAMS_ChooseToAccount, // For touch display to display to account
 		CDC_ButtonPressed, // Button pressed in cash deposit collector
 		CD_ButtonPressed, // Button pressed in cash dispenser
 		AP_UpdateAdvicePrinter, // Update display of advice printer
-		AP_ButtonPressed, //Button pressed in advice printer
+		AP_ButtonPressed, // Button pressed in advice printer
 	} // Type
 
 } // Msg

@@ -3,7 +3,6 @@ package ATMSS.TouchDisplayHandler;
 import AppKickstarter.AppKickstarter;
 import AppKickstarter.misc.*;
 
-
 //======================================================================
 // TouchDisplayHandler
 public class TouchDisplayHandler extends AppThread {
@@ -40,11 +39,11 @@ public class TouchDisplayHandler extends AppThread {
 			case Terminate:
 				quit = true;
 				break;
-				
+
 			case BAMS_ChooseFromAccount:
 				// let touch display show the from account
 				break;
-				
+
 			case BAMS_ChooseToAccount:
 				// let touch display show the to account
 				break;
@@ -64,6 +63,5 @@ public class TouchDisplayHandler extends AppThread {
 	protected void handleUpdateDisplay(Msg msg) {
 		log.info(id + ": update display -- " + msg.getDetails());
 	} // handleUpdateDisplay
-
 
 } // TouchDisplayHandler
