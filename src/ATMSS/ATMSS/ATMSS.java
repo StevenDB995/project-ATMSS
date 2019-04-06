@@ -604,9 +604,44 @@ public class ATMSS extends AppThread {
 					// "/0";
 				} else {
 					log.info("Enquiry successfully, you have " + enquiryFeedback + " in your account.");
-					touchDisplayMBox
-							.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorSuccessful"));
-					TD_StageId = "TouchDisplayEmulatorSuccessful";
+					if (x > 340 && x < 640 && y > 410 && y < 480) { // case for eject card
+						cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
+						currentCardNo = "";
+						credential = "";
+						touchDisplayMBox
+								.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulator(Welcome)"));
+						TD_StageId = "TouchDisplayEmulator(Welcome)";
+					}
+
+					else if (x > 340 && x < 640 && y > 270 && y < 340) { // case for print advice and eject card
+						// advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.AP_UpdateAdvicePrinter,
+						// adviceContent));
+						advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.AP_UpdateAdvicePrinter, "print"));
+						// adviceContent = "";
+						cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
+						currentCardNo = "";
+						credential = "";
+						touchDisplayMBox
+								.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulator(Welcome)"));
+						TD_StageId = "TouchDisplayEmulator(Welcome)";
+					}
+
+					else if (x > 0 && x < 300 && y > 410 && y < 480) { // case for more transactions
+						touchDisplayMBox.send(
+								new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorServiceChoice"));
+						TD_StageId = "TouchDisplayEmulatorServiceChoice";
+					}
+
+					else if (x > 0 && x < 300 && y > 270 && y < 340) { // case for print advice and more transactions
+						// advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.AP_UpdateAdvicePrinter,
+						// adviceContent));
+						advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.AP_UpdateAdvicePrinter, "print"));
+						// adviceContent = "";
+						touchDisplayMBox.send(
+								new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorServiceChoice"));
+						TD_StageId = "TouchDisplayEmulatorServiceChoice";
+					}
+
 					currentAccount = "";
 					// adviceContent = "Enquiry succeed/" + currentCardNo + "/" + currentAccount +
 					// "/"
@@ -616,7 +651,6 @@ public class ATMSS extends AppThread {
 				e.printStackTrace();
 			}
 			break;
-
 
 		case "TouchDisplayEmulatorFailed":
 			if (x > 340 && x < 640 && y > 410 && y < 480) { // case for eject card

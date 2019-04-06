@@ -60,7 +60,7 @@ public class AdvicePrinterEmulator extends AdvicePrinterHandler {
 		// String currentAccount = tokens[2];
 		// String amount = tokens[3];
 
-		log.info("Print advice.");
+		log.info(id + ": " + msg.getDetails() + " and update display of advice printer.");
 
 		switch (msg.getDetails()) {
 		case "print":

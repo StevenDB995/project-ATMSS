@@ -6,13 +6,29 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="150.0" prefWidth="228.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ATMSS.AdvicePrinterHandler.Emulator.AdvicePrinterEmulatorController">
-   <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#969696" height="54.0" layoutX="36.0" layoutY="48.0" stroke="BLACK" strokeType="INSIDE" width="157.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1b1b1b" height="14.0" layoutX="48.0" layoutY="68.0" stroke="BLACK" strokeType="INSIDE" width="134.0" />
-      <Button layoutX="12.0" layoutY="14.0" mnemonicParsing="false" onAction="#buttonPressed" text="Take" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="74.0" layoutX="53.0" layoutY="75.0" stroke="BLACK" strokeType="INSIDE" width="124.0" />
-      <Text layoutX="72.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text=".............................." />
-      <Label layoutX="89.0" layoutY="11.0" text="Take the advice first&#10;for futher operation" />
-   </children>
+<AnchorPane prefHeight="150.0" prefWidth="228.0"
+	xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="ATMSS.AdvicePrinterHandler.Emulator.AdvicePrinterEmulatorController">
+	<children>
+		<AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="197.0"
+			prefWidth="321.0">
+			<children>
+				<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#969696"
+					height="54.0" layoutX="36.0" layoutY="48.0" stroke="BLACK"
+					strokeType="INSIDE" width="157.0" />
+				<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1b1b1b"
+					height="14.0" layoutX="48.0" layoutY="68.0" stroke="BLACK"
+					strokeType="INSIDE" width="134.0" />
+				<Button layoutX="12.0" layoutY="14.0" mnemonicParsing="false"
+					onAction="#buttonPressed" text="Take" />
+				<Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE"
+					height="74.0" layoutX="53.0" layoutY="75.0" stroke="BLACK"
+					strokeType="INSIDE" width="124.0" />
+				<Text layoutX="72.0" layoutY="117.0" strokeType="OUTSIDE"
+					strokeWidth="0.0" text=".............................." />
+				<Label layoutX="89.0" layoutY="11.0"
+					text="Take the advice first&#10;for futher operation" />
+			</children>
+		</AnchorPane>
+	</children>
 </AnchorPane>

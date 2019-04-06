@@ -34,9 +34,11 @@ public class AdvicePrinterHandler extends AppThread {
 
 			case AP_UpdateAdvicePrinter:
 				handleUpdateDisplayOfAdvicePrinter(msg);
+				break;
 				
 			case AP_ButtonPressed:
 				atmss.send(new Msg(id, mbox, Msg.Type.AP_ButtonPressed, msg.getDetails()));
+				break;
 
 			default:
 				log.warning(id + ": unknown message type: [" + msg + "]");
@@ -58,6 +60,6 @@ public class AdvicePrinterHandler extends AppThread {
 //		String currentAccount = tokens[2];
 //		String amount = tokens[3];
 
-		log.info("Print advice.");
+		log.info(id + ": " + msg.getDetails() + " and update display of advice printer.");
 	} // handleUpdateDisplayOfAdvicePrinter
 }// AdvicePrinterHandler

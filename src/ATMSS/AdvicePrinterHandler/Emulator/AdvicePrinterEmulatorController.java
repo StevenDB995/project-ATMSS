@@ -32,8 +32,9 @@ public class AdvicePrinterEmulatorController {
 	// ------------------------------------------------------------
 	// buttonPressed
 	public void buttonPressed(ActionEvent actionEvent) {
-		// Button btn = (Button) actionEvent.getSource();
-		advicePrinterMBox.send(new Msg(id, advicePrinterMBox, Msg.Type.AP_ButtonPressed, ""));
+		Button btn = (Button) actionEvent.getSource();
+		String btnTxt = btn.getText();
+		advicePrinterMBox.send(new Msg(id, advicePrinterMBox, Msg.Type.AP_ButtonPressed, btnTxt));
 	} // buttonPressed
 
 }// AdvicePrinterEmulatorController
