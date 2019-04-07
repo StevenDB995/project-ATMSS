@@ -1,6 +1,12 @@
 package ATMSS.ATMSS;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Formatter;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
 import ATMSS.BAMSHandler.AdvancedBAMSHandler;
 import ATMSS.BAMSHandler.BAMSInvalidReplyException;
@@ -19,7 +25,7 @@ public class ATMSS extends AppThread {
 	private MBox cashDepositCollectorMBox;
 	private MBox cashDispenserMBox;
 	private MBox buzzerMBox;
-	String urlPrefix = "http://cslinux0.comp.hkbu.edu.hk/~comp4107/test/";
+	String urlPrefix = "http://cslinux0.comp.hkbu.edu.hk/comp4107_18-19_grp04/";
 
 	private AdvancedBAMSHandler bams;
 
@@ -31,6 +37,7 @@ public class ATMSS extends AppThread {
 	private String toAccount;
 	private String keypadInput; // Store keypad input by users
 	private String TD_StageId; // record the current stage of the touchDisplay
+	private int wrongPasswordTimes; // store the number of wrong password
 
 	// TD_StageId is designed to be the same as the FXML filename
 
@@ -38,7 +45,7 @@ public class ATMSS extends AppThread {
 	// ATMSS
 	public ATMSS(String id, AppKickstarter appKickstarter) throws Exception {
 		super(id, appKickstarter);
-		bams = new AdvancedBAMSHandler(urlPrefix);
+		bams = new AdvancedBAMSHandler(urlPrefix, initLogger());
 		currentCardNo = "";
 		credential = "";
 		keypadInput = "";
@@ -46,8 +53,45 @@ public class ATMSS extends AppThread {
 		toAccount = "";
 		credential = "";
 		TD_StageId = "TouchDisplayEmulator(Welcome)";
+		wrongPasswordTimes = 0;
 		// adviceContent = "";
 	} // ATMSS
+
+	// ------------------------------------------------------------
+	// initLogger
+	static Logger initLogger() {
+		// init our logger
+		ConsoleHandler logConHdr = new ConsoleHandler();
+		logConHdr.setFormatter(new LogFormatter());
+		Logger log = Logger.getLogger("ATMSS");
+		log.setUseParentHandlers(false);
+		log.setLevel(Level.ALL);
+		log.addHandler(logConHdr);
+		logConHdr.setLevel(Level.ALL);
+		return log;
+	} // initLogger
+
+	static class LogFormatter extends Formatter {
+		// ------------------------------------------------------------
+		// format
+		public String format(LogRecord rec) {
+			Calendar cal = Calendar.getInstance();
+			String str = "";
+
+			// get date
+			cal.setTimeInMillis(rec.getMillis());
+			str += String.format("%02d%02d%02d-%02d:%02d:%02d ", cal.get(Calendar.YEAR) - 2000,
+					cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.HOUR_OF_DAY),
+					cal.get(Calendar.MINUTE), cal.get(Calendar.SECOND));
+
+			// level of the log
+			str += "[" + rec.getLevel() + "] -- ";
+
+			// message of the log
+			str += rec.getMessage();
+			return str + "\n";
+		} // format
+	} // LogFormatter
 
 	// ------------------------------------------------------------
 	// run
@@ -255,6 +299,7 @@ public class ATMSS extends AppThread {
 						touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay,
 								"TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong"));
 						TD_StageId = "TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong";
+						wrongPasswordTimes++;
 					} else {
 						log.info(id + ": Login successful");
 						credential = feedback;
@@ -270,6 +315,45 @@ public class ATMSS extends AppThread {
 					}
 
 					keypadInput = "";
+					break;
+
+				case "TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong":
+					if (wrongPasswordTimes >= 2) {
+						log.info(id + ": Wrong login password exceed the limit.");
+						touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay,
+								"TouchDisplayEmulatorPasswordValidationP3_CardEaten"));
+						TD_StageId = "TouchDisplayEmulatorPasswordValidationP3_CardEaten";
+						cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_CardRetained, ""));
+						keypadInput = "";
+						currentCardNo = "";
+						currentAccount = "";
+						credential = "";
+					} else {
+						feedback = bams.login(currentCardNo, keypadInput);
+						log.info("logging in with card number " + currentCardNo);
+
+						if (feedback.compareToIgnoreCase("ERROR") == 0) {
+							log.info(id + ": Wrong login password");
+							touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay,
+									"TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong"));
+							TD_StageId = "TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong";
+							wrongPasswordTimes++;
+						} else {
+							log.info(id + ": Login successful");
+							credential = feedback;
+							// String accounts = bams.getAccounts(currentCardNo, credential); // to be
+							// revised
+							String accounts = "1/1/1/1"; // to be revised
+							availableFromAccounts = accounts.split("/");
+							availableToAccounts = accounts.split("/");
+
+							touchDisplayMBox.send(
+									new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorServiceChoice"));
+							TD_StageId = "TouchDisplayEmulatorServiceChoice";
+						}
+
+						keypadInput = "";
+					}
 					break;
 
 				case "TouchDisplayEmulatorTransferP3_InputAmount": // type in transfer amount

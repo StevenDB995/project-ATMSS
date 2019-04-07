@@ -11,7 +11,7 @@ public class TestBAMSHandler {
 	// ------------------------------------------------------------
 	// main
 	public static void main(String[] args) {
-		String urlPrefix = "http://cslinux0.comp.hkbu.edu.hk/~comp4107/test/";
+		String urlPrefix = "http://cslinux0.comp.hkbu.edu.hk/comp4107_18-19_grp04/";
 
 		// try logging in
 		// BAMSHandler bams = new BAMSHandler(urlPrefix); // without logger
@@ -35,7 +35,7 @@ public class TestBAMSHandler {
 	// testLogin
 	static void testLogin(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
 		System.out.println("Login:");
-		String cred = bams.login("12345678-0", "456123789");
+		String cred = bams.login("1005-5001", "2334");
 		System.out.println("cred: " + cred);
 		System.out.println();
 	} // testLogin

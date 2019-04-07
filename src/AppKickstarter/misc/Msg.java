@@ -56,6 +56,7 @@ public class Msg {
 		TD_MouseClicked, // Mouse Clicked
 		CR_CardInserted, // Card inserted
 		CR_CardRemoved, // Card removed
+		CR_CardRetained, // Card retained due to wrong password for three times
 		CR_EjectCard, // Eject card
 		KP_KeyPressed, // Key pressed
 		LoginAck, // Acknowledge successful login
