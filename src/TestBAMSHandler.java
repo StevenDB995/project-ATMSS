@@ -35,7 +35,7 @@ public class TestBAMSHandler {
 	// testLogin
 	static void testLogin(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
 		System.out.println("Login:");
-		String cred = bams.login("1005-5001", "2334");
+		String cred = bams.login("1005-5001", "232334");
 		System.out.println("cred: " + cred);
 		System.out.println();
 	} // testLogin
@@ -44,7 +44,7 @@ public class TestBAMSHandler {
 	// testGetAcc
 	static void testGetAcc(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
 		System.out.println("GetAcc:");
-		String accounts = bams.getAccounts("12345678-1", "cred-1");
+		String accounts = bams.getAccounts("1005-5001", "Credential");
 		System.out.println("accounts: " + accounts);
 		System.out.println();
 	} // testGetAcc
@@ -53,7 +53,7 @@ public class TestBAMSHandler {
 	// testWithdraw
 	static void testWithdraw(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
 		System.out.println("Withdraw:");
-		int outAmount = bams.withdraw("12345678-2", "111-222-332", "cred-2", "109702");
+		int outAmount = bams.withdraw("1005-5001", "1005-5001-01", "cred-2", "1");
 		System.out.println("outAmount: " + outAmount);
 		System.out.println();
 	} // testWithdraw
@@ -62,7 +62,7 @@ public class TestBAMSHandler {
 	// testDeposit
 	static void testDeposit(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
 		System.out.println("Deposit:");
-		double depAmount = bams.deposit("12345678-3", "111-222-333", "cred-3", "109703");
+		double depAmount = bams.deposit("1005-5001", "1005-5001-01", "cred-3", "109703");
 		System.out.println("depAmount: " + depAmount);
 		System.out.println();
 	} // testDeposit
