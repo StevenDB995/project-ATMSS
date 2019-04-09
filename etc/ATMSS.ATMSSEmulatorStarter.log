@@ -1,91 +1,153 @@
-190408-10:01:24 [INFO] -- 
-190408-10:01:24 [INFO] -- 
-190408-10:01:24 [INFO] -- ============================================================
-190408-10:01:24 [INFO] -- ATMSSStarter: Application Starting...
-190408-10:01:26 [INFO] -- AdvicePrinterHandler: starting...
-190408-10:01:26 [INFO] -- CashDepositCollectorHandler: starting...
-190408-10:01:26 [INFO] -- ATMSS: starting...
-190408-10:01:26 [INFO] -- CardReaderHandler: starting...
-190408-10:01:26 [INFO] -- KeypadHandler: starting...
-190408-10:01:26 [INFO] -- BuzzerHandler: starting...
-190408-10:01:26 [INFO] -- TouchDisplayHandler: starting...
-190408-10:01:26 [INFO] -- CashDispenserHandler: starting...
-190408-10:01:26 [INFO] -- timer: starting...
-190408-10:01:36 [INFO] -- CardInserted: 1005-5001
-190408-10:01:36 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorPasswordValidationP1_RequestPW.fxml
-190408-10:01:36 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorPasswordValidationP1_RequestPW
-190408-10:01:39 [INFO] -- KeyPressed: 2
-190408-10:01:40 [INFO] -- KeyPressed: 3
-190408-10:01:40 [INFO] -- KeyPressed: 2
-190408-10:01:41 [INFO] -- KeyPressed: 3
-190408-10:01:41 [INFO] -- KeyPressed: 3
-190408-10:01:42 [INFO] -- KeyPressed: 4
-190408-10:01:42 [INFO] -- KeyPressed: Enter
-190408-10:01:43 [INFO] -- logging in with card number 1005-5001
-190408-10:01:43 [INFO] -- ATMSS: Login successful
-190408-10:01:43 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorServiceChoice
-190408-10:01:43 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorServiceChoice.fxml
-190408-10:01:44 [INFO] -- MouseCLicked: 269 379
-190408-10:01:44 [INFO] -- You have choosen deposit.
-190408-10:01:44 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayDepositEmulatorP1_ChooseAccount.fxml
-190408-10:01:44 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayDepositEmulatorP1_ChooseAccount
-190408-10:01:45 [INFO] -- MouseCLicked: 388 312
-190408-10:01:45 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayDepositEmulatorP2_InputAmount.fxml
-190408-10:01:45 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayDepositEmulatorP2_InputAmount
-190408-10:01:48 [INFO] -- KeyPressed: 3
-190408-10:01:49 [INFO] -- KeyPressed: Enter
-190408-10:01:49 [INFO] -- Successfully deposited 3.0
-190408-10:01:49 [INFO] -- CashDepositCollectorHandler: OpenCashDepositCollectorSlot and update display of cash deposit collector.
-190408-10:01:49 [INFO] -- CashDepositCollectorHandler: loading fxml: CashDepositCollectorEmulatorOpen.fxml
-190408-10:01:51 [INFO] -- CashDepositCollectorHandler: CloseCashDepositCollectorSlot and update display of cash deposit collector.
-190408-10:01:51 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorSuccessful.fxml
-190408-10:01:51 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorSuccessful
-190408-10:01:51 [INFO] -- CashDepositCollectorHandler: loading fxml: CashDepositCollectorEmulator.fxml
-190408-10:01:53 [INFO] -- MouseCLicked: 495 438
-190408-10:01:53 [INFO] -- CardReaderHandler: card ejected
-190408-10:01:53 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulator(Welcome)
-190408-10:01:53 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulator(Welcome).fxml
-190408-10:01:58 [INFO] -- CardReaderHandler: card removed
-190408-10:02:02 [INFO] -- CardInserted: 1005-5001
-190408-10:02:02 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorPasswordValidationP1_RequestPW
-190408-10:02:02 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorPasswordValidationP1_RequestPW.fxml
-190408-10:02:06 [INFO] -- KeyPressed: 2
-190408-10:02:07 [INFO] -- KeyPressed: 3
-190408-10:02:08 [INFO] -- KeyPressed: 2
-190408-10:02:08 [INFO] -- KeyPressed: 3
-190408-10:02:09 [INFO] -- KeyPressed: 3
-190408-10:02:09 [INFO] -- KeyPressed: 4
-190408-10:02:10 [INFO] -- KeyPressed: Enter
-190408-10:02:10 [INFO] -- logging in with card number 1005-5001
-190408-10:02:10 [INFO] -- ATMSS: Login successful
-190408-10:02:10 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorServiceChoice
-190408-10:02:10 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorServiceChoice.fxml
-190408-10:02:26 [INFO] -- Poll: [97938]: Time's up!
-190408-10:02:26 [INFO] -- PollAck: CardReaderHandler is up!
-190408-10:02:26 [INFO] -- PollAck: KeypadHandler is up!
-190408-10:02:26 [INFO] -- PollAck: TouchDisplayHandler is up!
-190408-10:02:26 [INFO] -- PollAck: CashDepositCollectorHandler is up!
-190408-10:02:26 [INFO] -- PollAck: BuzzerHandler is up!
-190408-10:02:26 [INFO] -- PollAck: CashDispenserHandler is up!
-190408-10:02:26 [INFO] -- PollAck: AdvicePrinterHandler is up!
-190408-10:03:02 [INFO] -- KeyPressed: Cancel
-190408-10:03:02 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorCancelled
-190408-10:03:02 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorCancelled.fxml
-190408-10:03:02 [INFO] -- CardReaderHandler: card ejected
-190408-10:03:06 [INFO] -- CardReaderHandler: card removed
-190408-10:03:06 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulator(Welcome)
-190408-10:03:06 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulator(Welcome).fxml
-190408-10:03:08 [INFO] -- 
-190408-10:03:08 [INFO] -- 
-190408-10:03:08 [INFO] -- ============================================================
-190408-10:03:08 [INFO] -- ATMSSStarter: Application Stopping...
-190408-10:03:08 [INFO] -- ATMSS: terminating...
-190408-10:03:08 [INFO] -- timer: received terminate!
-190408-10:03:08 [INFO] -- timer: terminating...
-190408-10:03:08 [INFO] -- TouchDisplayHandler: terminating...
-190408-10:03:08 [INFO] -- BuzzerHandler: terminating...
-190408-10:03:08 [INFO] -- CashDepositCollectorHandler: terminating...
-190408-10:03:08 [INFO] -- CashDispenserHandler: terminating...
-190408-10:03:08 [INFO] -- KeypadHandler: terminating...
-190408-10:03:08 [INFO] -- CardReaderHandler: terminating...
-190408-10:03:08 [INFO] -- AdvicePrinterHandler: terminating...
+190409-09:44:52 [INFO] -- 
+190409-09:44:52 [INFO] -- 
+190409-09:44:52 [INFO] -- ============================================================
+190409-09:44:52 [INFO] -- ATMSSStarter: Application Starting...
+190409-09:44:57 [INFO] -- timer: starting...
+190409-09:44:57 [INFO] -- CardReaderHandler: starting...
+190409-09:44:57 [INFO] -- KeypadHandler: starting...
+190409-09:44:57 [INFO] -- TouchDisplayHandler: starting...
+190409-09:44:57 [INFO] -- AdvicePrinterHandler: starting...
+190409-09:44:57 [INFO] -- BuzzerHandler: starting...
+190409-09:44:57 [INFO] -- CashDispenserHandler: starting...
+190409-09:44:57 [INFO] -- CashDepositCollectorHandler: starting...
+190409-09:44:57 [INFO] -- ATMSS: starting...
+190409-09:45:14 [INFO] -- CardInserted: 1005-5001
+190409-09:45:14 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorPasswordValidationP1_RequestPW
+190409-09:45:14 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorPasswordValidationP1_RequestPW.fxml
+190409-09:45:17 [INFO] -- KeyPressed: 2
+190409-09:45:18 [INFO] -- KeyPressed: 3
+190409-09:45:18 [INFO] -- KeyPressed: 2
+190409-09:45:19 [INFO] -- KeyPressed: 3
+190409-09:45:19 [INFO] -- KeyPressed: 3
+190409-09:45:20 [INFO] -- KeyPressed: 4
+190409-09:45:21 [INFO] -- KeyPressed: Enter
+190409-09:45:22 [INFO] -- logging in with card number 1005-5001
+190409-09:45:22 [INFO] -- ATMSS: Login successful
+190409-09:45:22 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorServiceChoice.fxml
+190409-09:45:22 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorServiceChoice
+190409-09:45:24 [INFO] -- MouseCLicked: 254 309
+190409-09:45:24 [INFO] -- You have choosen withdraw.
+190409-09:45:24 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorwithdrawlP1_ChooseAccount
+190409-09:45:24 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorwithdrawlP1_ChooseAccount.fxml
+190409-09:45:25 [INFO] -- MouseCLicked: 254 309
+190409-09:45:25 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorwithdrawlP2_InputAmount.fxml
+190409-09:45:25 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorwithdrawlP2_InputAmount
+190409-09:45:29 [INFO] -- KeyPressed: 3
+190409-09:45:29 [INFO] -- KeyPressed: 6
+190409-09:45:30 [INFO] -- KeyPressed: Enter
+190409-09:45:30 [INFO] -- Successfully withdrawed 36
+190409-09:45:30 [INFO] -- CashDispenserHandler: OpenCashDispenserSlot and update display of cash dispenser.
+190409-09:45:30 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorSuccessful.fxml
+190409-09:45:30 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorSuccessful
+190409-09:45:30 [INFO] -- CashDispenserHandler: loading fxml: CashDispenserEmulatorOpen.fxml
+190409-09:45:31 [INFO] -- CashDispenserHandler: CloseCashDispenserSlot and update display of cash dispenser.
+190409-09:45:31 [INFO] -- CashDispenserHandler: loading fxml: CashDispenserEmulator.fxml
+190409-09:45:38 [INFO] -- MouseCLicked: 104 315
+190409-09:45:38 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorServiceChoice
+190409-09:45:38 [INFO] -- AdvicePrinterHandler: print and update display of advice printer.
+190409-09:45:38 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorServiceChoice.fxml
+190409-09:45:38 [INFO] -- AdvicePrinterHandler: loading fxml: AdvicePrinterEmulatorPrint.fxml
+190409-09:45:40 [INFO] -- Poll: Take
+190409-09:45:40 [INFO] -- AdvicePrinterHandler: close and update display of advice printer.
+190409-09:45:40 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-09:45:40 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-09:45:40 [INFO] -- AdvicePrinterHandler: loading fxml: AdvicePrinterEmulator.fxml
+190409-09:45:40 [INFO] -- PollAck: KeypadHandler is up!
+190409-09:45:40 [INFO] -- PollAck: BuzzerHandler is up!
+190409-09:45:40 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-09:45:40 [INFO] -- PollAck: CardReaderHandler is up!
+190409-09:45:40 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-09:45:41 [INFO] -- MouseCLicked: 245 371
+190409-09:45:41 [INFO] -- You have choosen deposit.
+190409-09:45:41 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayDepositEmulatorP1_ChooseAccount
+190409-09:45:41 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayDepositEmulatorP1_ChooseAccount.fxml
+190409-09:45:42 [INFO] -- MouseCLicked: 254 330
+190409-09:45:42 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayDepositEmulatorP2_InputAmount
+190409-09:45:42 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayDepositEmulatorP2_InputAmount.fxml
+190409-09:45:45 [INFO] -- KeyPressed: 3
+190409-09:45:46 [INFO] -- KeyPressed: Enter
+190409-09:45:46 [INFO] -- Successfully deposited 3.0
+190409-09:45:46 [INFO] -- CashDepositCollectorHandler: OpenCashDepositCollectorSlot and update display of cash deposit collector.
+190409-09:45:46 [INFO] -- CashDepositCollectorHandler: loading fxml: CashDepositCollectorEmulatorOpen.fxml
+190409-09:45:47 [INFO] -- CashDepositCollectorHandler: CloseCashDepositCollectorSlot and update display of cash deposit collector.
+190409-09:45:47 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorSuccessful
+190409-09:45:47 [INFO] -- CashDepositCollectorHandler: loading fxml: CashDepositCollectorEmulator.fxml
+190409-09:45:47 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorSuccessful.fxml
+190409-09:45:51 [INFO] -- MouseCLicked: 281 428
+190409-09:45:51 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorServiceChoice
+190409-09:45:51 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorServiceChoice.fxml
+190409-09:45:52 [INFO] -- MouseCLicked: 281 428
+190409-09:45:52 [INFO] -- You have choosen transfer.
+190409-09:45:52 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorTransferP1_ChooseSendingAccount
+190409-09:45:52 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorTransferP1_ChooseSendingAccount.fxml
+190409-09:45:53 [INFO] -- MouseCLicked: 281 428
+190409-09:45:53 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorTransferP2_ChooseAcceptingAccount
+190409-09:45:53 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorTransferP2_ChooseAcceptingAccount.fxml
+190409-09:45:53 [INFO] -- MouseCLicked: 281 428
+190409-09:45:53 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorTransferP3_InputAmount.fxml
+190409-09:45:53 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorTransferP3_InputAmount
+190409-09:45:56 [INFO] -- KeyPressed: 3
+190409-09:45:56 [INFO] -- KeyPressed: Enter
+190409-09:45:56 [INFO] -- Failed to transfer from 1005-5001-03 to 1005-5001-03
+190409-09:45:56 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorFailed
+190409-09:45:56 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorFailed.fxml
+190409-09:45:57 [INFO] -- Poll: [74386]: Time's up!
+190409-09:45:57 [INFO] -- PollAck: CardReaderHandler is up!
+190409-09:45:57 [INFO] -- PollAck: KeypadHandler is up!
+190409-09:45:57 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-09:45:57 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-09:45:57 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-09:45:57 [INFO] -- PollAck: BuzzerHandler is up!
+190409-09:45:57 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-09:45:58 [INFO] -- MouseCLicked: 395 310
+190409-09:45:58 [INFO] -- AdvicePrinterHandler: print and update display of advice printer.
+190409-09:45:58 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulator(Welcome)
+190409-09:45:58 [INFO] -- AdvicePrinterHandler: loading fxml: AdvicePrinterEmulatorPrint.fxml
+190409-09:45:58 [INFO] -- CardReaderHandler: card ejected
+190409-09:45:58 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulator(Welcome).fxml
+190409-09:46:03 [INFO] -- AdvicePrinterHandler: close and update display of advice printer.
+190409-09:46:03 [INFO] -- Poll: Take
+190409-09:46:03 [INFO] -- AdvicePrinterHandler: loading fxml: AdvicePrinterEmulator.fxml
+190409-09:46:03 [INFO] -- PollAck: KeypadHandler is up!
+190409-09:46:03 [INFO] -- PollAck: BuzzerHandler is up!
+190409-09:46:03 [INFO] -- PollAck: CardReaderHandler is up!
+190409-09:46:03 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-09:46:03 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-09:46:03 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-09:46:03 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-09:46:09 [INFO] -- CardReaderHandler: card removed
+190409-09:46:13 [INFO] -- CardInserted: 1005-5001
+190409-09:46:13 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorPasswordValidationP1_RequestPW
+190409-09:46:13 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorPasswordValidationP1_RequestPW.fxml
+190409-09:46:16 [INFO] -- KeyPressed: 2
+190409-09:46:16 [INFO] -- KeyPressed: 3
+190409-09:46:17 [INFO] -- KeyPressed: 2
+190409-09:46:17 [INFO] -- KeyPressed: 3
+190409-09:46:18 [INFO] -- KeyPressed: 3
+190409-09:46:18 [INFO] -- KeyPressed: 4
+190409-09:46:19 [INFO] -- KeyPressed: Enter
+190409-09:46:19 [INFO] -- logging in with card number 1005-5001
+190409-09:46:19 [INFO] -- ATMSS: Login successful
+190409-09:46:19 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorServiceChoice
+190409-09:46:19 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorServiceChoice.fxml
+190409-09:46:22 [INFO] -- KeyPressed: Cancel
+190409-09:46:22 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorCancelled
+190409-09:46:22 [INFO] -- CardReaderHandler: card ejected
+190409-09:46:22 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorCancelled.fxml
+190409-09:46:27 [INFO] -- CardReaderHandler: card removed
+190409-09:46:27 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulator(Welcome)
+190409-09:46:27 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulator(Welcome).fxml
+190409-09:46:29 [INFO] -- 
+190409-09:46:29 [INFO] -- 
+190409-09:46:29 [INFO] -- ============================================================
+190409-09:46:29 [INFO] -- ATMSSStarter: Application Stopping...
+190409-09:46:29 [INFO] -- ATMSS: terminating...
+190409-09:46:29 [INFO] -- CashDepositCollectorHandler: terminating...
+190409-09:46:29 [INFO] -- timer: received terminate!
+190409-09:46:29 [INFO] -- timer: terminating...
+190409-09:46:29 [INFO] -- KeypadHandler: terminating...
+190409-09:46:29 [INFO] -- CardReaderHandler: terminating...
+190409-09:46:29 [INFO] -- TouchDisplayHandler: terminating...
+190409-09:46:29 [INFO] -- AdvicePrinterHandler: terminating...
+190409-09:46:29 [INFO] -- CashDispenserHandler: terminating...
+190409-09:46:29 [INFO] -- BuzzerHandler: terminating...
