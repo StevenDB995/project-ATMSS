@@ -33,7 +33,8 @@ public class KeypadEmulatorController {
 	public void buttonPressed(ActionEvent actionEvent) {
 		Button btn = (Button) actionEvent.getSource();
 		String btnTxt = btn.getText();
-		keypadMBox.send(new Msg(id, keypadMBox, Msg.Type.KP_KeyPressed, btnTxt));
+		if (!btnTxt.isEmpty())
+			keypadMBox.send(new Msg(id, keypadMBox, Msg.Type.KP_KeyPressed, btnTxt));
 	} // buttonPressed
 
     //------------------------------------------------------------

@@ -31,13 +31,13 @@ public class ATMSS extends AppThread {
 
 	private String currentCardNo;
 	private String credential;
-	private String[] availableFromAccounts;
-	private String[] availableToAccounts;
+	private String[] availableAccounts;
 	private String currentAccount;
 	private String toAccount;
 	private String keypadInput; // Store keypad input by users
 	private String TD_StageId; // record the current stage of the touchDisplay
 	private int wrongPasswordTimes; // store the number of wrong password
+	private int idleTimerId;
 
 	// TD_StageId is designed to be the same as the FXML filename
 
@@ -96,7 +96,7 @@ public class ATMSS extends AppThread {
 	// ------------------------------------------------------------
 	// run
 	public void run() {
-		Timer.setTimer(id, mbox, 60000);
+		Timer.setTimer(id, mbox, 60000, Timer.POLL_RANGE);
 		log.info(id + ": starting...");
 
 		cardReaderMBox = appKickstarter.getThread("CardReaderHandler").getMBox();
@@ -119,6 +119,18 @@ public class ATMSS extends AppThread {
 
 			case KP_KeyPressed:
 				log.info("KeyPressed: " + msg.getDetails());
+				switch (TD_StageId) {
+				case "TouchDisplayEmulatorPasswordValidationP1_RequestPW":
+				case "TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong":
+				case "TouchDisplayEmulatorTransferP3_InputAmount":
+				case "TouchDisplayEmulatorwithdrawlP2_InputAmount":
+				case "TouchDisplayDepositEmulatorP2_InputAmount":
+					Timer.cancelTimer(id, mbox, idleTimerId);
+					if (Character.isDigit(msg.getDetails().charAt(0)) || msg.getDetails().compareTo(".") == 0
+							|| msg.getDetails().compareToIgnoreCase("Clear") == 0)
+						idleTimerId = Timer.setTimer(id, mbox, 10000, Timer.IDLE_RANGE);
+					break;
+				}
 				processKeyPressed(msg);
 				break;
 
@@ -129,7 +141,6 @@ public class ATMSS extends AppThread {
 					touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay,
 							"TouchDisplayEmulatorPasswordValidationP1_RequestPW"));
 					TD_StageId = "TouchDisplayEmulatorPasswordValidationP1_RequestPW";
-
 				}
 				break;
 
@@ -147,17 +158,34 @@ public class ATMSS extends AppThread {
 
 			case AP_ButtonPressed:
 				advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.AP_UpdateAdvicePrinter, "close"));
+				break;
+
+			case IdleTimer:
+				idleTimerId = Integer.parseInt(msg.getDetails());
+				break;
 
 			case TimesUp:
-				Timer.setTimer(id, mbox, 60000);
-				log.info("Poll: " + msg.getDetails());
-				cardReaderMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
-				keypadMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
-				cashDispenserMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
-				cashDepositCollectorMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
-				advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
-				buzzerMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
+				String timerIdStr = msg.getDetails().substring(1, 6);
+				int timerId = Integer.parseInt(timerIdStr);
+
+				if (timerId < Timer.POLL_RANGE) {
+					Timer.setTimer(id, mbox, 60000, Timer.POLL_RANGE);
+					log.info("Poll: " + msg.getDetails());
+					cardReaderMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
+					keypadMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
+					touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
+					cashDispenserMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
+					cashDepositCollectorMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
+					advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
+					buzzerMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
+				} else if (timerId >= Timer.CANCEL_RANGE && timerId < Timer.IDLE_RANGE) {
+					log.info("Idle: " + msg.getDetails());
+					touchDisplayMBox
+							.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorCancelled"));
+					cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
+					TD_StageId = "TouchDisplayEmulator(Welcome)";
+				}
+
 				break;
 
 			case PollAck:
@@ -184,76 +212,49 @@ public class ATMSS extends AppThread {
 		String details = msg.getDetails();
 
 		if (details.compareToIgnoreCase("Cancel") == 0) { // "Cancel" is pressed
+			boolean validKP = false;
 			switch (TD_StageId) {
 			case "TouchDisplayEmulatorPasswordValidationP1_RequestPW":
 			case "TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong":
+				wrongPasswordTimes = 0;
+			case "TouchDisplayEmulatorServiceChoice":
 				log.info("Cancelled.");
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorCancelled"));
-				keypadInput = "";
-				currentCardNo = "";
-				currentAccount = "";
-				credential = "";
-				cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
-				TD_StageId = "TouchDisplayEmulatorCancelled";
+				validKP = true;
 				break;
 
 			case "TouchDisplayEmulatorTransferP2_ChooseAcceptingAccount":
-				toAccount = "";
-				// no break here!!!
 			case "TouchDisplayEmulatorTransferP1_ChooseSendingAccount":
 			case "TouchDisplayEmulatorTransferP3_InputAmount":
 				log.info("Transfer Cancelled.");
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorCancelled"));
-				keypadInput = "";
-				currentCardNo = "";
-				currentAccount = "";
-				credential = "";
-				cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
-				TD_StageId = "TouchDisplayEmulatorCancelled";
+				validKP = true;
 				break;
 
 			case "TouchDisplayEmulatorwithdrawlP1_ChooseAccount":
 			case "TouchDisplayEmulatorwithdrawlP2_InputAmount":
 				log.info("Withdraw cancelled.");
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorCancelled"));
-				keypadInput = "";
-				currentCardNo = "";
-				currentAccount = "";
-				credential = "";
-				cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
-				TD_StageId = "TouchDisplayEmulatorCancelled";
+				validKP = true;
 				break;
 
 			case "TouchDisplayDepositEmulatorP1_ChooseAccount":
 			case "TouchDisplayDepositEmulatorP2_InputAmount":
 				log.info("Deposit cancelled.");
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorCancelled"));
-				keypadInput = "";
-				currentCardNo = "";
-				currentAccount = "";
-				credential = "";
-				cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
-				TD_StageId = "TouchDisplayEmulatorCancelled";
+				validKP = true;
 				break;
 
 			case "TouchDisplayEmulator_accountEnquiry_ChooseAccount":
 				log.info("Enquiry cancelled.");
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorCancelled"));
-				currentCardNo = "";
-				currentAccount = "";
-				credential = "";
-				cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
-				TD_StageId = "TouchDisplayEmulatorCancelled";
+				validKP = true;
 				break;
+			}
 
-			default:
+			if (validKP) {
 				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorCancelled"));
-				cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
 				keypadInput = "";
 				currentCardNo = "";
 				currentAccount = "";
 				credential = "";
-				TD_StageId = "TouchDisplayEmulatorCancelled";
+				cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
+				TD_StageId = "TouchDisplayEmulator(Welcome)";
 			}
 		}
 
@@ -263,27 +264,43 @@ public class ATMSS extends AppThread {
 			case "TouchDisplayEmulatorwithdrawlP2_InputAmount":
 			case "TouchDisplayDepositEmulatorP2_InputAmount":
 				keypadInput += details;
+				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateInputAmount, details));
 				break;
 
-			case "TouchDisplayEmulatorPasswordValidationP1_RequestPW":
+			case "TouchDisplayEmulatorPasswordValidationP1_RequestPW": // keypad input for password
 			case "TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong":
 				if (details.compareTo("00") != 0) {
 					keypadInput += details;
+					touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdatePasswordField, "Append"));
 				}
 				break;
 			}
+		}
 
-		} else if (details.compareToIgnoreCase(".") == 0) {
+		else if (details.compareToIgnoreCase(".") == 0) {
 			switch (TD_StageId) {
 			case "TouchDisplayEmulatorTransferP3_InputAmount": // cases where "." should be recorded
-			case "TouchDisplayEmulatorwithdrawlP2_InputAmount":
 			case "TouchDisplayDepositEmulatorP2_InputAmount":
 				keypadInput += details;
+				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateInputAmount, details));
 				break;
 			}
 		}
 
 		else if (details.compareToIgnoreCase("Clear") == 0) { // "Clear" is pressed
+			switch (TD_StageId) {
+			case "TouchDisplayEmulatorTransferP3_InputAmount":
+			case "TouchDisplayEmulatorwithdrawlP2_InputAmount":
+			case "TouchDisplayDepositEmulatorP2_InputAmount":
+				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateInputAmount, "Clear"));
+				break;
+
+			case "TouchDisplayEmulatorPasswordValidationP1_RequestPW":
+			case "TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong":
+				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdatePasswordField, "Clear"));
+				break;
+			}
+
 			keypadInput = "";
 		}
 
@@ -291,24 +308,36 @@ public class ATMSS extends AppThread {
 			try {
 				switch (TD_StageId) {
 				case "TouchDisplayEmulatorPasswordValidationP1_RequestPW": // Login state, type in password
+				case "TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong":
 					String feedback = bams.login(currentCardNo, keypadInput);
 					log.info("logging in with card number " + currentCardNo);
 
 					if (feedback.compareToIgnoreCase("ERROR") == 0) {
-						log.info(id + ": Wrong login password");
-						touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay,
-								"TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong"));
-						TD_StageId = "TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong";
 						wrongPasswordTimes++;
-					} else {
-						log.info(id + ": Login successful");
-						credential = feedback;
-						// String accounts = bams.getAccounts(currentCardNo, credential); // to be
-						// revised
-						String accounts = "1/1/1/1"; // to be revised
-						availableFromAccounts = accounts.split("/");
-						availableToAccounts = accounts.split("/");
+						log.info(id + ": Wrong login password (Wrong password times: " + wrongPasswordTimes + ")");
 
+						if (wrongPasswordTimes < 3) {
+							touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay,
+									"TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong"));
+							TD_StageId = "TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong";
+						} else {
+							log.info(id + ": Wrong login password exceed the limit.");
+							touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay,
+									"TouchDisplayEmulatorPasswordValidationP3_CardEaten"));
+							cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_CardRetained, ""));
+							TD_StageId = "TouchDisplayEmulator(Welcome)";
+							wrongPasswordTimes = 0;
+						}
+					}
+
+					else {
+						log.info(id + ": Login successful");
+						wrongPasswordTimes = 0;
+						credential = feedback;
+						String accounts = bams.getAccounts(currentCardNo, credential);
+						availableAccounts = accounts.split("/");
+
+						touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.BAMS_ChooseAccount, accounts));
 						touchDisplayMBox.send(
 								new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorServiceChoice"));
 						TD_StageId = "TouchDisplayEmulatorServiceChoice";
@@ -317,105 +346,69 @@ public class ATMSS extends AppThread {
 					keypadInput = "";
 					break;
 
-				case "TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong":
-					if (wrongPasswordTimes >= 2) {
-						log.info(id + ": Wrong login password exceed the limit.");
-						touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay,
-								"TouchDisplayEmulatorPasswordValidationP3_CardEaten"));
-						TD_StageId = "TouchDisplayEmulatorPasswordValidationP3_CardEaten";
-						cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_CardRetained, ""));
-						keypadInput = "";
-						currentCardNo = "";
-						currentAccount = "";
-						credential = "";
-					} else {
-						feedback = bams.login(currentCardNo, keypadInput);
-						log.info("logging in with card number " + currentCardNo);
-
-						if (feedback.compareToIgnoreCase("ERROR") == 0) {
-							log.info(id + ": Wrong login password");
-							touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay,
-									"TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong"));
-							TD_StageId = "TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong";
-							wrongPasswordTimes++;
+				case "TouchDisplayEmulatorTransferP3_InputAmount": // type in transfer amount
+					if (!keypadInput.isEmpty()) {
+						double transferFeedback = bams.transfer(currentCardNo, credential, currentAccount, toAccount,
+								keypadInput);
+						if (transferFeedback < 0) {
+							log.info("Failed to transfer from " + currentAccount + " to " + toAccount);
+							touchDisplayMBox
+									.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorFailed"));
+							TD_StageId = "TouchDisplayEmulatorFailed";
 						} else {
-							log.info(id + ": Login successful");
-							credential = feedback;
-							// String accounts = bams.getAccounts(currentCardNo, credential); // to be
-							// revised
-							String accounts = "1/1/1/1"; // to be revised
-							availableFromAccounts = accounts.split("/");
-							availableToAccounts = accounts.split("/");
-
+							log.info("Successfully transfered " + transferFeedback + " from " + currentAccount + " to "
+									+ toAccount);
 							touchDisplayMBox.send(
-									new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorServiceChoice"));
-							TD_StageId = "TouchDisplayEmulatorServiceChoice";
+									new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorSuccessful"));
+							TD_StageId = "TouchDisplayEmulatorSuccessful";
+						}
+
+						currentAccount = "";
+						toAccount = "";
+						keypadInput = "";
+					}
+					break;
+
+				case "TouchDisplayEmulatorwithdrawlP2_InputAmount": // type in withdraw amount
+					if (!keypadInput.isEmpty()) {
+						int withdrawFeedback = bams.withdraw(currentCardNo, currentAccount, credential, keypadInput);
+						if (withdrawFeedback < 0) {
+							log.info("Withdraw failed");
+							touchDisplayMBox
+									.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorFailed"));
+							TD_StageId = "TouchDisplayEmulatorFailed";
+						} else {
+							log.info("Successfully withdrawed " + withdrawFeedback);
+							touchDisplayMBox.send(
+									new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorSuccessful"));
+							cashDispenserMBox.send(
+									new Msg(id, mbox, Msg.Type.CD_UpdateCashDispenserSlot, "OpenCashDispenserSlot"));
+							TD_StageId = "TouchDisplayEmulatorSuccessful";
+						}
+
+						currentAccount = "";
+						keypadInput = "";
+					}
+					break;
+
+				case "TouchDisplayDepositEmulatorP2_InputAmount": // type in deposit amount
+					if (!keypadInput.isEmpty()) {
+						double depositFeedback = bams.deposit(currentCardNo, currentAccount, credential, keypadInput);
+						if (depositFeedback < 0) {
+							log.info("Deposit failed.");
+							touchDisplayMBox
+									.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorFailed"));
+							TD_StageId = "TouchDisplayEmulatorFailed";
+							currentAccount = "";
+						} else {
+							log.info("Successfully deposited " + depositFeedback);
+							cashDepositCollectorMBox.send(new Msg(id, mbox, Msg.Type.CDC_UpdateCashDepositCollectorSlot,
+									"OpenCashDepositCollectorSlot"));
+							currentAccount = "";
 						}
 
 						keypadInput = "";
 					}
-					break;
-
-				case "TouchDisplayEmulatorTransferP3_InputAmount": // type in transfer amount
-					double transferFeedback = bams.transfer(currentCardNo, credential, currentAccount, toAccount,
-							keypadInput);
-					if (transferFeedback < 0) {
-						log.info("Failed to transfer from " + currentAccount + " to " + toAccount);
-						touchDisplayMBox
-								.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorFailed"));
-						TD_StageId = "TouchDisplayEmulatorFailed";
-						currentAccount = "";
-						toAccount = "";
-					} else {
-						log.info("Successfully transfered " + transferFeedback + " from " + currentAccount + " to "
-								+ toAccount);
-						touchDisplayMBox
-								.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorSuccessful"));
-						TD_StageId = "TouchDisplayEmulatorSuccessful";
-						currentAccount = "";
-						toAccount = "";
-					}
-
-					keypadInput = "";
-					break;
-
-				case "TouchDisplayEmulatorwithdrawlP2_InputAmount": // type in withdraw amount
-					int withdrawFeedback = bams.withdraw(currentCardNo, currentAccount, credential, keypadInput);
-					if (withdrawFeedback < 0) {
-						log.info("Withdraw failed");
-						touchDisplayMBox
-								.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorFailed"));
-						TD_StageId = "TouchDisplayEmulatorFailed";
-						currentAccount = "";
-					} else {
-						log.info("Successfully withdrawed " + withdrawFeedback);
-						touchDisplayMBox
-								.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorSuccessful"));
-						cashDispenserMBox
-								.send(new Msg(id, mbox, Msg.Type.CD_UpdateCashDispenserSlot, "OpenCashDispenserSlot"));
-						TD_StageId = "TouchDisplayEmulatorSuccessful";
-						currentAccount = "";
-					}
-
-					keypadInput = "";
-					break;
-
-				case "TouchDisplayDepositEmulatorP2_InputAmount": // type in deposit amount
-					double depositFeedback = bams.deposit(currentCardNo, currentAccount, credential, keypadInput);
-					if (depositFeedback < 0) {
-						log.info("Deposit failed.");
-						touchDisplayMBox
-								.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorFailed"));
-						TD_StageId = "TouchDisplayEmulatorFailed";
-						currentAccount = "";
-					} else {
-						log.info("Successfully deposited " + depositFeedback);
-						cashDepositCollectorMBox.send(new Msg(id, mbox, Msg.Type.CDC_UpdateCashDepositCollectorSlot,
-								"OpenCashDepositCollectorSlot"));
-						currentAccount = "";
-					}
-
-					keypadInput = "";
 					break;
 				}
 			} catch (BAMSInvalidReplyException | IOException e) {
@@ -429,72 +422,97 @@ public class ATMSS extends AppThread {
 		String[] details = msg.getDetails().split(" ");
 		int x = Integer.parseInt(details[0]);
 		int y = Integer.parseInt(details[1]);
+		boolean validClick = false;
 
 		switch (TD_StageId) {
-
 		case "TouchDisplayEmulator_accountEnquiry_ChooseAccount": // choose from account in enquiry
 			if (x > 0 && x < 300 && y > 270 && y < 340) { // case for account one
-				currentAccount = availableFromAccounts[0];
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.BAMS_ChooseFromAccount, currentAccount));
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay,
-						"TouchDisplayEmulator_accountEnquiry_DisplayAccount"));
-				TD_StageId = "TouchDisplayEmulator_accountEnquiry_DisplayAccount";
+				currentAccount = availableAccounts[0];
+				validClick = true;
+			} else if (x > 340 && x < 640 && y > 270 && y < 340) { // case for account two
+				currentAccount = availableAccounts[1];
+				validClick = true;
+			} else if (x > 0 && x < 300 && y > 410 && y < 480) { // case for account three
+				currentAccount = availableAccounts[2];
+				validClick = true;
+			} else if (x > 340 && x < 640 && y > 410 && y < 480) { // case for account four
+				currentAccount = availableAccounts[3];
+				validClick = true;
 			}
 
-			else if (x > 340 && x < 640 && y > 270 && y < 340) { // case for account two
-				currentAccount = availableFromAccounts[1];
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.BAMS_ChooseFromAccount, currentAccount));
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay,
-						"TouchDisplayEmulator_accountEnquiry_DisplayAccount"));
-				TD_StageId = "TouchDisplayEmulator_accountEnquiry_DisplayAccount";
-			}
-
-			else if (x > 0 && x < 300 && y > 410 && y < 480) { // case for account three
-				currentAccount = availableFromAccounts[2];
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.BAMS_ChooseFromAccount, currentAccount));
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay,
-						"TouchDisplayEmulator_accountEnquiry_DisplayAccount"));
-				TD_StageId = "TouchDisplayEmulator_accountEnquiry_DisplayAccount";
-			}
-
-			else if (x > 340 && x < 640 && y > 410 && y < 480) { // case for account four
-				currentAccount = availableFromAccounts[3];
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.BAMS_ChooseFromAccount, currentAccount));
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay,
-						"TouchDisplayEmulator_accountEnquiry_DisplayAccount"));
-				TD_StageId = "TouchDisplayEmulator_accountEnquiry_DisplayAccount";
+			if (validClick) {
+				try {
+					double enquiryFeedback = bams.enquiry(currentCardNo, currentAccount, credential);
+					if (enquiryFeedback < 0) {
+						log.info("Enquiry failed.");
+						touchDisplayMBox
+								.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorFailed"));
+						TD_StageId = "TouchDisplayEmulatorFailed";
+					} else {
+						log.info("Enquiry successful, you have " + enquiryFeedback + " in your account.");
+						touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.BAMS_Balance, "" + enquiryFeedback));
+						touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay,
+								"TouchDisplayEmulator_accountEnquiry_DisplayAccount"));
+						TD_StageId = "TouchDisplayEmulator_accountEnquiry_DisplayAccount";
+					}
+				} catch (BAMSInvalidReplyException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 
 			break;
 
+		case "TouchDisplayEmulator_accountEnquiry_DisplayAccount": // step two for enquiry, display balance
+			if (x > 340 && x < 640 && y > 410 && y < 480) { // case for eject card
+				cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
+				currentCardNo = "";
+				credential = "";
+				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulator(Welcome)"));
+				TD_StageId = "TouchDisplayEmulator(Welcome)";
+			}
+
+			else if (x > 340 && x < 640 && y > 270 && y < 340) { // case for print advice and eject card
+				advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.AP_UpdateAdvicePrinter, "print"));
+				cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
+				currentCardNo = "";
+				credential = "";
+				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulator(Welcome)"));
+				TD_StageId = "TouchDisplayEmulator(Welcome)";
+			}
+
+			else if (x > 0 && x < 300 && y > 410 && y < 480) { // case for more transactions
+				touchDisplayMBox
+						.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorServiceChoice"));
+				TD_StageId = "TouchDisplayEmulatorServiceChoice";
+			}
+
+			else if (x > 0 && x < 300 && y > 270 && y < 340) { // case for print advice and more transactions
+				advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.AP_UpdateAdvicePrinter, "print"));
+				touchDisplayMBox
+						.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorServiceChoice"));
+				TD_StageId = "TouchDisplayEmulatorServiceChoice";
+			}
+
+			currentAccount = "";
+			break;
+
 		case "TouchDisplayEmulatorwithdrawlP1_ChooseAccount": // choose from account in withdraw
 			if (x > 0 && x < 300 && y > 270 && y < 340) { // case for account one
-				toAccount = availableFromAccounts[0];
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.BAMS_ChooseFromAccount, currentAccount));
-				touchDisplayMBox.send(
-						new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorwithdrawlP2_InputAmount"));
-				TD_StageId = "TouchDisplayEmulatorwithdrawlP2_InputAmount";
+				currentAccount = availableAccounts[0];
+				validClick = true;
+			} else if (x > 340 && x < 640 && y > 270 && y < 340) { // case for account two
+				currentAccount = availableAccounts[1];
+				validClick = true;
+			} else if (x > 0 && x < 300 && y > 410 && y < 480) { // case for account three
+				currentAccount = availableAccounts[2];
+				validClick = true;
+			} else if (x > 340 && x < 640 && y > 410 && y < 480) { // case for account four
+				currentAccount = availableAccounts[3];
+				validClick = true;
 			}
 
-			else if (x > 340 && x < 640 && y > 270 && y < 340) { // case for account two
-				toAccount = availableFromAccounts[1];
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.BAMS_ChooseFromAccount, currentAccount));
-				touchDisplayMBox.send(
-						new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorwithdrawlP2_InputAmount"));
-				TD_StageId = "TouchDisplayEmulatorwithdrawlP2_InputAmount";
-			}
-
-			else if (x > 0 && x < 300 && y > 410 && y < 480) { // case for account three
-				toAccount = availableFromAccounts[2];
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.BAMS_ChooseFromAccount, currentAccount));
-				touchDisplayMBox.send(
-						new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorwithdrawlP2_InputAmount"));
-				TD_StageId = "TouchDisplayEmulatorwithdrawlP2_InputAmount";
-			}
-
-			else if (x > 340 && x < 640 && y > 410 && y < 480) { // case for account four
-				toAccount = availableFromAccounts[3];
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.BAMS_ChooseFromAccount, currentAccount));
+			if (validClick) {
 				touchDisplayMBox.send(
 						new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorwithdrawlP2_InputAmount"));
 				TD_StageId = "TouchDisplayEmulatorwithdrawlP2_InputAmount";
@@ -504,32 +522,20 @@ public class ATMSS extends AppThread {
 
 		case "TouchDisplayDepositEmulatorP1_ChooseAccount": // choose from account in deposit
 			if (x > 0 && x < 300 && y > 270 && y < 340) { // case for account one
-				currentAccount = availableFromAccounts[0];
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.BAMS_ChooseFromAccount, currentAccount));
-				touchDisplayMBox.send(
-						new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayDepositEmulatorP2_InputAmount"));
-				TD_StageId = "TouchDisplayDepositEmulatorP2_InputAmount";
+				currentAccount = availableAccounts[0];
+				validClick = true;
+			} else if (x > 340 && x < 640 && y > 270 && y < 340) { // case for account two
+				currentAccount = availableAccounts[1];
+				validClick = true;
+			} else if (x > 0 && x < 300 && y > 410 && y < 480) { // case for account three
+				currentAccount = availableAccounts[2];
+				validClick = true;
+			} else if (x > 340 && x < 640 && y > 410 && y < 480) { // case for account four
+				currentAccount = availableAccounts[3];
+				validClick = true;
 			}
 
-			else if (x > 340 && x < 640 && y > 270 && y < 340) { // case for account two
-				currentAccount = availableFromAccounts[1];
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.BAMS_ChooseFromAccount, currentAccount));
-				touchDisplayMBox.send(
-						new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayDepositEmulatorP2_InputAmount"));
-				TD_StageId = "TouchDisplayDepositEmulatorP2_InputAmount";
-			}
-
-			else if (x > 0 && x < 300 && y > 410 && y < 480) { // case for account three
-				currentAccount = availableFromAccounts[2];
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.BAMS_ChooseFromAccount, currentAccount));
-				touchDisplayMBox.send(
-						new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayDepositEmulatorP2_InputAmount"));
-				TD_StageId = "TouchDisplayDepositEmulatorP2_InputAmount";
-			}
-
-			else if (x > 340 && x < 640 && y > 410 && y < 480) { // case for account four
-				currentAccount = availableFromAccounts[3];
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.BAMS_ChooseFromAccount, currentAccount));
+			if (validClick) {
 				touchDisplayMBox.send(
 						new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayDepositEmulatorP2_InputAmount"));
 				TD_StageId = "TouchDisplayDepositEmulatorP2_InputAmount";
@@ -539,150 +545,88 @@ public class ATMSS extends AppThread {
 
 		case "TouchDisplayEmulatorTransferP1_ChooseSendingAccount": // choose from account in transfer
 			if (x > 0 && x < 300 && y > 270 && y < 340) { // case for account one
-				currentAccount = availableFromAccounts[0];
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.BAMS_ChooseFromAccount, currentAccount));
+				currentAccount = availableAccounts[0];
+				validClick = true;
+			} else if (x > 340 && x < 640 && y > 270 && y < 340) { // case for account two
+				currentAccount = availableAccounts[1];
+				validClick = true;
+			} else if (x > 0 && x < 300 && y > 410 && y < 480) { // case for account three
+				currentAccount = availableAccounts[2];
+				validClick = true;
+			} else if (x > 340 && x < 640 && y > 410 && y < 480) { // case for account four
+				currentAccount = availableAccounts[3];
+				validClick = true;
+			}
+
+			if (validClick) {
+				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.BAMS_FromAccount, currentAccount));
 				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay,
 						"TouchDisplayEmulatorTransferP2_ChooseAcceptingAccount"));
 				TD_StageId = "TouchDisplayEmulatorTransferP2_ChooseAcceptingAccount";
 			}
 
-			else if (x > 340 && x < 640 && y > 270 && y < 340) { // case for account two
-				currentAccount = availableFromAccounts[1];
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.BAMS_ChooseFromAccount, currentAccount));
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay,
-						"TouchDisplayEmulatorTransferP2_ChooseAcceptingAccount"));
-				TD_StageId = "TouchDisplayEmulatorTransferP2_ChooseAcceptingAccount";
-			}
-
-			else if (x > 0 && x < 300 && y > 410 && y < 480) { // case for account three
-				currentAccount = availableFromAccounts[2];
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.BAMS_ChooseFromAccount, currentAccount));
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay,
-						"TouchDisplayEmulatorTransferP2_ChooseAcceptingAccount"));
-				TD_StageId = "TouchDisplayEmulatorTransferP2_ChooseAcceptingAccount";
-			}
-
-			else if (x > 340 && x < 640 && y > 410 && y < 480) { // case for account four
-				currentAccount = availableFromAccounts[3];
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.BAMS_ChooseFromAccount, currentAccount));
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay,
-						"TouchDisplayEmulatorTransferP2_ChooseAcceptingAccount"));
-				TD_StageId = "TouchDisplayEmulatorTransferP2_ChooseAcceptingAccount";
-			}
 			break;
 
 		case "TouchDisplayEmulatorTransferP2_ChooseAcceptingAccount": // choose to account in transfer
 			if (x > 0 && x < 300 && y > 270 && y < 340) { // case for account one
-				toAccount = availableToAccounts[0];
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.BAMS_ChooseToAccount, toAccount));
+				if (!currentAccount.equals(availableAccounts[0])) {
+					toAccount = availableAccounts[0];
+					validClick = true;
+				}
+			} else if (x > 340 && x < 640 && y > 270 && y < 340) { // case for account two
+				if (!currentAccount.equals(availableAccounts[1])) {
+					toAccount = availableAccounts[1];
+					validClick = true;
+				}
+			} else if (x > 0 && x < 300 && y > 410 && y < 480) { // case for account three
+				if (!currentAccount.equals(availableAccounts[2])) {
+					toAccount = availableAccounts[2];
+					validClick = true;
+				}
+			} else if (x > 340 && x < 640 && y > 410 && y < 480) { // case for account four
+				if (!currentAccount.equals(availableAccounts[3])) {
+					toAccount = availableAccounts[3];
+					validClick = true;
+				}
+			}
+
+			if (validClick) {
 				touchDisplayMBox.send(
 						new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorTransferP3_InputAmount"));
 				TD_StageId = "TouchDisplayEmulatorTransferP3_InputAmount";
 			}
 
-			else if (x > 340 && x < 640 && y > 270 && y < 340) { // case for account two
-				toAccount = availableToAccounts[1];
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.BAMS_ChooseToAccount, toAccount));
-				touchDisplayMBox.send(
-						new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorTransferP3_InputAmount"));
-				TD_StageId = "TouchDisplayEmulatorTransferP3_InputAmount";
-			}
-
-			else if (x > 0 && x < 300 && y > 410 && y < 480) { // case for account three
-				toAccount = availableToAccounts[2];
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.BAMS_ChooseToAccount, toAccount));
-				touchDisplayMBox.send(
-						new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorTransferP3_InputAmount"));
-				TD_StageId = "TouchDisplayEmulatorTransferP3_InputAmount";
-			}
-
-			else if (x > 340 && x < 640 && y > 410 && y < 480) { // case for account four
-				toAccount = availableToAccounts[3];
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.BAMS_ChooseToAccount, toAccount));
-				touchDisplayMBox.send(
-						new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorTransferP3_InputAmount"));
-				TD_StageId = "TouchDisplayEmulatorTransferP3_InputAmount";
-			}
 			break;
 
 		case "TouchDisplayEmulatorServiceChoice": // choose four services
 			if (x > 340 && x < 640 && y > 270 && y < 340) { // case for enquiry
-				log.info("You have choosed enquiry.");
+				log.info("You have chosen enquiry.");
 				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay,
 						"TouchDisplayEmulator_accountEnquiry_ChooseAccount"));
 				TD_StageId = "TouchDisplayEmulator_accountEnquiry_ChooseAccount";
 			}
 
 			else if (x > 0 && x < 300 && y > 270 && y < 340) { // case for withdraw
-				log.info("You have choosen withdraw.");
+				log.info("You have chosen withdraw.");
 				touchDisplayMBox.send(
 						new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorwithdrawlP1_ChooseAccount"));
 				TD_StageId = "TouchDisplayEmulatorwithdrawlP1_ChooseAccount";
 			}
 
 			else if (x > 0 && x < 300 && y > 340 && y < 410) { // case for deposit
-				log.info("You have choosen deposit.");
+				log.info("You have chosen deposit.");
 				touchDisplayMBox.send(
 						new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayDepositEmulatorP1_ChooseAccount"));
 				TD_StageId = "TouchDisplayDepositEmulatorP1_ChooseAccount";
 			}
 
 			else if (x > 0 && x < 300 && y > 410 && y < 480) { // case for transfer
-				log.info("You have choosen transfer.");
+				log.info("You have chosen transfer.");
 				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay,
 						"TouchDisplayEmulatorTransferP1_ChooseSendingAccount"));
 				TD_StageId = "TouchDisplayEmulatorTransferP1_ChooseSendingAccount";
 			}
 
-			break;
-
-		case "TouchDisplayEmulator_accountEnquiry_DisplayAccount": // step two for enquiry, display balance
-			try {
-				double enquiryFeedback = bams.enquiry(currentCardNo, currentAccount, credential);
-				if (enquiryFeedback < 0) {
-					log.info("Enquiry failed.");
-					touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorFailed"));
-					TD_StageId = "TouchDisplayEmulatorFailed";
-					currentAccount = "";
-				} else {
-					log.info("Enquiry successfully, you have " + enquiryFeedback + " in your account.");
-					if (x > 340 && x < 640 && y > 410 && y < 480) { // case for eject card
-						cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
-						currentCardNo = "";
-						credential = "";
-						touchDisplayMBox
-								.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulator(Welcome)"));
-						TD_StageId = "TouchDisplayEmulator(Welcome)";
-					}
-
-					else if (x > 340 && x < 640 && y > 270 && y < 340) { // case for print advice and eject card
-						advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.AP_UpdateAdvicePrinter, "print"));
-						cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
-						currentCardNo = "";
-						credential = "";
-						touchDisplayMBox
-								.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulator(Welcome)"));
-						TD_StageId = "TouchDisplayEmulator(Welcome)";
-					}
-
-					else if (x > 0 && x < 300 && y > 410 && y < 480) { // case for more transactions
-						touchDisplayMBox.send(
-								new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorServiceChoice"));
-						TD_StageId = "TouchDisplayEmulatorServiceChoice";
-					}
-
-					else if (x > 0 && x < 300 && y > 270 && y < 340) { // case for print advice and more transactions
-						advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.AP_UpdateAdvicePrinter, "print"));
-						touchDisplayMBox.send(
-								new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorServiceChoice"));
-						TD_StageId = "TouchDisplayEmulatorServiceChoice";
-					}
-
-					currentAccount = "";
-				}
-			} catch (BAMSInvalidReplyException | IOException e) {
-				e.printStackTrace();
-			}
 			break;
 
 		case "TouchDisplayEmulatorFailed":
@@ -748,6 +692,7 @@ public class ATMSS extends AppThread {
 						.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorServiceChoice"));
 				TD_StageId = "TouchDisplayEmulatorServiceChoice";
 			}
+
 			break;
 
 		}

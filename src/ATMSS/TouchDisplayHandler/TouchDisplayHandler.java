@@ -2,6 +2,7 @@ package ATMSS.TouchDisplayHandler;
 
 import AppKickstarter.AppKickstarter;
 import AppKickstarter.misc.*;
+import AppKickstarter.timer.Timer;
 
 //======================================================================
 // TouchDisplayHandler
@@ -31,21 +32,51 @@ public class TouchDisplayHandler extends AppThread {
 			case TD_UpdateDisplay:
 				handleUpdateDisplay(msg);
 				break;
+				
+			case TD_UpdatePasswordField:
+				td_updatePasswordField(msg);
+				break;
+				
+			case TD_UpdateInputAmount:
+				td_updateInputAmount(msg);
+				break;
 
 			case Poll:
 				atmss.send(new Msg(id, mbox, Msg.Type.PollAck, id + " is up!"));
 				break;
 
+			case BAMS_ChooseAccount:
+				// let touch display show the from account
+				td_showAccountNo(msg);
+				break;
+				
+			case BAMS_FromAccount:
+				td_disableAccount(msg);
+				break;
+				
+			case BAMS_Balance:
+				td_displayBalance(msg);
+				break;
+				
+			case IdleTimer:
+				atmss.send(new Msg(id, mbox, Msg.Type.IdleTimer, msg.getDetails()));
+				break;
+				
+			case TimesUp:
+				String timerIdStr = msg.getDetails().substring(1, 6);
+				int timerId = Integer.parseInt(timerIdStr);
+				
+				if (timerId >= Timer.POLL_RANGE && timerId < Timer.CANCEL_RANGE) {
+					log.info("Cancel: " + msg.getDetails());
+					mbox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulator(Welcome)"));
+				} else if (timerId < Timer.IDLE_RANGE) {
+					atmss.send(new Msg(id, mbox, Msg.Type.TimesUp, msg.getDetails()));
+				}
+				
+				break;
+				
 			case Terminate:
 				quit = true;
-				break;
-
-			case BAMS_ChooseFromAccount:
-				// let touch display show the from account
-				break;
-
-			case BAMS_ChooseToAccount:
-				// let touch display show the to account
 				break;
 
 			default:
@@ -63,5 +94,20 @@ public class TouchDisplayHandler extends AppThread {
 	protected void handleUpdateDisplay(Msg msg) {
 		log.info(id + ": update display -- " + msg.getDetails());
 	} // handleUpdateDisplay
+
+	protected void td_showAccountNo(Msg msg) {
+	}
+	
+	protected void td_disableAccount(Msg msg) {
+	}
+	
+	protected void td_displayBalance(Msg msg) {
+	}
+	
+	protected void td_updatePasswordField(Msg msg) {
+	}
+	
+	protected void td_updateInputAmount(Msg msg) {
+	}
 
 } // TouchDisplayHandler

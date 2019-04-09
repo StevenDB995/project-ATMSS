@@ -52,21 +52,22 @@ public class Msg {
 		TimesUp, // Time's up for the timer
 		Poll, // Health poll
 		PollAck, // Health poll acknowledgement
+		IdleTimer,
 		TD_UpdateDisplay, // Update Display
 		TD_MouseClicked, // Mouse Clicked
+		TD_UpdatePasswordField,
+		TD_UpdateInputAmount,
 		CR_CardInserted, // Card inserted
 		CR_CardRemoved, // Card removed
 		CR_CardRetained, // Card retained due to wrong password for three times
 		CR_EjectCard, // Eject card
 		KP_KeyPressed, // Key pressed
-		LoginAck, // Acknowledge successful login
-		LogoutAck, // Acknowledge logout
 		CDC_UpdateCashDepositCollectorSlot, // Update display of slot of cash deposit collector
 		CD_UpdateCashDispenserSlot, // Update display of slot of cash dispenser
 		B_Sound, // Buzzer makes sound
-		// BAMS_GetAccounts, // For touch display to display available accounts
-		BAMS_ChooseFromAccount, // For touch display to display from account
-		BAMS_ChooseToAccount, // For touch display to display to account
+		BAMS_ChooseAccount, // For touch display to display available account
+		BAMS_FromAccount,
+		BAMS_Balance,
 		CDC_ButtonPressed, // Button pressed in cash deposit collector
 		CD_ButtonPressed, // Button pressed in cash dispenser
 		AP_UpdateAdvicePrinter, // Update display of advice printer

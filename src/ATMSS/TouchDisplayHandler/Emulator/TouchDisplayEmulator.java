@@ -3,11 +3,12 @@ package ATMSS.TouchDisplayHandler.Emulator;
 import ATMSS.ATMSSStarter;
 import ATMSS.TouchDisplayHandler.TouchDisplayHandler;
 import AppKickstarter.misc.Msg;
-
+import AppKickstarter.timer.Timer;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
@@ -21,6 +22,10 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 	private String id;
 	private Stage myStage;
 	private TouchDisplayEmulatorController touchDisplayEmulatorController;
+
+	String[] accounts;
+	String fromAccount;
+	String balance;
 
 	// ------------------------------------------------------------
 	// TouchDisplayEmulator
@@ -40,7 +45,7 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 		loader.setLocation(TouchDisplayEmulator.class.getResource(fxmlName));
 		root = loader.load();
 		touchDisplayEmulatorController = (TouchDisplayEmulatorController) loader.getController();
-		touchDisplayEmulatorController.initialize(id, atmssStarter, log, this);
+		touchDisplayEmulatorController.initialize(id, atmssStarter, log, this, fxmlName);
 		myStage.initStyle(StageStyle.DECORATED);
 		myStage.setScene(new Scene(root, WIDTH, HEIGHT));
 		myStage.setTitle("Touch Display");
@@ -55,12 +60,57 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 	// ------------------------------------------------------------
 	// handleUpdateDisplay
 	protected void handleUpdateDisplay(Msg msg) {
-
 		String details = msg.getDetails();
 		reloadStage(details + ".fxml");
 		log.info(id + ": update display -- " + details);
-
+		
+		switch (details) {
+		case "TouchDisplayEmulatorCancelled":
+		case "TouchDisplayEmulatorPasswordValidationP3_CardEaten":
+			Timer.setTimer(id, mbox, 3000, Timer.CANCEL_RANGE);
+			break;
+			
+		case "TouchDisplayEmulatorPasswordValidationP1_RequestPW":
+		case "TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong":
+		case "TouchDisplayEmulatorTransferP3_InputAmount":
+		case "TouchDisplayEmulatorwithdrawlP2_InputAmount":
+		case "TouchDisplayDepositEmulatorP2_InputAmount":
+			int idleTimerId = Timer.setTimer(id, mbox, 10000, Timer.IDLE_RANGE);
+			mbox.send(new Msg(id, mbox, Msg.Type.IdleTimer, "" + idleTimerId));
+			break;
+		}
 	} // handleUpdateDisplay
+
+	protected void td_showAccountNo(Msg msg) {
+		accounts = msg.getDetails().split("/");
+	}
+
+	protected void td_disableAccount(Msg msg) {
+		fromAccount = msg.getDetails();
+	}
+
+	protected void td_displayBalance(Msg msg) {
+		balance = msg.getDetails();
+	}
+
+	protected void td_updatePasswordField(Msg msg) {
+		Platform.runLater(() -> {
+			if (msg.getDetails().compareToIgnoreCase("Clear") == 0)
+				touchDisplayEmulatorController.label1.setText("");
+			else
+				touchDisplayEmulatorController.label1.setText(touchDisplayEmulatorController.label1.getText() + '*');
+		});
+	}
+
+	protected void td_updateInputAmount(Msg msg) {
+		Platform.runLater(() -> {
+			if (msg.getDetails().compareToIgnoreCase("Clear") == 0)
+				touchDisplayEmulatorController.label1.setText("");
+			else
+				touchDisplayEmulatorController.label1
+						.setText(touchDisplayEmulatorController.label1.getText() + msg.getDetails());
+		});
+	}
 
 	// ------------------------------------------------------------
 	// reloadStage
@@ -78,7 +128,7 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 					loader.setLocation(TouchDisplayEmulator.class.getResource(fxmlFName));
 					root = loader.load();
 					touchDisplayEmulatorController = (TouchDisplayEmulatorController) loader.getController();
-					touchDisplayEmulatorController.initialize(id, atmssStarter, log, touchDisplayEmulator);
+					touchDisplayEmulatorController.initialize(id, atmssStarter, log, touchDisplayEmulator, fxmlFName);
 					myStage.setScene(new Scene(root, WIDTH, HEIGHT));
 				} catch (Exception e) {
 					log.severe(id + ": failed to load " + fxmlFName);

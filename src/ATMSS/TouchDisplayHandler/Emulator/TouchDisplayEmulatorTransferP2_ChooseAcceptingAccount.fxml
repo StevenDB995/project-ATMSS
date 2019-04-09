@@ -5,56 +5,40 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0"
-	prefWidth="680.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="ATMSS.TouchDisplayHandler.Emulator.TouchDisplayEmulatorController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ATMSS.TouchDisplayHandler.Emulator.TouchDisplayEmulatorController">
 	<children>
-		<AnchorPane prefHeight="480.0" prefWidth="640.0"
-			AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20">
+		<AnchorPane prefHeight="480.0" prefWidth="640.0" AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20">
 			<children>
-				<Rectangle arcHeight="5.0" arcWidth="5.0" fill="white"
-					height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0"
-					AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" />
-				<Rectangle arcHeight="5.0" arcWidth="5.0" fill="white"
-					height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0"
-					AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" />
-				<Rectangle arcHeight="5.0" arcWidth="5.0" fill="white"
-					height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0"
-					AnchorPane.bottomAnchor="140" AnchorPane.leftAnchor="0" />
-				<Rectangle arcHeight="5.0" arcWidth="5.0" fill="white"
-					height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0"
-					AnchorPane.bottomAnchor="140" AnchorPane.rightAnchor="0" />
-				<Label layoutX="96.0" layoutY="86.0"
-					text="Please Choose the Accepting Account">
+				<Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" />
+				<Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" />
+				<Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="140" AnchorPane.leftAnchor="0" />
+				<Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="140" AnchorPane.rightAnchor="0" />
+				<Label layoutX="96.0" layoutY="86.0" text="Please Choose the Accepting Account">
 					<font>
 						<Font size="25.0" />
 					</font>
 				</Label>
-				<Label layoutX="435.0" layoutY="292.0" text="Account 2">
+				<Label fx:id="label2" layoutX="435.0" layoutY="292.0">
 					<font>
 						<Font size="16.0" />
 					</font>
 				</Label>
-				<Label layoutX="93.0" layoutY="432.0" text="Account 3">
+				<Label fx:id="label3" layoutX="93.0" layoutY="432.0">
 					<font>
 						<Font size="16.0" />
 					</font>
 				</Label>
-				<Label layoutX="95.0" layoutY="292.0" text="Account 1">
+				<Label fx:id="label1" layoutX="95.0" layoutY="292.0">
 					<font>
 						<Font size="16.0" />
 					</font>
 				</Label>
-				<Label layoutX="433.0" layoutY="432.0" text="Account 4">
+				<Label fx:id="label4" layoutX="433.0" layoutY="432.0">
 					<font>
 						<Font size="16.0" />
 					</font>
 				</Label>
-				<Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT"
-					height="480.0" onMouseClicked="#td_mouseClick" stroke="BLACK"
-					strokeType="OUTSIDE" width="640" AnchorPane.bottomAnchor="0"
-					AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
+				<Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="480.0" onMouseClicked="#td_mouseClick" stroke="BLACK" strokeType="OUTSIDE" width="640" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
 			</children>
 		</AnchorPane>
 	</children>

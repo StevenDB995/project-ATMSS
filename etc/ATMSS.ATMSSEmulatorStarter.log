@@ -1,48 +1,112 @@
-190407-11:17:51 [INFO] -- 
-190407-11:17:51 [INFO] -- 
-190407-11:17:51 [INFO] -- ============================================================
-190407-11:17:51 [INFO] -- ATMSSStarter: Application Starting...
-190407-11:17:53 [INFO] -- CardReaderHandler: starting...
-190407-11:17:53 [INFO] -- KeypadHandler: starting...
-190407-11:17:53 [INFO] -- AdvicePrinterHandler: starting...
-190407-11:17:53 [INFO] -- ATMSS: starting...
-190407-11:17:53 [INFO] -- CashDepositCollectorHandler: starting...
-190407-11:17:53 [INFO] -- timer: starting...
-190407-11:17:53 [INFO] -- TouchDisplayHandler: starting...
-190407-11:17:53 [INFO] -- BuzzerHandler: starting...
-190407-11:17:53 [INFO] -- CashDispenserHandler: starting...
-190407-11:17:58 [INFO] -- CardInserted: 1005-5001
-190407-11:17:58 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorPasswordValidationP1_RequestPW
-190407-11:17:58 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorPasswordValidationP1_RequestPW.fxml
-190407-11:18:14 [INFO] -- KeyPressed: 9
-190407-11:18:15 [INFO] -- KeyPressed: Enter
-190407-11:18:16 [INFO] -- logging in with card number 1005-5001
-190407-11:18:16 [INFO] -- ATMSS: Wrong login password
-190407-11:18:16 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong
-190407-11:18:16 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong.fxml
-190407-11:18:19 [INFO] -- KeyPressed: 3
-190407-11:18:21 [INFO] -- KeyPressed: Enter
-190407-11:18:21 [INFO] -- logging in with card number 1005-5001
-190407-11:18:21 [INFO] -- ATMSS: Wrong login password
-190407-11:18:21 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong
-190407-11:18:21 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong.fxml
-190407-11:18:27 [INFO] -- KeyPressed: 2
-190407-11:18:28 [INFO] -- KeyPressed: Enter
-190407-11:18:28 [INFO] -- ATMSS: Wrong login password exceed the limit.
-190407-11:18:28 [INFO] -- PollAck: CardReaderHandler is up!
-190407-11:18:28 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorPasswordValidationP3_CardEaten.fxml
-190407-11:18:28 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorPasswordValidationP3_CardEaten
-190407-11:18:30 [INFO] -- 
-190407-11:18:30 [INFO] -- 
-190407-11:18:30 [INFO] -- ============================================================
-190407-11:18:30 [INFO] -- ATMSSStarter: Application Stopping...
-190407-11:18:30 [INFO] -- ATMSS: terminating...
-190407-11:18:30 [INFO] -- AdvicePrinterHandler: terminating...
-190407-11:18:30 [INFO] -- TouchDisplayHandler: terminating...
-190407-11:18:30 [INFO] -- KeypadHandler: terminating...
-190407-11:18:30 [INFO] -- CashDispenserHandler: terminating...
-190407-11:18:30 [INFO] -- CardReaderHandler: terminating...
-190407-11:18:30 [INFO] -- BuzzerHandler: terminating...
-190407-11:18:30 [INFO] -- timer: received terminate!
-190407-11:18:30 [INFO] -- timer: terminating...
-190407-11:18:30 [INFO] -- CashDepositCollectorHandler: terminating...
+190410-06:04:51 [INFO] -- 
+190410-06:04:51 [INFO] -- 
+190410-06:04:51 [INFO] -- ============================================================
+190410-06:04:51 [INFO] -- ATMSSStarter: Application Starting...
+190410-06:04:55 [INFO] -- timer: starting...
+190410-06:04:55 [INFO] -- KeypadHandler: starting...
+190410-06:04:55 [INFO] -- TouchDisplayHandler: starting...
+190410-06:04:55 [INFO] -- CardReaderHandler: starting...
+190410-06:04:55 [INFO] -- AdvicePrinterHandler: starting...
+190410-06:04:55 [INFO] -- ATMSS: starting...
+190410-06:04:55 [INFO] -- CashDispenserHandler: starting...
+190410-06:04:55 [INFO] -- CashDepositCollectorHandler: starting...
+190410-06:04:55 [INFO] -- BuzzerHandler: starting...
+190410-06:04:58 [INFO] -- KeyPressed: 2
+190410-06:05:02 [INFO] -- CardInserted: 1005-5001
+190410-06:05:02 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorPasswordValidationP1_RequestPW.fxml
+190410-06:05:02 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorPasswordValidationP1_RequestPW
+190410-06:05:04 [INFO] -- KeyPressed: 2
+190410-06:05:07 [INFO] -- KeyPressed: Enter
+190410-06:05:08 [INFO] -- logging in with card number 1005-5001
+190410-06:05:08 [INFO] -- ATMSS: Wrong login password (Wrong password times: 1)
+190410-06:05:08 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong
+190410-06:05:08 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong.fxml
+190410-06:05:12 [INFO] -- KeyPressed: 2
+190410-06:05:14 [INFO] -- KeyPressed: Enter
+190410-06:05:14 [INFO] -- logging in with card number 1005-5001
+190410-06:05:14 [INFO] -- ATMSS: Wrong login password (Wrong password times: 2)
+190410-06:05:14 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong.fxml
+190410-06:05:14 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong
+190410-06:05:17 [INFO] -- KeyPressed: 3
+190410-06:05:18 [INFO] -- KeyPressed: Enter
+190410-06:05:18 [INFO] -- logging in with card number 1005-5001
+190410-06:05:18 [INFO] -- ATMSS: Wrong login password (Wrong password times: 3)
+190410-06:05:18 [INFO] -- ATMSS: Wrong login password exceed the limit.
+190410-06:05:18 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorPasswordValidationP3_CardEaten
+190410-06:05:18 [INFO] -- PollAck: CardReaderHandler is up!
+190410-06:05:18 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorPasswordValidationP3_CardEaten.fxml
+190410-06:05:21 [INFO] -- Cancel: [17278]: Time's up!
+190410-06:05:21 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulator(Welcome).fxml
+190410-06:05:21 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulator(Welcome)
+190410-06:05:46 [INFO] -- CardInserted: 1005-5001
+190410-06:05:46 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorPasswordValidationP1_RequestPW
+190410-06:05:46 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorPasswordValidationP1_RequestPW.fxml
+190410-06:05:50 [INFO] -- KeyPressed: 2
+190410-06:05:51 [INFO] -- KeyPressed: Enter
+190410-06:05:51 [INFO] -- logging in with card number 1005-5001
+190410-06:05:51 [INFO] -- ATMSS: Wrong login password (Wrong password times: 1)
+190410-06:05:51 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong.fxml
+190410-06:05:51 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong
+190410-06:05:55 [INFO] -- Poll: [01712]: Time's up!
+190410-06:05:55 [INFO] -- PollAck: CardReaderHandler is up!
+190410-06:05:55 [INFO] -- PollAck: KeypadHandler is up!
+190410-06:05:55 [INFO] -- PollAck: TouchDisplayHandler is up!
+190410-06:05:55 [INFO] -- PollAck: CashDispenserHandler is up!
+190410-06:05:55 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190410-06:05:55 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190410-06:05:55 [INFO] -- PollAck: BuzzerHandler is up!
+190410-06:05:57 [INFO] -- KeyPressed: 2
+190410-06:05:58 [INFO] -- KeyPressed: Enter
+190410-06:05:58 [INFO] -- logging in with card number 1005-5001
+190410-06:05:58 [INFO] -- ATMSS: Wrong login password (Wrong password times: 2)
+190410-06:05:58 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong
+190410-06:05:58 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong.fxml
+190410-06:06:00 [INFO] -- KeyPressed: Cancel
+190410-06:06:00 [INFO] -- Cancelled.
+190410-06:06:00 [INFO] -- CardReaderHandler: card ejected
+190410-06:06:00 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorCancelled.fxml
+190410-06:06:00 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorCancelled
+190410-06:06:03 [INFO] -- Cancel: [18359]: Time's up!
+190410-06:06:03 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulator(Welcome)
+190410-06:06:03 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulator(Welcome).fxml
+190410-06:06:13 [INFO] -- CardInserted: 1005-5001
+190410-06:06:13 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorPasswordValidationP1_RequestPW
+190410-06:06:13 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorPasswordValidationP1_RequestPW.fxml
+190410-06:06:16 [INFO] -- KeyPressed: 2
+190410-06:06:17 [INFO] -- KeyPressed: 3
+190410-06:06:18 [INFO] -- KeyPressed: 2
+190410-06:06:19 [INFO] -- KeyPressed: Enter
+190410-06:06:19 [INFO] -- logging in with card number 1005-5001
+190410-06:06:19 [INFO] -- ATMSS: Wrong login password (Wrong password times: 1)
+190410-06:06:19 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong
+190410-06:06:19 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong.fxml
+190410-06:06:22 [INFO] -- KeyPressed: 3
+190410-06:06:23 [INFO] -- KeyPressed: 2
+190410-06:06:23 [INFO] -- KeyPressed: Enter
+190410-06:06:23 [INFO] -- logging in with card number 1005-5001
+190410-06:06:23 [INFO] -- ATMSS: Wrong login password (Wrong password times: 2)
+190410-06:06:23 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong
+190410-06:06:23 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong.fxml
+190410-06:06:27 [INFO] -- KeyPressed: 7
+190410-06:06:29 [INFO] -- KeyPressed: 8
+190410-06:06:39 [INFO] -- Idle: [29352]: Time's up!
+190410-06:06:39 [INFO] -- CardReaderHandler: card ejected
+190410-06:06:39 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorCancelled.fxml
+190410-06:06:39 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorCancelled
+190410-06:06:42 [INFO] -- Cancel: [12239]: Time's up!
+190410-06:06:42 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulator(Welcome)
+190410-06:06:42 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulator(Welcome).fxml
+190410-06:06:49 [INFO] -- 
+190410-06:06:49 [INFO] -- 
+190410-06:06:49 [INFO] -- ============================================================
+190410-06:06:49 [INFO] -- ATMSSStarter: Application Stopping...
+190410-06:06:49 [INFO] -- ATMSS: terminating...
+190410-06:06:49 [INFO] -- AdvicePrinterHandler: terminating...
+190410-06:06:49 [INFO] -- timer: received terminate!
+190410-06:06:49 [INFO] -- timer: terminating...
+190410-06:06:49 [INFO] -- CardReaderHandler: terminating...
+190410-06:06:49 [INFO] -- KeypadHandler: terminating...
+190410-06:06:49 [INFO] -- CashDispenserHandler: terminating...
+190410-06:06:49 [INFO] -- BuzzerHandler: terminating...
+190410-06:06:49 [INFO] -- CashDepositCollectorHandler: terminating...
+190410-06:06:49 [INFO] -- TouchDisplayHandler: terminating...

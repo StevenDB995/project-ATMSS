@@ -18,6 +18,10 @@ public class Timer extends AppThread {
     private Ticker ticker = null;
     private ArrayList<ActiveTimer> timerList = null;
     private static long systemStartTime;
+    
+    public static final int POLL_RANGE = 10000;
+    public static final int CANCEL_RANGE = 20000;
+    public static final int IDLE_RANGE = 30000;
 
     //------------------------------------------------------------
     // Timer
@@ -162,15 +166,8 @@ public class Timer extends AppThread {
 
     //------------------------------------------------------------
     // setTimer (sleep time based on wall clock)
-    public static int setTimer(String id, MBox mbox, long sleepTime) {
-	int timerId = (new Random()).nextInt(90000) + 10000;
-	return setTimer(id, mbox, sleepTime, timerId);
-    } // setTimer
-
-
-    //------------------------------------------------------------
-    // setTimer (sleep time based on wall clock)
-    public static int setTimer(String id, MBox mbox, long sleepTime, int timerId) {
+    public static int setTimer(String id, MBox mbox, long sleepTime, int timerIdRange) {
+	int timerId = timerIdRange - (new Random()).nextInt(10000) - 1;
 	timerMBox.send(new Msg(id, mbox, Msg.Type.SetTimer,"set timer, "+sleepTime+", "+timerId));
 	return timerId;
     } // setTimer
@@ -178,15 +175,8 @@ public class Timer extends AppThread {
 
     //------------------------------------------------------------
     // setSimulationTimer (sleep time based on simulation time)
-    public static int setSimulationTimer(String id, MBox mbox, long simulationSleepTimeInSeconds) {
-	return setTimer(id, mbox, simulationSleepTimeInSeconds*simulationSpeed);
-    } // setSimulationTimer
-
-
-    //------------------------------------------------------------
-    // setSimulationTimer (sleep time based on simulation time)
-    public static int setSimulationTimer(String id, MBox mbox, long simulationSleepTimeInSeconds, int timerId) {
-	return setTimer(id, mbox, simulationSleepTimeInSeconds*simulationSpeed, timerId);
+    public static int setSimulationTimer(String id, MBox mbox, long simulationSleepTimeInSeconds, int timerIdRange) {
+	return setTimer(id, mbox, simulationSleepTimeInSeconds*simulationSpeed, timerIdRange);
     } // setSimulationTimer
 
 
@@ -254,10 +244,8 @@ public class Timer extends AppThread {
 
 	for (ActiveTimer timer : timerList) {
 	    if (timer.getTimerID() == timerID) {
-		if (timer.getCaller().equals(caller)) {
 		    cancelTimer = timer;
 		    break;
-		}
 	    }
 	}
 
