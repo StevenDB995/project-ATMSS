@@ -436,6 +436,7 @@ public class ATMSS extends AppThread {
 				e.printStackTrace();
 			}
 		}
+		buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "SoundOne"));
 	} // processKeyPressed
 
 	// processMouseClicked

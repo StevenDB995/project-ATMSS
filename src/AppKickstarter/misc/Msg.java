@@ -63,7 +63,7 @@ public class Msg {
 		LogoutAck, // Acknowledge logout
 		CDC_UpdateCashDepositCollectorSlot, // Update display of slot of cash deposit collector
 		CD_UpdateCashDispenserSlot, // Update display of slot of cash dispenser
-		B_Sound, // Buzzer makes sound
+		BZ_Sound, // Buzzer makes sound
 		// BAMS_GetAccounts, // For touch display to display available accounts
 		BAMS_ChooseFromAccount, // For touch display to display from account
 		BAMS_ChooseToAccount, // For touch display to display to account
