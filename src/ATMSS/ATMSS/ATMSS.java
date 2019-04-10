@@ -114,6 +114,19 @@ public class ATMSS extends AppThread {
 			switch (msg.getType()) {
 			case TD_MouseClicked:
 				log.info("MouseCLicked: " + msg.getDetails());
+				switch (TD_StageId) {
+				case "TouchDisplayDepositEmulatorP1_ChooseAccount":
+				case "TouchDisplayEmulator_accountEnquiry_ChooseAccount":
+				case "TouchDisplayEmulator_accountEnquiry_DisplayAccount":
+				case "TouchDisplayEmulatorTransferP1_ChooseSendingAccount":
+				case "TouchDisplayEmulatorTransferP2_ChooseAcceptingAccount":
+				case "TouchDisplayEmulatorwithdrawlP1_ChooseAccount":
+				case "TouchDisplayEmulatorServiceChoice":
+				case "TouchDisplayEmulatorSuccessful":
+				case "TouchDisplayEmulatorFailed":
+					Timer.cancelTimer(id, mbox, idleTimerId);
+					break;
+				}
 				processMouseClicked(msg);
 				break;
 
@@ -182,8 +195,11 @@ public class ATMSS extends AppThread {
 					cashDepositCollectorMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
 					advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
 					buzzerMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
-				} else if (timerId >= Timer.CANCEL_RANGE && timerId < Timer.IDLE_RANGE) {
+				}
+				
+				else if (timerId >= Timer.CANCEL_RANGE && timerId < Timer.IDLE_RANGE) {
 					log.info("Idle: " + msg.getDetails());
+					keypadInput = "";
 					touchDisplayMBox
 							.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorCancelled"));
 					cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
@@ -464,7 +480,8 @@ public class ATMSS extends AppThread {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
+			} else
+				idleTimerId = Timer.setTimer(id, mbox, 10000, Timer.IDLE_RANGE);
 
 			break;
 
@@ -498,6 +515,9 @@ public class ATMSS extends AppThread {
 						.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorServiceChoice"));
 				TD_StageId = "TouchDisplayEmulatorServiceChoice";
 			}
+			
+			else
+				idleTimerId = Timer.setTimer(id, mbox, 10000, Timer.IDLE_RANGE);
 
 			currentAccount = "";
 			break;
@@ -521,7 +541,8 @@ public class ATMSS extends AppThread {
 				touchDisplayMBox.send(
 						new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorwithdrawlP2_InputAmount"));
 				TD_StageId = "TouchDisplayEmulatorwithdrawlP2_InputAmount";
-			}
+			} else
+				idleTimerId = Timer.setTimer(id, mbox, 10000, Timer.IDLE_RANGE);
 
 			break;
 
@@ -544,7 +565,8 @@ public class ATMSS extends AppThread {
 				touchDisplayMBox.send(
 						new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayDepositEmulatorP2_InputAmount"));
 				TD_StageId = "TouchDisplayDepositEmulatorP2_InputAmount";
-			}
+			} else
+				idleTimerId = Timer.setTimer(id, mbox, 10000, Timer.IDLE_RANGE);
 
 			break;
 
@@ -568,7 +590,8 @@ public class ATMSS extends AppThread {
 				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay,
 						"TouchDisplayEmulatorTransferP2_ChooseAcceptingAccount"));
 				TD_StageId = "TouchDisplayEmulatorTransferP2_ChooseAcceptingAccount";
-			}
+			} else
+				idleTimerId = Timer.setTimer(id, mbox, 10000, Timer.IDLE_RANGE);
 
 			break;
 
@@ -599,7 +622,8 @@ public class ATMSS extends AppThread {
 				touchDisplayMBox.send(
 						new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorTransferP3_InputAmount"));
 				TD_StageId = "TouchDisplayEmulatorTransferP3_InputAmount";
-			}
+			} else
+				idleTimerId = Timer.setTimer(id, mbox, 10000, Timer.IDLE_RANGE);
 
 			break;
 
@@ -631,6 +655,9 @@ public class ATMSS extends AppThread {
 						"TouchDisplayEmulatorTransferP1_ChooseSendingAccount"));
 				TD_StageId = "TouchDisplayEmulatorTransferP1_ChooseSendingAccount";
 			}
+			
+			else
+				idleTimerId = Timer.setTimer(id, mbox, 10000, Timer.IDLE_RANGE);
 
 			break;
 
@@ -664,6 +691,9 @@ public class ATMSS extends AppThread {
 						.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorServiceChoice"));
 				TD_StageId = "TouchDisplayEmulatorServiceChoice";
 			}
+			
+			else
+				idleTimerId = Timer.setTimer(id, mbox, 10000, Timer.IDLE_RANGE);
 
 			break;
 
@@ -697,6 +727,9 @@ public class ATMSS extends AppThread {
 						.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorServiceChoice"));
 				TD_StageId = "TouchDisplayEmulatorServiceChoice";
 			}
+			
+			else
+				idleTimerId = Timer.setTimer(id, mbox, 10000, Timer.IDLE_RANGE);
 
 			break;
 
