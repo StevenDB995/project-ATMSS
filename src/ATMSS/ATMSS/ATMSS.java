@@ -96,7 +96,7 @@ public class ATMSS extends AppThread {
 	// ------------------------------------------------------------
 	// run
 	public void run() {
-		Timer.setTimer(id, mbox, 60000, Timer.POLL_RANGE);
+		Timer.setTimer(id, mbox, Timer.POLL_SLEEPTIME, Timer.POLL_RANGE);
 		log.info(id + ": starting...");
 
 		cardReaderMBox = appKickstarter.getThread("CardReaderHandler").getMBox();
@@ -139,9 +139,6 @@ public class ATMSS extends AppThread {
 				case "TouchDisplayEmulatorwithdrawlP2_InputAmount":
 				case "TouchDisplayDepositEmulatorP2_InputAmount":
 					Timer.cancelTimer(id, mbox, idleTimerId);
-					if (Character.isDigit(msg.getDetails().charAt(0)) || msg.getDetails().compareTo(".") == 0
-							|| msg.getDetails().compareToIgnoreCase("Clear") == 0)
-						idleTimerId = Timer.setTimer(id, mbox, 10000, Timer.IDLE_RANGE);
 					break;
 				}
 				processKeyPressed(msg);
@@ -186,7 +183,7 @@ public class ATMSS extends AppThread {
 				int timerId = Integer.parseInt(timerIdStr);
 
 				if (timerId < Timer.POLL_RANGE) {
-					Timer.setTimer(id, mbox, 60000, Timer.POLL_RANGE);
+					Timer.setTimer(id, mbox, Timer.POLL_SLEEPTIME, Timer.POLL_RANGE);
 					log.info("Poll: " + msg.getDetails());
 					cardReaderMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
 					keypadMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
@@ -296,6 +293,8 @@ public class ATMSS extends AppThread {
 				}
 				break;
 			}
+			
+			idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE);
 		}
 
 		else if (details.compareToIgnoreCase(".") == 0) {
@@ -306,6 +305,8 @@ public class ATMSS extends AppThread {
 				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateInputAmount, details));
 				break;
 			}
+			
+			idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE);
 		}
 
 		else if (details.compareToIgnoreCase("Clear") == 0) { // "Clear" is pressed
@@ -323,6 +324,8 @@ public class ATMSS extends AppThread {
 			}
 
 			keypadInput = "";
+			
+			idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE);
 		}
 
 		else if (details.compareToIgnoreCase("Enter") == 0) { // "Enter" is pressed
@@ -387,7 +390,9 @@ public class ATMSS extends AppThread {
 						currentAccount = "";
 						toAccount = "";
 						keypadInput = "";
-					}
+					} else
+						idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE);
+					
 					break;
 
 				case "TouchDisplayEmulatorwithdrawlP2_InputAmount": // type in withdraw amount
@@ -409,7 +414,9 @@ public class ATMSS extends AppThread {
 
 						currentAccount = "";
 						keypadInput = "";
-					}
+					} else
+						idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE);
+					
 					break;
 
 				case "TouchDisplayDepositEmulatorP2_InputAmount": // type in deposit amount
@@ -420,16 +427,17 @@ public class ATMSS extends AppThread {
 							touchDisplayMBox
 									.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorFailed"));
 							TD_StageId = "TouchDisplayEmulatorFailed";
-							currentAccount = "";
 						} else {
 							log.info("Successfully deposited " + depositFeedback);
 							cashDepositCollectorMBox.send(new Msg(id, mbox, Msg.Type.CDC_UpdateCashDepositCollectorSlot,
 									"OpenCashDepositCollectorSlot"));
-							currentAccount = "";
 						}
 
+						currentAccount = "";
 						keypadInput = "";
-					}
+					} else
+						idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE);
+					
 					break;
 				}
 			} catch (BAMSInvalidReplyException | IOException e) {
@@ -482,7 +490,7 @@ public class ATMSS extends AppThread {
 					e.printStackTrace();
 				}
 			} else
-				idleTimerId = Timer.setTimer(id, mbox, 10000, Timer.IDLE_RANGE);
+				idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE);
 
 			break;
 
@@ -518,7 +526,7 @@ public class ATMSS extends AppThread {
 			}
 
 			else
-				idleTimerId = Timer.setTimer(id, mbox, 10000, Timer.IDLE_RANGE);
+				idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE);
 
 			currentAccount = "";
 			break;
@@ -543,7 +551,7 @@ public class ATMSS extends AppThread {
 						new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorwithdrawlP2_InputAmount"));
 				TD_StageId = "TouchDisplayEmulatorwithdrawlP2_InputAmount";
 			} else
-				idleTimerId = Timer.setTimer(id, mbox, 10000, Timer.IDLE_RANGE);
+				idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE);
 
 			break;
 
@@ -567,7 +575,7 @@ public class ATMSS extends AppThread {
 						new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayDepositEmulatorP2_InputAmount"));
 				TD_StageId = "TouchDisplayDepositEmulatorP2_InputAmount";
 			} else
-				idleTimerId = Timer.setTimer(id, mbox, 10000, Timer.IDLE_RANGE);
+				idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE);
 
 			break;
 
@@ -592,7 +600,7 @@ public class ATMSS extends AppThread {
 						"TouchDisplayEmulatorTransferP2_ChooseAcceptingAccount"));
 				TD_StageId = "TouchDisplayEmulatorTransferP2_ChooseAcceptingAccount";
 			} else
-				idleTimerId = Timer.setTimer(id, mbox, 10000, Timer.IDLE_RANGE);
+				idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE);
 
 			break;
 
@@ -624,7 +632,7 @@ public class ATMSS extends AppThread {
 						new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorTransferP3_InputAmount"));
 				TD_StageId = "TouchDisplayEmulatorTransferP3_InputAmount";
 			} else
-				idleTimerId = Timer.setTimer(id, mbox, 10000, Timer.IDLE_RANGE);
+				idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE);
 
 			break;
 
@@ -658,7 +666,7 @@ public class ATMSS extends AppThread {
 			}
 
 			else
-				idleTimerId = Timer.setTimer(id, mbox, 10000, Timer.IDLE_RANGE);
+				idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE);
 
 			break;
 
@@ -694,7 +702,7 @@ public class ATMSS extends AppThread {
 			}
 
 			else
-				idleTimerId = Timer.setTimer(id, mbox, 10000, Timer.IDLE_RANGE);
+				idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE);
 
 			break;
 
@@ -730,7 +738,7 @@ public class ATMSS extends AppThread {
 			}
 
 			else
-				idleTimerId = Timer.setTimer(id, mbox, 10000, Timer.IDLE_RANGE);
+				idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE);
 
 			break;
 
