@@ -63,19 +63,30 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 		String details = msg.getDetails();
 		reloadStage(details + ".fxml");
 		log.info(id + ": update display -- " + details);
-		
+
+		int idleTimerId;
 		switch (details) {
 		case "TouchDisplayEmulatorCancelled":
 		case "TouchDisplayEmulatorPasswordValidationP3_CardEaten":
 			Timer.setTimer(id, mbox, 3000, Timer.CANCEL_RANGE);
 			break;
-			
+
 		case "TouchDisplayEmulatorPasswordValidationP1_RequestPW":
 		case "TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong":
 		case "TouchDisplayEmulatorTransferP3_InputAmount":
 		case "TouchDisplayEmulatorwithdrawlP2_InputAmount":
 		case "TouchDisplayDepositEmulatorP2_InputAmount":
-			int idleTimerId = Timer.setTimer(id, mbox, 10000, Timer.IDLE_RANGE);
+			
+		case "TouchDisplayDepositEmulatorP1_ChooseAccount":
+		case "TouchDisplayEmulator_accountEnquiry_ChooseAccount":
+		case "TouchDisplayEmulator_accountEnquiry_DisplayAccount":
+		case "TouchDisplayEmulatorTransferP1_ChooseSendingAccount":
+		case "TouchDisplayEmulatorTransferP2_ChooseAcceptingAccount":
+		case "TouchDisplayEmulatorwithdrawlP1_ChooseAccount":
+		case "TouchDisplayEmulatorServiceChoice":
+		case "TouchDisplayEmulatorSuccessful":
+		case "TouchDisplayEmulatorFailed":
+			idleTimerId = Timer.setTimer(id, mbox, 10000, Timer.IDLE_RANGE); // simulation
 			mbox.send(new Msg(id, mbox, Msg.Type.IdleTimer, "" + idleTimerId));
 			break;
 		}
