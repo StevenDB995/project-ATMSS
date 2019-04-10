@@ -19,6 +19,10 @@ public class Timer extends AppThread {
     private ArrayList<ActiveTimer> timerList = null;
     private static long systemStartTime;
     
+    public static final long POLL_SLEEPTIME = 60000;
+    public static final long CANCEL_SLEEPTIME = 3000;
+    public static final long IDLE_SLEEPTIME = 30000;
+    
     public static final int POLL_RANGE = 10000;
     public static final int CANCEL_RANGE = 20000;
     public static final int IDLE_RANGE = 30000;

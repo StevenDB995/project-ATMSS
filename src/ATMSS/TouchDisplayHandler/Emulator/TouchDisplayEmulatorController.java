@@ -62,6 +62,7 @@ public class TouchDisplayEmulatorController {
 				
 			case "TouchDisplayEmulator_accountEnquiry_DisplayAccount.fxml":
 				label1.setText(this.touchDisplayEmulator.balance);
+				label2.setText(this.touchDisplayEmulator.balance);
 				break;
 			}
 		});

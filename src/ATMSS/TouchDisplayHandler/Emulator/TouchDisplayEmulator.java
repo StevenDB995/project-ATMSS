@@ -68,7 +68,7 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 		switch (details) {
 		case "TouchDisplayEmulatorCancelled":
 		case "TouchDisplayEmulatorPasswordValidationP3_CardEaten":
-			Timer.setTimer(id, mbox, 3000, Timer.CANCEL_RANGE);
+			Timer.setTimer(id, mbox, Timer.CANCEL_SLEEPTIME, Timer.CANCEL_RANGE);
 			break;
 
 		case "TouchDisplayEmulatorPasswordValidationP1_RequestPW":
@@ -86,7 +86,7 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 		case "TouchDisplayEmulatorServiceChoice":
 		case "TouchDisplayEmulatorSuccessful":
 		case "TouchDisplayEmulatorFailed":
-			idleTimerId = Timer.setTimer(id, mbox, 10000, Timer.IDLE_RANGE); // simulation
+			idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE); // simulation
 			mbox.send(new Msg(id, mbox, Msg.Type.IdleTimer, "" + idleTimerId));
 			break;
 		}
