@@ -59,6 +59,12 @@ public class BuzzerHandler extends AppThread {
 			MediaPlayer player = new MediaPlayer(new Media(uriString));
 			player.play();
 			break;
+			
+		case "SoundLoop":
+			String uriStringLoop = new File("sound/soundloop.mp3").toURI().toString();
+			MediaPlayer playerLoop = new MediaPlayer(new Media(uriStringLoop));
+			playerLoop.play();
+			break;
 		}
 	}
 
