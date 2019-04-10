@@ -14,6 +14,15 @@ import javafx.stage.WindowEvent;
 
 //======================================================================
 // CardReaderEmulator
+/**
+ * The CardReaderEmulator class implements the GUI of CardReader
+ *
+ * 
+ * @author Group4
+ * @version 1.1
+ * 
+ *
+ */
 public class CardReaderEmulator extends CardReaderHandler {
     private ATMSSStarter atmssStarter;
     private String id;
@@ -31,6 +40,12 @@ public class CardReaderEmulator extends CardReaderHandler {
 
     //------------------------------------------------------------
     // start
+    /**
+     * This method is used to load the GUI of CardReader
+     * 
+     *
+     * @throws Exception When GUI fail to load, throw Exception
+     */
     public void start() throws Exception {
 	Parent root;
 	myStage = new Stage();
@@ -54,6 +69,9 @@ public class CardReaderEmulator extends CardReaderHandler {
 
     //------------------------------------------------------------
     // handleCardInsert
+    /**
+     * This method is used to show insert information in text area and update card statues after Card Inserted
+     */
     protected void handleCardInsert() {
         // fixme
 	super.handleCardInsert();
@@ -61,7 +79,9 @@ public class CardReaderEmulator extends CardReaderHandler {
 	cardReaderEmulatorController.updateCardStatus("Card Inserted");
     } // handleCardInsert
 
-
+    /**
+     * This method is used to show eject information in text area and update card statues after Card Ejected
+     */
     //------------------------------------------------------------
     // handleCardEject
     protected void handleCardEject() {
@@ -71,7 +91,9 @@ public class CardReaderEmulator extends CardReaderHandler {
 	cardReaderEmulatorController.updateCardStatus("Card Ejected");
     } // handleCardEject
 
-
+    /**
+     * This method is used to show card removed information in text area and update card statues after Card Removed
+     */
     //------------------------------------------------------------
     // handleCardRemove
     protected void handleCardRemove() {

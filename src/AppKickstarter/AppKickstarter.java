@@ -127,7 +127,7 @@ public abstract class AppKickstarter {
     // getProperty
     public String getProperty(String property) {
 	String s = cfgProps.getProperty(property);
-
+	
 	if (s == null) {
 	    log.severe(id + ": getProperty(" + property + ") failed.  Check the config file (" + cfgFName + ")!");
 	}

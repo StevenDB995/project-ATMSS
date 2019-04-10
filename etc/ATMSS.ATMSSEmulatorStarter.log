@@ -1,91 +1,508 @@
-190408-10:01:24 [INFO] -- 
-190408-10:01:24 [INFO] -- 
-190408-10:01:24 [INFO] -- ============================================================
-190408-10:01:24 [INFO] -- ATMSSStarter: Application Starting...
-190408-10:01:26 [INFO] -- AdvicePrinterHandler: starting...
-190408-10:01:26 [INFO] -- CashDepositCollectorHandler: starting...
-190408-10:01:26 [INFO] -- ATMSS: starting...
-190408-10:01:26 [INFO] -- CardReaderHandler: starting...
-190408-10:01:26 [INFO] -- KeypadHandler: starting...
-190408-10:01:26 [INFO] -- BuzzerHandler: starting...
-190408-10:01:26 [INFO] -- TouchDisplayHandler: starting...
-190408-10:01:26 [INFO] -- CashDispenserHandler: starting...
-190408-10:01:26 [INFO] -- timer: starting...
-190408-10:01:36 [INFO] -- CardInserted: 1005-5001
-190408-10:01:36 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorPasswordValidationP1_RequestPW.fxml
-190408-10:01:36 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorPasswordValidationP1_RequestPW
-190408-10:01:39 [INFO] -- KeyPressed: 2
-190408-10:01:40 [INFO] -- KeyPressed: 3
-190408-10:01:40 [INFO] -- KeyPressed: 2
-190408-10:01:41 [INFO] -- KeyPressed: 3
-190408-10:01:41 [INFO] -- KeyPressed: 3
-190408-10:01:42 [INFO] -- KeyPressed: 4
-190408-10:01:42 [INFO] -- KeyPressed: Enter
-190408-10:01:43 [INFO] -- logging in with card number 1005-5001
-190408-10:01:43 [INFO] -- ATMSS: Login successful
-190408-10:01:43 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorServiceChoice
-190408-10:01:43 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorServiceChoice.fxml
-190408-10:01:44 [INFO] -- MouseCLicked: 269 379
-190408-10:01:44 [INFO] -- You have choosen deposit.
-190408-10:01:44 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayDepositEmulatorP1_ChooseAccount.fxml
-190408-10:01:44 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayDepositEmulatorP1_ChooseAccount
-190408-10:01:45 [INFO] -- MouseCLicked: 388 312
-190408-10:01:45 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayDepositEmulatorP2_InputAmount.fxml
-190408-10:01:45 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayDepositEmulatorP2_InputAmount
-190408-10:01:48 [INFO] -- KeyPressed: 3
-190408-10:01:49 [INFO] -- KeyPressed: Enter
-190408-10:01:49 [INFO] -- Successfully deposited 3.0
-190408-10:01:49 [INFO] -- CashDepositCollectorHandler: OpenCashDepositCollectorSlot and update display of cash deposit collector.
-190408-10:01:49 [INFO] -- CashDepositCollectorHandler: loading fxml: CashDepositCollectorEmulatorOpen.fxml
-190408-10:01:51 [INFO] -- CashDepositCollectorHandler: CloseCashDepositCollectorSlot and update display of cash deposit collector.
-190408-10:01:51 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorSuccessful.fxml
-190408-10:01:51 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorSuccessful
-190408-10:01:51 [INFO] -- CashDepositCollectorHandler: loading fxml: CashDepositCollectorEmulator.fxml
-190408-10:01:53 [INFO] -- MouseCLicked: 495 438
-190408-10:01:53 [INFO] -- CardReaderHandler: card ejected
-190408-10:01:53 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulator(Welcome)
-190408-10:01:53 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulator(Welcome).fxml
-190408-10:01:58 [INFO] -- CardReaderHandler: card removed
-190408-10:02:02 [INFO] -- CardInserted: 1005-5001
-190408-10:02:02 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorPasswordValidationP1_RequestPW
-190408-10:02:02 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorPasswordValidationP1_RequestPW.fxml
-190408-10:02:06 [INFO] -- KeyPressed: 2
-190408-10:02:07 [INFO] -- KeyPressed: 3
-190408-10:02:08 [INFO] -- KeyPressed: 2
-190408-10:02:08 [INFO] -- KeyPressed: 3
-190408-10:02:09 [INFO] -- KeyPressed: 3
-190408-10:02:09 [INFO] -- KeyPressed: 4
-190408-10:02:10 [INFO] -- KeyPressed: Enter
-190408-10:02:10 [INFO] -- logging in with card number 1005-5001
-190408-10:02:10 [INFO] -- ATMSS: Login successful
-190408-10:02:10 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorServiceChoice
-190408-10:02:10 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorServiceChoice.fxml
-190408-10:02:26 [INFO] -- Poll: [97938]: Time's up!
-190408-10:02:26 [INFO] -- PollAck: CardReaderHandler is up!
-190408-10:02:26 [INFO] -- PollAck: KeypadHandler is up!
-190408-10:02:26 [INFO] -- PollAck: TouchDisplayHandler is up!
-190408-10:02:26 [INFO] -- PollAck: CashDepositCollectorHandler is up!
-190408-10:02:26 [INFO] -- PollAck: BuzzerHandler is up!
-190408-10:02:26 [INFO] -- PollAck: CashDispenserHandler is up!
-190408-10:02:26 [INFO] -- PollAck: AdvicePrinterHandler is up!
-190408-10:03:02 [INFO] -- KeyPressed: Cancel
-190408-10:03:02 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorCancelled
-190408-10:03:02 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorCancelled.fxml
-190408-10:03:02 [INFO] -- CardReaderHandler: card ejected
-190408-10:03:06 [INFO] -- CardReaderHandler: card removed
-190408-10:03:06 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulator(Welcome)
-190408-10:03:06 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulator(Welcome).fxml
-190408-10:03:08 [INFO] -- 
-190408-10:03:08 [INFO] -- 
-190408-10:03:08 [INFO] -- ============================================================
-190408-10:03:08 [INFO] -- ATMSSStarter: Application Stopping...
-190408-10:03:08 [INFO] -- ATMSS: terminating...
-190408-10:03:08 [INFO] -- timer: received terminate!
-190408-10:03:08 [INFO] -- timer: terminating...
-190408-10:03:08 [INFO] -- TouchDisplayHandler: terminating...
-190408-10:03:08 [INFO] -- BuzzerHandler: terminating...
-190408-10:03:08 [INFO] -- CashDepositCollectorHandler: terminating...
-190408-10:03:08 [INFO] -- CashDispenserHandler: terminating...
-190408-10:03:08 [INFO] -- KeypadHandler: terminating...
-190408-10:03:08 [INFO] -- CardReaderHandler: terminating...
-190408-10:03:08 [INFO] -- AdvicePrinterHandler: terminating...
+190409-21:43:39 [INFO] -- 
+190409-21:43:39 [INFO] -- 
+190409-21:43:39 [INFO] -- ============================================================
+190409-21:43:39 [INFO] -- ATMSSStarter: Application Starting...
+190409-21:43:41 [INFO] -- timer: starting...
+190409-21:43:41 [INFO] -- KeypadHandler: starting...
+190409-21:43:41 [INFO] -- CardReaderHandler: starting...
+190409-21:43:41 [INFO] -- AdvicePrinterHandler: starting...
+190409-21:43:41 [INFO] -- CashDispenserHandler: starting...
+190409-21:43:41 [INFO] -- ATMSS: starting...
+190409-21:43:41 [INFO] -- TouchDisplayHandler: starting...
+190409-21:43:41 [INFO] -- BuzzerHandler: starting...
+190409-21:43:41 [INFO] -- CashDepositCollectorHandler: starting...
+190409-21:43:53 [INFO] -- CardInserted: 1005-5001
+190409-21:43:53 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorPasswordValidationP1_RequestPW
+190409-21:43:53 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorPasswordValidationP1_RequestPW.fxml
+190409-21:44:10 [INFO] -- KeyPressed: Cancel
+190409-21:44:10 [INFO] -- Cancelled.
+190409-21:44:10 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorCancelled.fxml
+190409-21:44:10 [INFO] -- CardReaderHandler: card ejected
+190409-21:44:10 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorCancelled
+190409-21:44:15 [INFO] -- CardReaderHandler: card removed
+190409-21:44:15 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulator(Welcome)
+190409-21:44:15 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulator(Welcome).fxml
+190409-21:44:41 [INFO] -- Poll: [28118]: Time's up!
+190409-21:44:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-21:44:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-21:44:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-21:44:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-21:44:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-21:44:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-21:44:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-21:45:41 [INFO] -- Poll: [54316]: Time's up!
+190409-21:45:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-21:45:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-21:45:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-21:45:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-21:45:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-21:45:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-21:45:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-21:46:41 [INFO] -- Poll: [92737]: Time's up!
+190409-21:46:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-21:46:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-21:46:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-21:46:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-21:46:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-21:46:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-21:46:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-21:47:41 [INFO] -- Poll: [86963]: Time's up!
+190409-21:47:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-21:47:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-21:47:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-21:47:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-21:47:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-21:47:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-21:47:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-21:48:41 [INFO] -- Poll: [48933]: Time's up!
+190409-21:48:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-21:48:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-21:48:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-21:48:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-21:48:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-21:48:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-21:48:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-21:49:41 [INFO] -- Poll: [72820]: Time's up!
+190409-21:49:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-21:49:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-21:49:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-21:49:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-21:49:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-21:49:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-21:49:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-21:50:41 [INFO] -- Poll: [63400]: Time's up!
+190409-21:50:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-21:50:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-21:50:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-21:50:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-21:50:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-21:50:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-21:50:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-21:51:40 [INFO] -- CardInserted: 3006-4056
+190409-21:51:40 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorPasswordValidationP1_RequestPW
+190409-21:51:40 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorPasswordValidationP1_RequestPW.fxml
+190409-21:51:41 [INFO] -- Poll: [63265]: Time's up!
+190409-21:51:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-21:51:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-21:51:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-21:51:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-21:51:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-21:51:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-21:51:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-21:51:45 [INFO] -- KeyPressed: Cancel
+190409-21:51:45 [INFO] -- Cancelled.
+190409-21:51:45 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorCancelled.fxml
+190409-21:51:45 [INFO] -- CardReaderHandler: card ejected
+190409-21:51:45 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorCancelled
+190409-21:51:47 [INFO] -- CardReaderHandler: card removed
+190409-21:51:47 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulator(Welcome).fxml
+190409-21:51:47 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulator(Welcome)
+190409-21:52:08 [INFO] -- CardInserted: 3006-4056
+190409-21:52:08 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorPasswordValidationP1_RequestPW
+190409-21:52:08 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorPasswordValidationP1_RequestPW.fxml
+190409-21:52:17 [INFO] -- KeyPressed: Cancel
+190409-21:52:17 [INFO] -- Cancelled.
+190409-21:52:17 [INFO] -- CardReaderHandler: card ejected
+190409-21:52:17 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorCancelled.fxml
+190409-21:52:17 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorCancelled
+190409-21:52:20 [INFO] -- CardReaderHandler: card removed
+190409-21:52:20 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulator(Welcome)
+190409-21:52:20 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulator(Welcome).fxml
+190409-21:52:41 [INFO] -- Poll: [60126]: Time's up!
+190409-21:52:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-21:52:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-21:52:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-21:52:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-21:52:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-21:52:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-21:52:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-21:53:41 [INFO] -- Poll: [15063]: Time's up!
+190409-21:53:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-21:53:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-21:53:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-21:53:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-21:53:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-21:53:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-21:53:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-21:54:41 [INFO] -- Poll: [45246]: Time's up!
+190409-21:54:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-21:54:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-21:54:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-21:54:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-21:54:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-21:54:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-21:54:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-21:55:41 [INFO] -- Poll: [30046]: Time's up!
+190409-21:55:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-21:55:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-21:55:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-21:55:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-21:55:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-21:55:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-21:55:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-21:56:41 [INFO] -- Poll: [39362]: Time's up!
+190409-21:56:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-21:56:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-21:56:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-21:56:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-21:56:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-21:56:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-21:56:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-21:57:41 [INFO] -- Poll: [53022]: Time's up!
+190409-21:57:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-21:57:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-21:57:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-21:57:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-21:57:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-21:57:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-21:57:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-21:58:41 [INFO] -- Poll: [13224]: Time's up!
+190409-21:58:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-21:58:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-21:58:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-21:58:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-21:58:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-21:58:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-21:58:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-21:59:41 [INFO] -- Poll: [95620]: Time's up!
+190409-21:59:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-21:59:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-21:59:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-21:59:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-21:59:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-21:59:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-21:59:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:00:41 [INFO] -- Poll: [37590]: Time's up!
+190409-22:00:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:00:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:00:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:00:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:00:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:00:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:00:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:01:41 [INFO] -- Poll: [45822]: Time's up!
+190409-22:01:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:01:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:01:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:01:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:01:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:01:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:01:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:02:41 [INFO] -- Poll: [78783]: Time's up!
+190409-22:02:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:02:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:02:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:02:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:02:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:02:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:02:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:03:41 [INFO] -- Poll: [48740]: Time's up!
+190409-22:03:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:03:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:03:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:03:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:03:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:03:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:03:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:04:41 [INFO] -- Poll: [52740]: Time's up!
+190409-22:04:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:04:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:04:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:04:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:04:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:04:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:04:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:05:41 [INFO] -- Poll: [24000]: Time's up!
+190409-22:05:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:05:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:05:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:05:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:05:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:05:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:05:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:06:41 [INFO] -- Poll: [54948]: Time's up!
+190409-22:06:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:06:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:06:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:06:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:06:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:06:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:06:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:07:41 [INFO] -- Poll: [54001]: Time's up!
+190409-22:07:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:07:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:07:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:07:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:07:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:07:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:07:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:08:41 [INFO] -- Poll: [31669]: Time's up!
+190409-22:08:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:08:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:08:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:08:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:08:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:08:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:08:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:09:41 [INFO] -- Poll: [80902]: Time's up!
+190409-22:09:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:09:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:09:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:09:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:09:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:09:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:09:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:10:41 [INFO] -- Poll: [39560]: Time's up!
+190409-22:10:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:10:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:10:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:10:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:10:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:10:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:10:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:11:41 [INFO] -- Poll: [87586]: Time's up!
+190409-22:11:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:11:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:11:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:11:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:11:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:11:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:11:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:12:41 [INFO] -- Poll: [74882]: Time's up!
+190409-22:12:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:12:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:12:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:12:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:12:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:12:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:12:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:13:41 [INFO] -- Poll: [82245]: Time's up!
+190409-22:13:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:13:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:13:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:13:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:13:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:13:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:13:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:14:41 [INFO] -- Poll: [95360]: Time's up!
+190409-22:14:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:14:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:14:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:14:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:14:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:14:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:14:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:15:41 [INFO] -- Poll: [69738]: Time's up!
+190409-22:15:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:15:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:15:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:15:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:15:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:15:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:15:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:16:41 [INFO] -- Poll: [70931]: Time's up!
+190409-22:16:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:16:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:16:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:16:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:16:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:16:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:16:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:17:41 [INFO] -- Poll: [19480]: Time's up!
+190409-22:17:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:17:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:17:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:17:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:17:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:17:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:17:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:18:41 [INFO] -- Poll: [25064]: Time's up!
+190409-22:18:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:18:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:18:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:18:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:18:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:18:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:18:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:19:41 [INFO] -- Poll: [58440]: Time's up!
+190409-22:19:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:19:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:19:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:19:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:19:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:19:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:19:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:20:41 [INFO] -- Poll: [95027]: Time's up!
+190409-22:20:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:20:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:20:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:20:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:20:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:20:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:20:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:21:41 [INFO] -- Poll: [18167]: Time's up!
+190409-22:21:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:21:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:21:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:21:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:21:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:21:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:21:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:22:41 [INFO] -- Poll: [86302]: Time's up!
+190409-22:22:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:22:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:22:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:22:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:22:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:22:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:22:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:23:41 [INFO] -- Poll: [39236]: Time's up!
+190409-22:23:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:23:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:23:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:23:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:23:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:23:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:23:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:24:41 [INFO] -- Poll: [64383]: Time's up!
+190409-22:24:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:24:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:24:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:24:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:24:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:24:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:24:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:25:41 [INFO] -- Poll: [18092]: Time's up!
+190409-22:25:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:25:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:25:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:25:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:25:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:25:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:25:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:26:41 [INFO] -- Poll: [24734]: Time's up!
+190409-22:26:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:26:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:26:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:26:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:26:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:26:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:26:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:27:41 [INFO] -- Poll: [97376]: Time's up!
+190409-22:27:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:27:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:27:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:27:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:27:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:27:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:27:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:28:41 [INFO] -- Poll: [96141]: Time's up!
+190409-22:28:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:28:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:28:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:28:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:28:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:28:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:28:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:29:41 [INFO] -- Poll: [19787]: Time's up!
+190409-22:29:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:29:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:29:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:29:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:29:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:29:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:29:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:30:41 [INFO] -- Poll: [75553]: Time's up!
+190409-22:30:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:30:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:30:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:30:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:30:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:30:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:30:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:31:41 [INFO] -- Poll: [26728]: Time's up!
+190409-22:31:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:31:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:31:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:31:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:31:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:31:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:31:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:32:41 [INFO] -- Poll: [85480]: Time's up!
+190409-22:32:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:32:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:32:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:32:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:32:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:32:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:32:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:33:41 [INFO] -- Poll: [83574]: Time's up!
+190409-22:33:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:33:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:33:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:33:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:33:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:33:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:33:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:34:41 [INFO] -- Poll: [84300]: Time's up!
+190409-22:34:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:34:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:34:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:34:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:34:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:34:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:34:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:35:41 [INFO] -- Poll: [16482]: Time's up!
+190409-22:35:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:35:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:35:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:35:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:35:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:35:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:35:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:36:41 [INFO] -- Poll: [29617]: Time's up!
+190409-22:36:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:36:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:36:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:36:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:36:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:36:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:36:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:37:41 [INFO] -- Poll: [21460]: Time's up!
+190409-22:37:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:37:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:37:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:37:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:37:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:37:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:37:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:38:41 [INFO] -- Poll: [85825]: Time's up!
+190409-22:38:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:38:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:38:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:38:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:38:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:38:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:38:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:39:41 [INFO] -- Poll: [95019]: Time's up!
+190409-22:39:41 [INFO] -- PollAck: KeypadHandler is up!
+190409-22:39:41 [INFO] -- PollAck: TouchDisplayHandler is up!
+190409-22:39:41 [INFO] -- PollAck: CardReaderHandler is up!
+190409-22:39:41 [INFO] -- PollAck: CashDepositCollectorHandler is up!
+190409-22:39:41 [INFO] -- PollAck: AdvicePrinterHandler is up!
+190409-22:39:41 [INFO] -- PollAck: BuzzerHandler is up!
+190409-22:39:41 [INFO] -- PollAck: CashDispenserHandler is up!
+190409-22:40:17 [INFO] -- 
+190409-22:40:17 [INFO] -- 
+190409-22:40:17 [INFO] -- ============================================================
+190409-22:40:17 [INFO] -- ATMSSStarter: Application Stopping...
+190409-22:40:17 [INFO] -- CashDepositCollectorHandler: terminating...
+190409-22:40:17 [INFO] -- timer: received terminate!
+190409-22:40:17 [INFO] -- KeypadHandler: terminating...
+190409-22:40:17 [INFO] -- CardReaderHandler: terminating...
+190409-22:40:17 [INFO] -- AdvicePrinterHandler: terminating...
+190409-22:40:17 [INFO] -- ATMSS: terminating...
+190409-22:40:17 [INFO] -- timer: terminating...
+190409-22:40:17 [INFO] -- BuzzerHandler: terminating...
+190409-22:40:17 [INFO] -- TouchDisplayHandler: terminating...
+190409-22:40:17 [INFO] -- CashDispenserHandler: terminating...

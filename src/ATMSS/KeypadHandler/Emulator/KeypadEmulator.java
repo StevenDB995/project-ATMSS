@@ -14,6 +14,15 @@ import javafx.stage.WindowEvent;
 
 //======================================================================
 // KeypadEmulator
+
+/**
+ * This is the Class to implement KeypadEmulator
+ * 
+ * @author Group4
+ * @version 1.1
+ * 
+ *
+ */
 public class KeypadEmulator extends KeypadHandler {
     private ATMSSStarter atmssStarter;
     private String id;
@@ -22,6 +31,7 @@ public class KeypadEmulator extends KeypadHandler {
 
     //------------------------------------------------------------
     // KeypadEmulator
+    
     public KeypadEmulator(String id, ATMSSStarter atmssStarter) {
 	super(id, atmssStarter);
 	this.atmssStarter = atmssStarter;
@@ -31,6 +41,12 @@ public class KeypadEmulator extends KeypadHandler {
 
     //------------------------------------------------------------
     // start
+    /**
+     * This is the method to start the KeypadEmulator
+     * @exception Exception On input error.
+     * 
+     *
+     */
     public void start() throws Exception {
 	Parent root;
 	myStage = new Stage();

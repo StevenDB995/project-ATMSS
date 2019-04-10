@@ -5,6 +5,16 @@ import AppKickstarter.misc.*;
 
 //======================================================================
 // CardReaderHandler
+
+/**
+ * The CardReaderHandler class implements an application that
+ * handle different cases of CardReader 
+ * 
+ * @author Group4
+ * @version 1.1
+ * 
+ *
+ */
 public class CardReaderHandler extends AppThread {
 	// ------------------------------------------------------------
 	// CardReaderHandler
@@ -14,6 +24,14 @@ public class CardReaderHandler extends AppThread {
 
 	// ------------------------------------------------------------
 	// run
+	
+	 /**
+     * This method is used to run different cases
+     * CR_CardInserted, CR_EjectCard, CR_CardRemoved, CR_CardRetained
+     *
+     * 
+     *
+     */
 	public void run() {
 		MBox atmss = appKickstarter.getThread("ATMSS").getMBox();
 		log.info(id + ": starting...");
@@ -59,24 +77,40 @@ public class CardReaderHandler extends AppThread {
 
 	// ------------------------------------------------------------
 	// handleCardInsert
+	
+	 /**
+     * This method is used to show the information when card is inserted
+     */
 	protected void handleCardInsert() {
 		log.info(id + ": card inserted");
 	} // handleCardInsert
 
 	// ------------------------------------------------------------
 	// handleCardEject
+	
+	/**
+     * This method is used to show the information when card is ejected
+     */
 	protected void handleCardEject() {
 		log.info(id + ": card ejected");
 	} // handleCardEject
 
 	// ------------------------------------------------------------
 	// handleCardRemove
+	
+	/**
+     * This method is used to show the information when card is removed
+     */
 	protected void handleCardRemove() {
 		log.info(id + ": card removed");
 	} // handleCardRemove
 
 	// ------------------------------------------------------------
 	// handleCardRetained
+	
+	/**
+     * This method is used to show the information when card is retained
+     */
 	protected void handleCardRetained() {
 		log.info(id + ": card retained");
 	} // handleCardRemove
