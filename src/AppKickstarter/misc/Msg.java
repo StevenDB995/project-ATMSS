@@ -64,7 +64,7 @@ public class Msg {
 		KP_KeyPressed, // Key pressed
 		CDC_UpdateCashDepositCollectorSlot, // Update display of slot of cash deposit collector
 		CD_UpdateCashDispenserSlot, // Update display of slot of cash dispenser
-		B_Sound, // Buzzer makes sound
+		BZ_Sound, // Buzzer makes sound
 		BAMS_ChooseAccount, // For touch display to display available account
 		BAMS_FromAccount,
 		BAMS_Balance,

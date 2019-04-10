@@ -141,6 +141,7 @@ public class ATMSS extends AppThread {
 					touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay,
 							"TouchDisplayEmulatorPasswordValidationP1_RequestPW"));
 					TD_StageId = "TouchDisplayEmulatorPasswordValidationP1_RequestPW";
+					buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "SoundOne"));
 				}
 				break;
 
@@ -149,15 +150,18 @@ public class ATMSS extends AppThread {
 						"CloseCashDepositCollectorSlot"));
 				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorSuccessful"));
 				TD_StageId = "TouchDisplayEmulatorSuccessful";
+				buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "SoundOne"));
 				break;
 
 			case CD_ButtonPressed:
 				cashDispenserMBox
 						.send(new Msg(id, mbox, Msg.Type.CD_UpdateCashDispenserSlot, "CloseCashDispenserSlot"));
+				buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "SoundOne"));
 				break;
 
 			case AP_ButtonPressed:
 				advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.AP_UpdateAdvicePrinter, "close"));
+				buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "SoundOne"));
 				break;
 
 			case IdleTimer:
@@ -415,6 +419,7 @@ public class ATMSS extends AppThread {
 				e.printStackTrace();
 			}
 		}
+		buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "SoundOne"));
 	} // processKeyPressed
 
 	// processMouseClicked
@@ -696,6 +701,7 @@ public class ATMSS extends AppThread {
 			break;
 
 		}
+		buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "SoundOne"));
 	} // processMouseClicked
 
 } // ATMSS
