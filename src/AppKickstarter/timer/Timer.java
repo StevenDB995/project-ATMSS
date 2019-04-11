@@ -20,12 +20,12 @@ public class Timer extends AppThread {
     private static long systemStartTime;
     
     public static long POLL_SLEEPTIME;
-    public static long CANCEL_SLEEPTIME ;
-    public static  long IDLE_SLEEPTIME;
+    public static long CANCEL_SLEEPTIME;
+    public static long IDLE_SLEEPTIME;
     
     public static int POLL_RANGE;
     public static int CANCEL_RANGE;
-    public static  int IDLE_RANGE;
+    public static int IDLE_RANGE;
 
     //------------------------------------------------------------
     // Timer
@@ -37,14 +37,13 @@ public class Timer extends AppThread {
 	ticks = Integer.parseInt(appKickstarter.getProperty("Timer.MSecPerTick"));
 	simulationSpeed = Integer.parseInt(appKickstarter.getProperty("Timer.SimulationSpeed"));
 	
-	POLL_SLEEPTIME =Long.parseLong(appKickstarter.getProperty("Timer.POLL_SLEEPTIME"));
-	CANCEL_SLEEPTIME =Long.parseLong(appKickstarter.getProperty("Timer.CANCEL_SLEEPTIME"));
-	IDLE_SLEEPTIME =Long.parseLong(appKickstarter.getProperty("Timer.IDLE_SLEEPTIME"));
+	POLL_SLEEPTIME = Long.parseLong(appKickstarter.getProperty("Timer.POLL_SLEEPTIME"));
+	CANCEL_SLEEPTIME = Long.parseLong(appKickstarter.getProperty("Timer.CANCEL_SLEEPTIME"));
+	IDLE_SLEEPTIME = Long.parseLong(appKickstarter.getProperty("Timer.IDLE_SLEEPTIME"));
 	
-	
-	POLL_RANGE =Integer.parseInt(appKickstarter.getProperty("Timer.POLL_RANGE"));
-	CANCEL_RANGE =Integer.parseInt(appKickstarter.getProperty("Timer.CANCEL_RANGE"));
-	IDLE_RANGE =Integer.parseInt(appKickstarter.getProperty("Timer.IDLE_RANGE"));
+	POLL_RANGE = Integer.parseInt(appKickstarter.getProperty("Timer.POLL_RANGE"));
+	CANCEL_RANGE = Integer.parseInt(appKickstarter.getProperty("Timer.CANCEL_RANGE"));
+	IDLE_RANGE = Integer.parseInt(appKickstarter.getProperty("Timer.IDLE_RANGE"));
     } // Timer
 
 

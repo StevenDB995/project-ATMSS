@@ -29,13 +29,4 @@ public class BuzzerEmulatorController {
 		this.buzzerMBox = appKickstarter.getThread("BuzzerHandler").getMBox();
 	} // initialize
 
-	// ------------------------------------------------------------
-	// sound
-	public void sound() {
-
-		String uriString = new File("sound/sound.mp3").toURI().toString();
-		MediaPlayer player = new MediaPlayer(new Media(uriString));
-		player.play();
-	} // sound
-
 }// BuzzerEmulatorController

@@ -1,13 +1,87 @@
-190411-20:18:42 [INFO] -- 
-190411-20:18:42 [INFO] -- 
-190411-20:18:42 [INFO] -- ============================================================
-190411-20:18:42 [INFO] -- ATMSSStarter: Application Starting...
-190411-20:18:44 [INFO] -- KeypadHandler: starting...
-190411-20:18:44 [INFO] -- TouchDisplayHandler: starting...
-190411-20:18:44 [INFO] -- CardReaderHandler: starting...
-190411-20:18:44 [INFO] -- ATMSS: starting...
-190411-20:18:44 [INFO] -- AdvicePrinterHandler: starting...
-190411-20:18:44 [INFO] -- CashDepositCollectorHandler: starting...
-190411-20:18:44 [INFO] -- CashDispenserHandler: starting...
-190411-20:18:44 [INFO] -- timer: starting...
-190411-20:18:44 [INFO] -- BuzzerHandler: starting...
+190412-02:38:26 [INFO] -- 
+190412-02:38:26 [INFO] -- 
+190412-02:38:26 [INFO] -- ============================================================
+190412-02:38:26 [INFO] -- ATMSSStarter: Application Starting...
+190412-02:38:29 [INFO] -- timer: starting...
+190412-02:38:29 [INFO] -- KeypadHandler: starting...
+190412-02:38:29 [INFO] -- CardReaderHandler: starting...
+190412-02:38:29 [INFO] -- TouchDisplayHandler: starting...
+190412-02:38:29 [INFO] -- AdvicePrinterHandler: starting...
+190412-02:38:29 [INFO] -- CashDepositCollectorHandler: starting...
+190412-02:38:29 [INFO] -- CashDispenserHandler: starting...
+190412-02:38:29 [INFO] -- BuzzerHandler: starting...
+190412-02:38:29 [INFO] -- ATMSS: starting...
+190412-02:38:34 [INFO] -- CardReaderHandler: card inserted
+190412-02:38:34 [INFO] -- CardInserted: 1005-5001
+190412-02:38:34 [INFO] -- BuzzerHandler: sound command -- Success
+190412-02:38:34 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorPasswordValidationP1_RequestPW
+190412-02:38:34 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorPasswordValidationP1_RequestPW.fxml
+190412-02:38:37 [INFO] -- KeyPressed: 2
+190412-02:38:37 [INFO] -- BuzzerHandler: sound command -- KP
+190412-02:38:37 [INFO] -- KeyPressed: 3
+190412-02:38:37 [INFO] -- BuzzerHandler: sound command -- KP
+190412-02:38:38 [INFO] -- KeyPressed: 2
+190412-02:38:38 [INFO] -- BuzzerHandler: sound command -- KP
+190412-02:38:39 [INFO] -- KeyPressed: 3
+190412-02:38:39 [INFO] -- BuzzerHandler: sound command -- KP
+190412-02:38:39 [INFO] -- KeyPressed: 3
+190412-02:38:39 [INFO] -- BuzzerHandler: sound command -- KP
+190412-02:38:40 [INFO] -- KeyPressed: 4
+190412-02:38:40 [INFO] -- BuzzerHandler: sound command -- KP
+190412-02:38:40 [INFO] -- KeyPressed: Enter
+190412-02:38:40 [INFO] -- BuzzerHandler: sound command -- KP
+190412-02:38:42 [INFO] -- logging in with card number 1005-5001
+190412-02:38:42 [INFO] -- ATMSS: Login successful
+190412-02:38:42 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorServiceChoice
+190412-02:38:42 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorServiceChoice.fxml
+190412-02:38:44 [INFO] -- MouseClicked: 380 326
+190412-02:38:44 [INFO] -- You have chosen enquiry.
+190412-02:38:44 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulator_accountEnquiry_ChooseAccount
+190412-02:38:44 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulator_accountEnquiry_ChooseAccount.fxml
+190412-02:38:45 [INFO] -- MouseClicked: 446 311
+190412-02:38:45 [INFO] -- Enquiry successful, you have 99352.2 in your account.
+190412-02:38:45 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulator_accountEnquiry_DisplayAccount.fxml
+190412-02:38:45 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulator_accountEnquiry_DisplayAccount
+190412-02:38:46 [INFO] -- MouseClicked: 442 435
+190412-02:38:46 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulator(Welcome)
+190412-02:38:46 [INFO] -- BuzzerHandler: sound command -- Success
+190412-02:38:46 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulator(Welcome).fxml
+190412-02:38:46 [INFO] -- CardReaderHandler: card ejected
+190412-02:38:52 [INFO] -- CardReaderHandler: card removed
+190412-02:38:54 [INFO] -- CardReaderHandler: card inserted
+190412-02:38:54 [INFO] -- CardInserted: 1005-5001
+190412-02:38:54 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorPasswordValidationP1_RequestPW
+190412-02:38:54 [INFO] -- BuzzerHandler: sound command -- Success
+190412-02:38:54 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorPasswordValidationP1_RequestPW.fxml
+190412-02:38:56 [INFO] -- KeyPressed: 2
+190412-02:38:56 [INFO] -- BuzzerHandler: sound command -- KP
+190412-02:38:56 [INFO] -- KeyPressed: 3
+190412-02:38:56 [INFO] -- BuzzerHandler: sound command -- KP
+190412-02:38:57 [INFO] -- KeyPressed: 2
+190412-02:38:57 [INFO] -- BuzzerHandler: sound command -- KP
+190412-02:38:57 [INFO] -- KeyPressed: 3
+190412-02:38:57 [INFO] -- BuzzerHandler: sound command -- KP
+190412-02:38:58 [INFO] -- KeyPressed: 3
+190412-02:38:58 [INFO] -- BuzzerHandler: sound command -- KP
+190412-02:38:58 [INFO] -- KeyPressed: 4
+190412-02:38:58 [INFO] -- BuzzerHandler: sound command -- KP
+190412-02:38:59 [INFO] -- KeyPressed: Enter
+190412-02:38:59 [INFO] -- BuzzerHandler: sound command -- KP
+190412-02:38:59 [INFO] -- logging in with card number 1005-5001
+190412-02:38:59 [INFO] -- ATMSS: Login successful
+190412-02:38:59 [INFO] -- TouchDisplayHandler: update display -- TouchDisplayEmulatorServiceChoice
+190412-02:38:59 [INFO] -- TouchDisplayHandler: loading fxml: TouchDisplayEmulatorServiceChoice.fxml
+190412-02:39:01 [INFO] -- 
+190412-02:39:01 [INFO] -- 
+190412-02:39:01 [INFO] -- ============================================================
+190412-02:39:01 [INFO] -- ATMSSStarter: Application Stopping...
+190412-02:39:01 [INFO] -- ATMSS: terminating...
+190412-02:39:01 [INFO] -- timer: received terminate!
+190412-02:39:01 [INFO] -- timer: terminating...
+190412-02:39:01 [INFO] -- BuzzerHandler: terminating...
+190412-02:39:01 [INFO] -- CardReaderHandler: terminating...
+190412-02:39:01 [INFO] -- CashDispenserHandler: terminating...
+190412-02:39:01 [INFO] -- CashDepositCollectorHandler: terminating...
+190412-02:39:01 [INFO] -- AdvicePrinterHandler: terminating...
+190412-02:39:01 [INFO] -- TouchDisplayHandler: terminating...
+190412-02:39:01 [INFO] -- KeypadHandler: terminating...

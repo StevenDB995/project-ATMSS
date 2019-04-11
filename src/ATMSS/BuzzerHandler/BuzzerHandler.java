@@ -53,17 +53,39 @@ public class BuzzerHandler extends AppThread {
 
 	protected void sound(Msg msg) {
 		log.info(id + ": sound command -- " + msg.getDetails());
+		String uriString = new File("sound/sound.mp3").toURI().toString();
+		MediaPlayer player = new MediaPlayer(new Media(uriString));
+		
 		switch (msg.getDetails()) {
-		case "SoundOne":
-			String uriString = new File("sound/sound.mp3").toURI().toString();
-			MediaPlayer player = new MediaPlayer(new Media(uriString));
+		case "KP":
 			player.play();
 			break;
 			
-		case "SoundLoop":
-			String uriStringLoop = new File("sound/soundloop.mp3").toURI().toString();
-			MediaPlayer playerLoop = new MediaPlayer(new Media(uriStringLoop));
-			playerLoop.play();
+		case "Success":
+			for (int i = 0; i < 3; ++i) {
+				player.play();
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				player.stop();
+			}
+			break;
+
+		case "Cancel":
+		case "Fail":
+			for (int i = 0; i < 5; ++i) {
+				player.play();
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				player.stop();
+			}
 			break;
 		}
 	}

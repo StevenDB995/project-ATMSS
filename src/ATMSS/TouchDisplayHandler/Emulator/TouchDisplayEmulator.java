@@ -16,7 +16,7 @@ import javafx.stage.WindowEvent;
 //======================================================================
 // TouchDisplayEmulator
 public class TouchDisplayEmulator extends TouchDisplayHandler {
-	private int WIDTH ;
+	private int WIDTH;
 	private int HEIGHT;
 	private ATMSSStarter atmssStarter;
 	private String id;
@@ -33,8 +33,8 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 		super(id, atmssStarter);
 		this.atmssStarter = atmssStarter;
 		this.id = id;
-		WIDTH =Integer.parseInt(appKickstarter.getProperty("TouchDisplayEmulator.WIDTH"));
-		HEIGHT=Integer.parseInt(appKickstarter.getProperty("TouchDisplayEmulator.HEIGHT"));
+		WIDTH = Integer.parseInt(appKickstarter.getProperty("TouchDisplayEmulator.WIDTH"));
+		HEIGHT = Integer.parseInt(appKickstarter.getProperty("TouchDisplayEmulator.HEIGHT"));
 	} // TouchDisplayEmulator
 
 	// ------------------------------------------------------------
@@ -78,7 +78,7 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 		case "TouchDisplayEmulatorTransferP3_InputAmount":
 		case "TouchDisplayEmulatorwithdrawlP2_InputAmount":
 		case "TouchDisplayDepositEmulatorP2_InputAmount":
-			
+
 		case "TouchDisplayDepositEmulatorP1_ChooseAccount":
 		case "TouchDisplayEmulator_accountEnquiry_ChooseAccount":
 		case "TouchDisplayEmulator_accountEnquiry_DisplayAccount":

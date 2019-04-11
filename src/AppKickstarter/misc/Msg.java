@@ -53,6 +53,7 @@ public class Msg {
 		Poll, // Health poll
 		PollAck, // Health poll acknowledgement
 		IdleTimer,
+		FatalError,
 		TD_UpdateDisplay, // Update Display
 		TD_MouseClicked, // Mouse Clicked
 		TD_UpdatePasswordField,

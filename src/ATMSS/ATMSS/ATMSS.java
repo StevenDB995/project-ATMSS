@@ -132,6 +132,8 @@ public class ATMSS extends AppThread {
 
 			case KP_KeyPressed:
 				log.info("KeyPressed: " + msg.getDetails());
+				buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "KP"));
+				
 				switch (TD_StageId) {
 				case "TouchDisplayEmulatorPasswordValidationP1_RequestPW":
 				case "TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong":
@@ -151,7 +153,7 @@ public class ATMSS extends AppThread {
 					touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay,
 							"TouchDisplayEmulatorPasswordValidationP1_RequestPW"));
 					TD_StageId = "TouchDisplayEmulatorPasswordValidationP1_RequestPW";
-					buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "SoundOne"));
+					buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "Success"));
 				}
 				break;
 
@@ -164,11 +166,13 @@ public class ATMSS extends AppThread {
 					double depositFeedback = bams.deposit(currentCardNo, currentAccount, credential, keypadInput);
 					if (depositFeedback < 0) {
 						log.info("Deposit failed.");
+						buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "Fail"));
 						touchDisplayMBox
 								.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorFailed"));
 						TD_StageId = "TouchDisplayEmulatorFailed";
 					} else {
 						log.info("Successfully deposited " + depositFeedback);
+						buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "Success"));
 						touchDisplayMBox
 								.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorSuccessful"));
 						TD_StageId = "TouchDisplayEmulatorSuccessful";
@@ -189,7 +193,6 @@ public class ATMSS extends AppThread {
 
 			case AP_ButtonPressed:
 				advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.AP_UpdateAdvicePrinter, "close"));
-				buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "SoundOne"));
 				break;
 
 			case IdleTimer:
@@ -219,7 +222,7 @@ public class ATMSS extends AppThread {
 							.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorCancelled"));
 					cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
 					TD_StageId = "TouchDisplayEmulator(Welcome)";
-					buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "SoundLoop"));
+					buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "Cancel"));
 				}
 
 				break;
@@ -282,9 +285,24 @@ public class ATMSS extends AppThread {
 				validKP = true;
 				break;
 			}
+			
+			switch (TD_StageId) {
+			case "TouchDisplayDepositEmulatorP1_ChooseAccount":
+			case "TouchDisplayEmulator_accountEnquiry_ChooseAccount":
+			case "TouchDisplayEmulator_accountEnquiry_DisplayAccount":
+			case "TouchDisplayEmulatorTransferP1_ChooseSendingAccount":
+			case "TouchDisplayEmulatorTransferP2_ChooseAcceptingAccount":
+			case "TouchDisplayEmulatorwithdrawlP1_ChooseAccount":
+			case "TouchDisplayEmulatorServiceChoice":
+			case "TouchDisplayEmulatorSuccessful":
+			case "TouchDisplayEmulatorFailed":
+				Timer.cancelTimer(id, mbox, idleTimerId);
+				break;
+			}
 
 			if (validKP) {
 				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorCancelled"));
+				buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "Cancel"));
 				keypadInput = "";
 				currentCardNo = "";
 				currentAccount = "";
@@ -367,6 +385,7 @@ public class ATMSS extends AppThread {
 					if (feedback.compareToIgnoreCase("ERROR") == 0) {
 						wrongPasswordTimes++;
 						log.info(id + ": Wrong login password (Wrong password times: " + wrongPasswordTimes + ")");
+						buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "Fail"));
 
 						if (wrongPasswordTimes < 3) {
 							touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay,
@@ -404,12 +423,14 @@ public class ATMSS extends AppThread {
 								keypadInput);
 						if (transferFeedback < 0) {
 							log.info("Failed to transfer from " + currentAccount + " to " + toAccount);
+							buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "Fail"));
 							touchDisplayMBox
 									.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorFailed"));
 							TD_StageId = "TouchDisplayEmulatorFailed";
 						} else {
 							log.info("Successfully transfered " + transferFeedback + " from " + currentAccount + " to "
 									+ toAccount);
+							buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "Success"));
 							touchDisplayMBox.send(
 									new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorSuccessful"));
 							TD_StageId = "TouchDisplayEmulatorSuccessful";
@@ -428,11 +449,13 @@ public class ATMSS extends AppThread {
 						int withdrawFeedback = bams.withdraw(currentCardNo, currentAccount, credential, keypadInput);
 						if (withdrawFeedback < 0) {
 							log.info("Withdraw failed");
+							buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "Fail"));
 							touchDisplayMBox
 									.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorFailed"));
 							TD_StageId = "TouchDisplayEmulatorFailed";
 						} else {
 							log.info("Successfully withdrawed " + withdrawFeedback);
+							buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "Success"));
 							touchDisplayMBox.send(
 									new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorSuccessful"));
 							cashDispenserMBox.send(
@@ -460,8 +483,6 @@ public class ATMSS extends AppThread {
 				e.printStackTrace();
 			}
 		}
-
-		buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "SoundOne"));
 	} // processKeyPressed
 
 	// processMouseClicked
@@ -514,6 +535,7 @@ public class ATMSS extends AppThread {
 		case "TouchDisplayEmulator_accountEnquiry_DisplayAccount": // step two for enquiry, display balance
 			if (x > 340 && x < 640 && y > 410 && y < 480) { // case for eject card
 				cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
+				buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "Success"));
 				currentCardNo = "";
 				credential = "";
 				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulator(Welcome)"));
@@ -523,6 +545,7 @@ public class ATMSS extends AppThread {
 			else if (x > 340 && x < 640 && y > 270 && y < 340) { // case for print advice and eject card
 				advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.AP_UpdateAdvicePrinter, "print"));
 				cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
+				buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "Success"));
 				currentCardNo = "";
 				credential = "";
 				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulator(Welcome)"));
@@ -690,6 +713,7 @@ public class ATMSS extends AppThread {
 		case "TouchDisplayEmulatorFailed":
 			if (x > 340 && x < 640 && y > 410 && y < 480) { // case for eject card
 				cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
+				buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "Success"));
 				currentCardNo = "";
 				credential = "";
 				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulator(Welcome)"));
@@ -699,6 +723,7 @@ public class ATMSS extends AppThread {
 			else if (x > 340 && x < 640 && y > 270 && y < 340) { // case for print advice and eject card
 				advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.AP_UpdateAdvicePrinter, "print"));
 				cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
+				buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "Success"));
 				currentCardNo = "";
 				credential = "";
 				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulator(Welcome)"));
@@ -726,6 +751,7 @@ public class ATMSS extends AppThread {
 		case "TouchDisplayEmulatorSuccessful":
 			if (x > 340 && x < 640 && y > 410 && y < 480) { // case for eject card
 				cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
+				buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "Success"));
 				currentCardNo = "";
 				credential = "";
 				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulator(Welcome)"));
@@ -735,6 +761,7 @@ public class ATMSS extends AppThread {
 			else if (x > 340 && x < 640 && y > 270 && y < 340) { // case for print advice and eject card
 				advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.AP_UpdateAdvicePrinter, "print"));
 				cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
+				buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "Success"));
 				currentCardNo = "";
 				credential = "";
 				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulator(Welcome)"));
@@ -758,9 +785,7 @@ public class ATMSS extends AppThread {
 				idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE);
 
 			break;
-
 		}
-		buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "SoundOne"));
 	} // processMouseClicked
 
 } // ATMSS
