@@ -17,16 +17,19 @@ public class AdvicePrinterEmulator extends AdvicePrinterHandler {
 	private ATMSSStarter atmssStarter;
 	private String id;
 	private Stage myStage;
-	private final int WIDTH = 250;
-	private final int HEIGHT = 150;
+	private int WIDTH;
+	private int HEIGHT ;
 	private AdvicePrinterEmulatorController advicePrinterEmulatorController;
 
 	// ------------------------------------------------------------
 	// AdvicePrinterEmulator
 	public AdvicePrinterEmulator(String id, ATMSSStarter atmssStarter) {
+		
 		super(id, atmssStarter);
 		this.atmssStarter = atmssStarter;
 		this.id = id;
+		WIDTH =Integer.parseInt(appKickstarter.getProperty("AdvicePrinterEmulator.WIDTH"));
+		HEIGHT=Integer.parseInt(appKickstarter.getProperty("AdvicePrinterEmulator.HEIGHT"));
 	} // AdvicePrinterEmulator
 
 	// ------------------------------------------------------------

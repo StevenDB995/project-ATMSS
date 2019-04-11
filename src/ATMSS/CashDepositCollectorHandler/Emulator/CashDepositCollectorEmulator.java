@@ -18,8 +18,8 @@ public class CashDepositCollectorEmulator extends CashDepositCollectorHandler {
 	private ATMSSStarter atmssStarter;
 	private String id;
 	private Stage myStage;
-	private final int WIDTH = 350;
-	private final int HEIGHT = 350;
+	private  int WIDTH ;
+	private  int HEIGHT ;
 	private CashDepositCollectorEmulatorController cashDepositCollectorEmulatorController;
 
 	// ------------------------------------------------------------
@@ -28,6 +28,8 @@ public class CashDepositCollectorEmulator extends CashDepositCollectorHandler {
 		super(id, atmssStarter);
 		this.atmssStarter = atmssStarter;
 		this.id = id;
+		WIDTH =Integer.parseInt(appKickstarter.getProperty("CashDepositCollectorEmulator.WIDTH"));
+		HEIGHT=Integer.parseInt(appKickstarter.getProperty("CashDepositCollectorEmulator.HEIGHT"));
 	} // CashDepositCollectorEmulator
 
 	// ------------------------------------------------------------
@@ -42,7 +44,7 @@ public class CashDepositCollectorEmulator extends CashDepositCollectorHandler {
 		cashDepositCollectorEmulatorController = (CashDepositCollectorEmulatorController) loader.getController();
 		cashDepositCollectorEmulatorController.initialize(id, atmssStarter, log, this);
 		myStage.initStyle(StageStyle.DECORATED);
-		myStage.setScene(new Scene(root, 350, 350));
+		myStage.setScene(new Scene(root, WIDTH, HEIGHT));
 		myStage.setTitle("Cash Deposit Collector");
 		myStage.setResizable(false);
 		myStage.setOnCloseRequest((WindowEvent event) -> {

@@ -17,8 +17,8 @@ public class CashDispenserEmulator extends CashDispenserHandler {
 	private ATMSSStarter atmssStarter;
 	private String id;
 	private Stage myStage;
-	private final int WIDTH = 350;
-	private final int HEIGHT = 350;
+	private  int WIDTH ;
+	private  int HEIGHT ;
 	private CashDispenserEmulatorController cashDispenserEmulatorController;
 
 	// ------------------------------------------------------------
@@ -27,6 +27,8 @@ public class CashDispenserEmulator extends CashDispenserHandler {
 		super(id, atmssStarter);
 		this.atmssStarter = atmssStarter;
 		this.id = id;
+		WIDTH =Integer.parseInt(appKickstarter.getProperty("CashDispenserEmulator.WIDTH"));
+		HEIGHT=Integer.parseInt(appKickstarter.getProperty("CashDispenserEmulator.HEIGHT"));
 	} // CashDispenserEmulator
 
 	// ------------------------------------------------------------
