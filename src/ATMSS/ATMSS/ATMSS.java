@@ -113,7 +113,7 @@ public class ATMSS extends AppThread {
 
 			switch (msg.getType()) {
 			case TD_MouseClicked:
-				log.info("MouseCLicked: " + msg.getDetails());
+				log.info("MouseClicked: " + msg.getDetails());
 				switch (TD_StageId) {
 				case "TouchDisplayDepositEmulatorP1_ChooseAccount":
 				case "TouchDisplayEmulator_accountEnquiry_ChooseAccount":
@@ -228,9 +228,9 @@ public class ATMSS extends AppThread {
 	// processKeyPressed
 	private void processKeyPressed(Msg msg) {
 		String details = msg.getDetails();
+		boolean validKP = false;
 
 		if (details.compareToIgnoreCase("Cancel") == 0) { // "Cancel" is pressed
-			boolean validKP = false;
 			switch (TD_StageId) {
 			case "TouchDisplayEmulatorPasswordValidationP1_RequestPW":
 			case "TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong":
@@ -283,6 +283,7 @@ public class ATMSS extends AppThread {
 			case "TouchDisplayDepositEmulatorP2_InputAmount":
 				keypadInput += details;
 				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateInputAmount, details));
+				validKP = true;
 				break;
 
 			case "TouchDisplayEmulatorPasswordValidationP1_RequestPW": // keypad input for password
@@ -291,22 +292,28 @@ public class ATMSS extends AppThread {
 					keypadInput += details;
 					touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdatePasswordField, "Append"));
 				}
+				validKP = true;
 				break;
 			}
-			
-			idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE);
+
+			if (validKP)
+				idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE);
 		}
 
-		else if (details.compareToIgnoreCase(".") == 0) {
+		else if (details.compareTo(".") == 0) {
 			switch (TD_StageId) {
 			case "TouchDisplayEmulatorTransferP3_InputAmount": // cases where "." should be recorded
 			case "TouchDisplayDepositEmulatorP2_InputAmount":
-				keypadInput += details;
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateInputAmount, details));
+				if (!keypadInput.contains(".")) {
+					keypadInput += details;
+					touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateInputAmount, details));
+				}
+				validKP = true;
 				break;
 			}
-			
-			idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE);
+
+			if (validKP)
+				idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE);
 		}
 
 		else if (details.compareToIgnoreCase("Clear") == 0) { // "Clear" is pressed
@@ -315,17 +322,20 @@ public class ATMSS extends AppThread {
 			case "TouchDisplayEmulatorwithdrawlP2_InputAmount":
 			case "TouchDisplayDepositEmulatorP2_InputAmount":
 				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateInputAmount, "Clear"));
+				validKP = true;
 				break;
 
 			case "TouchDisplayEmulatorPasswordValidationP1_RequestPW":
 			case "TouchDisplayEmulatorPasswordValidationP2_RequestAgainifwrong":
 				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdatePasswordField, "Clear"));
+				validKP = true;
 				break;
 			}
 
 			keypadInput = "";
-			
-			idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE);
+
+			if (validKP)
+				idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE);
 		}
 
 		else if (details.compareToIgnoreCase("Enter") == 0) { // "Enter" is pressed
@@ -392,7 +402,7 @@ public class ATMSS extends AppThread {
 						keypadInput = "";
 					} else
 						idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE);
-					
+
 					break;
 
 				case "TouchDisplayEmulatorwithdrawlP2_InputAmount": // type in withdraw amount
@@ -416,7 +426,7 @@ public class ATMSS extends AppThread {
 						keypadInput = "";
 					} else
 						idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE);
-					
+
 					break;
 
 				case "TouchDisplayDepositEmulatorP2_InputAmount": // type in deposit amount
@@ -437,13 +447,14 @@ public class ATMSS extends AppThread {
 						keypadInput = "";
 					} else
 						idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE);
-					
+
 					break;
 				}
 			} catch (BAMSInvalidReplyException | IOException e) {
 				e.printStackTrace();
 			}
 		}
+
 		buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "SoundOne"));
 	} // processKeyPressed
 
