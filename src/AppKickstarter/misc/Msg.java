@@ -47,7 +47,7 @@ public class Msg {
 	public enum Type {
 		Terminate, // Terminate the running thread
 		SetTimer, // Set a timer
-		CancelTimer, // Set a timer
+		CancelTimer, // Cancel a timer
 		Tick, // Timer clock ticks
 		TimesUp, // Time's up for the timer
 		Poll, // Health poll

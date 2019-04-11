@@ -26,6 +26,7 @@ public class CardReaderHandler extends AppThread {
 			switch (msg.getType()) {
 			case CR_CardInserted:
 				atmss.send(new Msg(id, mbox, Msg.Type.CR_CardInserted, msg.getDetails()));
+				handleCardInsert();
 				break;
 
 			case CR_EjectCard:
@@ -37,6 +38,7 @@ public class CardReaderHandler extends AppThread {
 				break;
 
 			case CR_CardRetained:
+				handleCardRetained();
 				break;
 
 			case Poll:

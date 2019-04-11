@@ -48,11 +48,11 @@ public class KeypadEmulatorController {
 		} else if (keyCodeStr.compareTo("DECIMAL") == 0) {
 			keypadMBox.send(new Msg(id, keypadMBox, Msg.Type.KP_KeyPressed, "."));
 		} else if (keyCodeStr.compareTo("ENTER") == 0) {
-			keypadMBox.send(new Msg(id, keypadMBox, Msg.Type.KP_KeyPressed, "ENTER"));
+			keypadMBox.send(new Msg(id, keypadMBox, Msg.Type.KP_KeyPressed, "Enter"));
 		} else if (keyCodeStr.compareTo("ESCAPE") == 0) {
-			keypadMBox.send(new Msg(id, keypadMBox, Msg.Type.KP_KeyPressed, "CANCEL"));
+			keypadMBox.send(new Msg(id, keypadMBox, Msg.Type.KP_KeyPressed, "Cancel"));
 		} else if (keyCodeStr.compareTo("BACK_SPACE") == 0) {
-			keypadMBox.send(new Msg(id, keypadMBox, Msg.Type.KP_KeyPressed, "ERASE"));
+			keypadMBox.send(new Msg(id, keypadMBox, Msg.Type.KP_KeyPressed, "Clear"));
 		} else {
 			log.finer(id + ": Key Pressed " + keyCodeStr);
 		}

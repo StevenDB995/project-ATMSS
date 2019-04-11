@@ -27,13 +27,23 @@ public class CashDepositCollectorHandler extends AppThread {
 			case CDC_UpdateCashDepositCollectorSlot:
 				handleUpdateDisplayOfCashDepositCollectorSlot(msg);
 				break;
-				
+
 			case CDC_ButtonPressed:
 				atmss.send(new Msg(id, mbox, Msg.Type.CDC_ButtonPressed, msg.getDetails()));
 				break;
-			
+
 			case Poll:
 				atmss.send(new Msg(id, mbox, Msg.Type.PollAck, id + " is up!"));
+				break;
+				
+			case IdleTimer:
+				atmss.send(new Msg(id, mbox, Msg.Type.IdleTimer, msg.getDetails()));
+				break;
+
+			case TimesUp:
+				mbox.send(new Msg(id, mbox, Msg.Type.CDC_UpdateCashDepositCollectorSlot,
+						"CloseCashDepositCollectorSlot"));
+				atmss.send(new Msg(id, mbox, Msg.Type.TimesUp, msg.getDetails()));
 				break;
 
 			case Terminate:

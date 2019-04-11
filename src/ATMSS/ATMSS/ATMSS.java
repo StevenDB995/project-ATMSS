@@ -158,15 +158,33 @@ public class ATMSS extends AppThread {
 			case CDC_ButtonPressed:
 				cashDepositCollectorMBox.send(new Msg(id, mbox, Msg.Type.CDC_UpdateCashDepositCollectorSlot,
 						"CloseCashDepositCollectorSlot"));
-				touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorSuccessful"));
-				TD_StageId = "TouchDisplayEmulatorSuccessful";
-				buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "SoundOne"));
+				Timer.cancelTimer(id, mbox, idleTimerId);
+
+				try {
+					double depositFeedback = bams.deposit(currentCardNo, currentAccount, credential, keypadInput);
+					if (depositFeedback < 0) {
+						log.info("Deposit failed.");
+						touchDisplayMBox
+								.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorFailed"));
+						TD_StageId = "TouchDisplayEmulatorFailed";
+					} else {
+						log.info("Successfully deposited " + depositFeedback);
+						touchDisplayMBox
+								.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorSuccessful"));
+						TD_StageId = "TouchDisplayEmulatorSuccessful";
+					}
+				} catch (BAMSInvalidReplyException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				currentAccount = "";
+				keypadInput = "";
 				break;
 
 			case CD_ButtonPressed:
 				cashDispenserMBox
 						.send(new Msg(id, mbox, Msg.Type.CD_UpdateCashDispenserSlot, "CloseCashDispenserSlot"));
-				buzzerMBox.send(new Msg(id, mbox, Msg.Type.BZ_Sound, "SoundOne"));
 				break;
 
 			case AP_ButtonPressed:
@@ -430,24 +448,12 @@ public class ATMSS extends AppThread {
 					break;
 
 				case "TouchDisplayDepositEmulatorP2_InputAmount": // type in deposit amount
-					if (!keypadInput.isEmpty()) {
-						double depositFeedback = bams.deposit(currentCardNo, currentAccount, credential, keypadInput);
-						if (depositFeedback < 0) {
-							log.info("Deposit failed.");
-							touchDisplayMBox
-									.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TouchDisplayEmulatorFailed"));
-							TD_StageId = "TouchDisplayEmulatorFailed";
-						} else {
-							log.info("Successfully deposited " + depositFeedback);
-							cashDepositCollectorMBox.send(new Msg(id, mbox, Msg.Type.CDC_UpdateCashDepositCollectorSlot,
-									"OpenCashDepositCollectorSlot"));
-						}
-
-						currentAccount = "";
-						keypadInput = "";
-					} else
+					if (!keypadInput.isEmpty())
+						cashDepositCollectorMBox.send(new Msg(id, mbox, Msg.Type.CDC_UpdateCashDepositCollectorSlot,
+								"OpenCashDepositCollectorSlot"));
+					else
 						idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE);
-
+					
 					break;
 				}
 			} catch (BAMSInvalidReplyException | IOException e) {

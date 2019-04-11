@@ -3,6 +3,7 @@ package ATMSS.CashDepositCollectorHandler.Emulator;
 import ATMSS.ATMSSStarter;
 import ATMSS.CashDepositCollectorHandler.CashDepositCollectorHandler;
 import AppKickstarter.misc.Msg;
+import AppKickstarter.timer.Timer;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -59,6 +60,8 @@ public class CashDepositCollectorEmulator extends CashDepositCollectorHandler {
 		switch (msg.getDetails()) {
 		case "OpenCashDepositCollectorSlot":
 			reloadStage("CashDepositCollectorEmulatorOpen.fxml");
+			int idleTimerId = Timer.setTimer(id, mbox, Timer.IDLE_SLEEPTIME, Timer.IDLE_RANGE);
+			mbox.send(new Msg(id, mbox, Msg.Type.IdleTimer, "" + idleTimerId));
 			break;
 
 		case "CloseCashDepositCollectorSlot":
