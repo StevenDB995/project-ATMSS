@@ -37,6 +37,7 @@ public class CardReaderHandler extends AppThread {
 				break;
 
 			case CR_CardRetained:
+				break;
 
 			case Poll:
 				atmss.send(new Msg(id, mbox, Msg.Type.PollAck, id + " is up!"));
