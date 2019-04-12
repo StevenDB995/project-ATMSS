@@ -3,7 +3,17 @@ package ATMSS.CardReaderHandler;
 import AppKickstarter.AppKickstarter;
 import AppKickstarter.misc.*;
 
-//======================================================================
+/**
+ * The CardReaderHandler class implements an application that handle different
+ * cases of CardReader
+ * 
+ * @author Group4
+ * @version 1.1
+ * 
+ *
+ */
+
+// ======================================================================
 // CardReaderHandler
 public class CardReaderHandler extends AppThread {
 	// ------------------------------------------------------------
@@ -11,6 +21,14 @@ public class CardReaderHandler extends AppThread {
 	public CardReaderHandler(String id, AppKickstarter appKickstarter) {
 		super(id, appKickstarter);
 	} // CardReaderHandler
+
+	/**
+	 * This method is used to run different cases CR_CardInserted, CR_EjectCard,
+	 * CR_CardRemoved, CR_CardRetained
+	 *
+	 * 
+	 *
+	 */
 
 	// ------------------------------------------------------------
 	// run
@@ -59,11 +77,19 @@ public class CardReaderHandler extends AppThread {
 		log.info(id + ": terminating...");
 	} // run
 
+	/**
+	 * This method is used to show the information when card is inserted
+	 */
+
 	// ------------------------------------------------------------
 	// handleCardInsert
 	protected void handleCardInsert() {
 		log.info(id + ": card inserted");
 	} // handleCardInsert
+
+	/**
+	 * This method is used to show the information when card is ejected
+	 */
 
 	// ------------------------------------------------------------
 	// handleCardEject
@@ -71,11 +97,19 @@ public class CardReaderHandler extends AppThread {
 		log.info(id + ": card ejected");
 	} // handleCardEject
 
+	/**
+	 * This method is used to show the information when card is removed
+	 */
+
 	// ------------------------------------------------------------
 	// handleCardRemove
 	protected void handleCardRemove() {
 		log.info(id + ": card removed");
 	} // handleCardRemove
+
+	/**
+	 * This method is used to show the information when card is retained
+	 */
 
 	// ------------------------------------------------------------
 	// handleCardRetained

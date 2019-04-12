@@ -11,7 +11,17 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
-//======================================================================
+/**
+ * The CardReaderEmulator class implements the GUI of CardReader
+ *
+ * 
+ * @author Group4
+ * @version 1.1
+ * 
+ *
+ */
+
+// ======================================================================
 // CardReaderEmulator
 public class CardReaderEmulator extends CardReaderHandler {
 	private ATMSSStarter atmssStarter;
@@ -26,6 +36,14 @@ public class CardReaderEmulator extends CardReaderHandler {
 		this.atmssStarter = atmssStarter;
 		this.id = id;
 	} // CardReaderEmulator
+
+	/**
+	 * This method is used to load the GUI of CardReader
+	 * 
+	 *
+	 * @throws Exception
+	 *             When GUI fail to load, throw Exception
+	 */
 
 	// ------------------------------------------------------------
 	// start
@@ -49,6 +67,11 @@ public class CardReaderEmulator extends CardReaderHandler {
 		myStage.show();
 	} // CardReaderEmulator
 
+	/**
+	 * This method is used to show insert information in text area and update card
+	 * statues after Card Inserted
+	 */
+
 	// ------------------------------------------------------------
 	// handleCardInsert
 	protected void handleCardInsert() {
@@ -56,6 +79,11 @@ public class CardReaderEmulator extends CardReaderHandler {
 		cardReaderEmulatorController.appendTextArea("Card Inserted");
 		cardReaderEmulatorController.updateCardStatus("Card Inserted");
 	} // handleCardInsert
+
+	/**
+	 * This method is used to show eject information in text area and update card
+	 * statues after Card Ejected
+	 */
 
 	// ------------------------------------------------------------
 	// handleCardEject
@@ -65,6 +93,11 @@ public class CardReaderEmulator extends CardReaderHandler {
 		cardReaderEmulatorController.updateCardStatus("Card Ejected");
 	} // handleCardEject
 
+	/**
+	 * This method is used to show card removed information in text area and update
+	 * card statues after Card Removed
+	 */
+
 	// ------------------------------------------------------------
 	// handleCardRemove
 	protected void handleCardRemove() {
@@ -72,7 +105,11 @@ public class CardReaderEmulator extends CardReaderHandler {
 		cardReaderEmulatorController.appendTextArea("Card Removed");
 		cardReaderEmulatorController.updateCardStatus("Card Reader Empty");
 	} // handleCardRemove
-	
+
+	/**
+	 * This method is used to show card retained information in text area and update
+	 * card statues after Card retained
+	 */
 	// ------------------------------------------------------------
 	// handleCardRetained
 	protected void handleCardRetained() {

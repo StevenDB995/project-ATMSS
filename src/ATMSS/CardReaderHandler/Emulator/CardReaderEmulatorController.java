@@ -10,7 +10,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-//======================================================================
+/**
+ * The CardReaderEmulator class controls the GUI of CardReader
+ *
+ * 
+ * @author Group4
+ * @version 1.1
+ * 
+ *
+ */
+
+// ======================================================================
 // CardReaderEmulatorController
 public class CardReaderEmulatorController {
 	private String id;
@@ -22,6 +32,20 @@ public class CardReaderEmulatorController {
 	public TextField cardStatusField;
 	public TextArea cardReaderTextArea;
 
+	/**
+	 * This method is used to initialize the variable
+	 *
+	 * 
+	 * @param id
+	 *            This is the parameter of thread id
+	 * @param appKickstarter
+	 *            This is the parameter of AppKickstarter to start application
+	 * @param log
+	 *            This is the parameter of logger to record operation
+	 * @param cardReaderEmulator
+	 *            This is the parameter of CardReaderEmulator to use CardReader GUI
+	 */
+
 	// ------------------------------------------------------------
 	// initialize
 	public void initialize(String id, AppKickstarter appKickstarter, Logger log,
@@ -32,6 +56,14 @@ public class CardReaderEmulatorController {
 		this.cardReaderEmulator = cardReaderEmulator;
 		this.cardReaderMBox = appKickstarter.getThread("CardReaderHandler").getMBox();
 	} // initialize
+
+	/**
+	 * This method is used to handle the button pressed on CardReader Page
+	 * 
+	 *
+	 * @param actionEvent
+	 *            This is the parameter of selected action
+	 */
 
 	// ------------------------------------------------------------
 	// buttonPressed
@@ -75,11 +107,27 @@ public class CardReaderEmulatorController {
 		}
 	} // buttonPressed
 
+	/**
+	 * This method is used to update the card statues in corresponding area
+	 * 
+	 *
+	 * @param status
+	 *            This is the parameter of card statue
+	 */
+
 	// ------------------------------------------------------------
 	// updateCardStatus
 	public void updateCardStatus(String status) {
 		cardStatusField.setText(status);
 	} // updateCardStatus
+
+	/**
+	 * This method is used to show the card statues in TextArea
+	 * 
+	 *
+	 * @param status
+	 *            This is the parameter of card statue
+	 */
 
 	// ------------------------------------------------------------
 	// appendTextArea
